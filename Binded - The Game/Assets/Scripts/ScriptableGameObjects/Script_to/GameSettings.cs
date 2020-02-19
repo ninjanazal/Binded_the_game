@@ -13,14 +13,21 @@ public class GameSettings : ScriptableObject
     public float MasterVolume = 1f;
 
     [Header("Controls")]
+    [Header("   Camera")]
     // Sensibilidade rato
     [Range(0.5f, 7f)]
     public float MouseSensitivity = 2f;
 
     // Distancia da camera ao alvo
-    [Range(5f, 15f)]
-    public float CameraDistance = 10f;
+    [Range(0.5f, 5f)]
+    public float CameraMaxDistance = 10f;
 
+    // clap de angulo vertica
+    [Range(-45, 80)]
+    public float MinVerticalCamAngle, MaxVerticalCamAngle;
+
+
+    // private Vars -------------------------------------------------------
     // Multiplicador de tempo
     private float _timeMultiplier = 1f;
 

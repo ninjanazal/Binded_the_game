@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MasterVolume: 1
   MouseSensitivity: 1
-  CameraDistance: 10
+  CameraMaxDistance: 3
+  MinVerticalCamAngle: -15
+  MaxVerticalCamAngle: 40
