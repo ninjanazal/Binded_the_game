@@ -20,7 +20,7 @@ public class GameSettings : ScriptableObject
 
     // Distancia da camera ao alvo
     [Range(0.5f, 5f)]
-    public float CameraMaxDistance = 10f;
+    public float CameraDistance = 5f;
 
     // clap de angulo vertica
     [Range(-45, 80)]

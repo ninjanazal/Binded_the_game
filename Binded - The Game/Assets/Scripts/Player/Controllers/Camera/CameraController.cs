@@ -4,167 +4,128 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Script fror controlling the Main camera
-    // -----------------------------------------------------------------------
-
-    // referencia para Settings do jogo
-    [Header("Game Settings Object")]
+    // player camera script
+    // public vars -----------------------------------------
+    [Header("GameSettings Obj")]
     public GameSettings game_settings;
-    // posiçao do alvo da camera
-    [Header("Objecto foco")]
-    public Transform CameraTarget;
-    // distancia minima para que o snap da camera ocora com a direcçao desejada
-    [Header("Distancia minima para snap para a direcçao da camera")]
-    public float MinSnapDistance = 1f;
-    // velocidade de deslocamento da camera
-    [Header("Velocidade de deslocamento da camera")]
-    public float CamMoveSpeed = 5f;
+    // valores de informaçao do jogador
+    [Header("Char Informations")]
+    public CharacterInfo char_Information;
+    // camera offset
+    [Header("Offset da camera")]
+    public Vector3 camera_offset;
+    // tempo para a rotaçao smooth da camera
+    [Header("Tempo desejado para a rotaçao da camera")]
+    public float SecToRotation = 0.2f;
 
+    // distancia maxima de aproximaçao ao objecto 
+    [Header("Distancia minima da cam ao alvo")]
+    public float MinCameraDistance = 0.5f;
 
-    // private Vars ---------------------------------------------------
-    #region PrivateVars
-    // referencia para a Camera principal da cena
-    private Camera _mainCamera;
+    // private vars ------------------------------------------
+    // camera principal
+    private Camera _main_camera;
+    // pitch e yaw determinado
+    private Vector3 _input_pitch_yaw;
+    // alvo da camera
+    private Transform _camTarget;
+    // vector de rotaçao defenida
+    private Vector3 _cam_calculated_rot = Vector3.zero;
+    // valor da posiçao do alvo com o offset
+    private Vector3 _offseted_cam_target;
+    // velocidade de damp
+    private Vector3 _damp_speed;
 
-    // bool retem a utilizaçao da camera
-    public static bool _usingCamera;
+    // camera calculated position
+    private Vector3 _cam_calculated_pos;
 
-    // direçao e posiçao da camera desejada
-    private Vector3 _cameraTargetPosition, _cameraTargetDirection;
-    private Vector2 _inputCameraAngles;
+    // testes de clipping da camera
+    private LayerMask mask;
+    // hit usado para o test
+    private RaycastHit clippingHit;
 
-    #endregion
-
-
-    // On Start
-    void Awake()
+    private void Awake()
     {
-        // retem a camera marcada com main
-        _mainCamera = Camera.main;
-        // reset camera target      
-        CameraTarget = null;
-        // reeniciar os angulos de input
-        _inputCameraAngles = Vector2.zero;
+        // cache a referencia para a camera principal
+        _main_camera = Camera.main;
+        // inica o vetor de yaw e pitch
+        _input_pitch_yaw = Vector2.zero;
+        // garda cache para o player
+        // tenta encontrar um jogador na cena
+        try { _camTarget = GameObject.FindGameObjectWithTag("Player").transform; }
+        catch (System.Exception ex) { Debug.LogError(ex); throw; }
 
-
-        // para determinar a deslocaçao do rato, é colocado no centro do ecra
-        // para executar calculos de deslocamento
-        _usingCamera = true;
+        // bloquear o rato
         Cursor.lockState = CursorLockMode.Locked;
 
-        // procura pelo jogador em cena
-        TryGetPlayerTransform();
+        // define a mask para teste de clipping
+        mask = ~LayerMask.GetMask("Ignore CameraClipping");
+        // inia a posiçao alvo da camera igual á actual
+        _cam_calculated_pos = _main_camera.transform.position;
     }
 
-    // Update
-    void Update()
+    private void Update()
     {
-        // funçao para determinar o input do rato na camera
-        ManageMouseCameraInput();
-    }
-
-    // metodos privados
-    #region private
-    // tenta encontrar a posiçao do jogador
-    private void TryGetPlayerTransform()
-    {
-        // ao defenir a camera para seguir o jogar
-        // tenta encontrar o jogador na cena
-        var player = GameObject.FindGameObjectsWithTag("Player");
-        // caso nao encontre nenhum objecto com a tag de Player
-        if (player.Length == 0 || player == null)
-        {
-            // Apresenta info na console
-            Debug.LogWarning("Player not found, camera has no target;");
-        }
-        // caso encontre varios players em jogo
-        else if (player.Length > 1)
-        {
-            // apresenta info na consola
-            Debug.LogWarning("Multiple players found!");
-        }
-        // caso encontre um jogador
-        else
-        {
-            // guarda referencia para o transform
-            CameraTarget = player[0].transform;
-            // informa na consola que encontrou apenas um player em cena
-            Debug.Log("Player found!");
-        }
+        // call para o comportamento da camera
+        CameraInputBehaviour();
+        // determina se a camera esta em clipping ou nao
+        AvoidCameraClipping();
 
     }
 
-    // Rotaçao da camera pelo input da camera
-    private void ManageMouseCameraInput()
+    // metodo de comportamento da camera 
+    private void CameraInputBehaviour()
     {
-        // determinado a quantidade de pixeis deslocados no ultimo frame
-        var currentMousePosition = new Vector2(-Input.GetAxis("Mouse Y"),
-                                    Input.GetAxis("Mouse X"));
+        //determina o valor de yaw e pitch para o input do rato
+        // calcula o valor do angulo total
+        _input_pitch_yaw += new Vector3(-Input.GetAxis("Mouse Y") * game_settings.MouseSensitivity,
+            Input.GetAxis("Mouse X") * game_settings.MouseSensitivity);
 
-        // caso esteja a utilizar a camera
-        // e a posiçao do rato foi alterada        
-        if (_usingCamera)
-        {
-            // caso nao exista um alvo da camera
-            if (!CameraTarget && currentMousePosition != Vector2.zero)
-            {
-                // se nao existir a camera deve rodar sobre si propria
-                // determina a rotaçao da direcçao actual para a direçao 
-                // desejada atravez do deslocamento do rato
-                _mainCamera.transform.forward =
-                    Quaternion.Euler(currentMousePosition.x * game_settings.MouseSensitivity,
-                     currentMousePosition.y * game_settings.MouseSensitivity, 0.0f) *
-                    _mainCamera.transform.forward;
-            }
-            else
-            {
-                // se tiver um alvo definido, a camera deverá rodar em torno desse objecto
-                // para tar a camera deverá estabelecer a posiçao alvo de lookAt
-                // determinar a posiçao ideal da camera relativa ao objecto alvo
-                _inputCameraAngles.x += currentMousePosition.x * game_settings.MouseSensitivity;
-                _inputCameraAngles.y += currentMousePosition.y * game_settings.MouseSensitivity;
+        // limitada que o pitch seja maior que valores defenidos nas settings
+        _input_pitch_yaw.x =
+            Mathf.Clamp(_input_pitch_yaw.x, game_settings.MinVerticalCamAngle, game_settings.MaxVerticalCamAngle);
 
-                // limitar o valor de angulo entre valores definidos nas settings
-                _inputCameraAngles.x =
-                    Mathf.Clamp(_inputCameraAngles.x,
-                     game_settings.MinVerticalCamAngle, game_settings.MaxVerticalCamAngle);
+        // posiçao da camera
+        // guarda o valor do offset com base na posiçao do alvo
+        _offseted_cam_target = _camTarget.transform.position +
+             _main_camera.transform.TransformDirection(camera_offset);
 
-                // com base no input e na posiçao desejada
-                _cameraTargetDirection = Quaternion.Euler(_inputCameraAngles.x, _inputCameraAngles.y, 0.0f) *
-                    Vector3.back;
+        // definir a direcçao da camera, com base o offset calculado
+        _cam_calculated_rot =
+            Vector3.SmoothDamp(_cam_calculated_rot, _input_pitch_yaw, ref _damp_speed, SecToRotation);
+        _main_camera.transform.eulerAngles = _cam_calculated_rot;
 
-                // determina a posiçao alvo da camera
-                _cameraTargetPosition = CameraTarget.position +
-                    _cameraTargetDirection * game_settings.CameraMaxDistance;
+        // Define a posiçao da camera
+        _cam_calculated_pos = _offseted_cam_target -
+            (_main_camera.transform.forward * game_settings.CameraDistance);
 
-                // define posiçao da camera
-                _mainCamera.transform.position = Vector3.Lerp(_mainCamera.transform.position,
-                    _cameraTargetPosition, game_settings.TimeMultiplication() * CamMoveSpeed);
-
-                // define a direçao da camera
-                _mainCamera.transform.LookAt(CameraTarget);
-            }
-
-        }
+        // determina se esta posiçao calculada esta á distancia desejada do alvo
+        if (Vector3.Distance(_cam_calculated_pos, _camTarget.position) > game_settings.CameraDistance)
+            _cam_calculated_pos = _camTarget.transform.position +
+                (_cam_calculated_pos - _camTarget.position).normalized * game_settings.CameraDistance;
     }
 
-    #endregion
-
-    // metodo estatico para controlar se o rato esta ou nao preso
-    public void IsUsingcamera(bool isUsing)
+    // teste para inpedir o clipping da camera
+    private void AvoidCameraClipping()
     {
-        // guarda o ultimo estado
-        _usingCamera = isUsing;
-        // se sim
-        if (isUsing)
+        // utilizando um ray da direçao do player ate á posiçao da camera
+        // caso colida com algum objecto , deve aproximar a camera
+
+        if (Physics.Raycast(_offseted_cam_target, (_cam_calculated_pos - _offseted_cam_target).normalized,
+         out clippingHit, Vector3.Distance(_cam_calculated_pos, _offseted_cam_target), mask))
         {
-            // bloqueia a posiçao do rato
-            Cursor.lockState = CursorLockMode.Locked;
+            // se este teste for positivo, a camera deve ser deslocada para a posicao de alvo mais um offset 
+            // de distancia
+            _cam_calculated_pos = clippingHit.point + _main_camera.transform.forward;
+
+            // determina se a camera esta dentro das proximidades determinadas
+            if (Vector3.Distance(_cam_calculated_pos, _camTarget.position) < MinCameraDistance)
+                // ajusta a posiçao calculada
+                _cam_calculated_pos = _offseted_cam_target - (_main_camera.transform.forward * MinCameraDistance);
         }
-        else
-        {
-            // se nao, liberta a utilizaçao do rato
-            Cursor.lockState = CursorLockMode.None;
-        }
+
+        // move a camera a posiçao determinada
+        _main_camera.transform.position =
+             Vector3.Lerp(_main_camera.transform.position, _cam_calculated_pos, game_settings.TimeMultiplication() / SecToRotation);
     }
 }
