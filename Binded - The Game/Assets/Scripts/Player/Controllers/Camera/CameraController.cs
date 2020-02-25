@@ -95,7 +95,7 @@ public class CameraController : MonoBehaviour
             _cam_calculated_rot =
                 Vector3.SmoothDamp(_cam_calculated_rot, _input_pitch_yaw, ref _damp_speed, SecToRotation);
             // atribui a rotaçao determinada
-            _main_camera.transform.eulerAngles = _cam_calculated_rot + (_camTarget.eulerAngles * 0.25f);
+            _main_camera.transform.eulerAngles = _cam_calculated_rot;
 
             // Define a posiçao da camera
             _cam_calculated_pos = _offseted_cam_target -

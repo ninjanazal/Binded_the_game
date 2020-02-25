@@ -13,3 +13,11 @@ MonoBehaviour:
   m_Name: CharacterInformation
   m_EditorClassIdentifier: 
   shape: 0
+  AikeMaxSpeed: 3
+  AikeAceleration: 3
+  AikeRotationSpeed: 10
+  AikeDrag: 5
+  ArifMaxSpeed: 10
+  ArifAceleration: 5
+  ArifRotationSpeed: 4
+  ArifDrag: 6
