@@ -52,12 +52,14 @@ public class AikeBehavior
       {
             // avalia o input direcional (Vertical)
             // caso o w esteja pressionado
-            
+
             // caso exista input vertical
             if (Input.GetAxis("Vertical") != 0f)
             {
+                  // determinar a direcçao do jogador quando esta na forma
+                  // de Aike
                   // varia a aceleraçao utilizando o inout system do Unity
-                  _playerAcceleration = _char_info.AikeAceleration * 
+                  _playerAcceleration = _char_info.AikeAceleration *
                         Mathf.Abs(Input.GetAxis("Vertical")) *
                         _game_settings.TimeMultiplication();
 
@@ -72,25 +74,8 @@ public class AikeBehavior
                     _char_info.AikeRotationSpeed * _game_settings.TimeMultiplication());
             }
 
-            // determina se ouve input na acelaraçao 
-            if (_playerAcceleration == 0 && _char_system._player_speed > 0)
-                  // se nao tiver ocorrido input, a velocidade do jogador reduz com base
-                  // no drag definido
-                  _char_system._player_speed -=
-                      _char_info.AikeDrag *
-                       _game_settings.TimeMultiplication();
-            else
-                  // caso tenha ocorrido, adiciona a velocidade
-                  _char_system._player_speed += _playerAcceleration;
-
-
-            // impede que a velocidade nao seja maior que a maxima
-            _char_system._player_speed = Mathf.Clamp(_char_system._player_speed,
-              0f, _char_info.AikeMaxSpeed);
-
-
-            // desloca o jogador de acordo com a velocidade e a direcçao
-            _player_transform.position += _player_transform.forward * _playerAcceleration;
+            // chama o movimento no caracterController
+            _custom_char_controller.SimpleMove(_playerAcceleration);
             // reseta a aceleraçao determinada
             _playerAcceleration = 0f;
       }
@@ -104,5 +89,8 @@ public class AikeBehavior
             // desenha a direcçao obtida atraves da direcçao da camera
             Debug.DrawLine(_player_transform.position, _player_transform.position +
                 _char_system.ProjectDirection(), Color.green);
+            //desenha a direcçao alvo do jogador
+            Debug.DrawLine(_player_transform.position, _player_transform.position +
+              _target_direction, Color.blue);
       }
 }

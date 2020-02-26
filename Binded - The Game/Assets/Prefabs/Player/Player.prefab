@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 7825488917120565572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.459, z: -3}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4928420484260040231}
   m_Father: {fileID: 0}
@@ -155,11 +155,11 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_Height: 0.49
+  m_Radius: 0.49
+  m_SlopeLimit: 50
+  m_StepOffset: 0.1
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2247676890415289055
@@ -174,12 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f0aec98fe67a5478fa45f0a2db97cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseGravity: {x: 0, y: 0, z: 0}
-  PlayerHeight: 0
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  useDebugLines: 1
+  BaseGravity: {x: 0, y: -9.8, z: 0}
+  MaxGravitySpeed: 0
 --- !u!114 &1588658707
 MonoBehaviour:
   m_ObjectHideFlags: 0
