@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // componentes obrigatorios a este
+[RequireComponent(typeof(CustomCharController))]
 public class CharacterSystem : MonoBehaviour
 {
       #region public fields
@@ -59,6 +60,7 @@ public class CharacterSystem : MonoBehaviour
 
       }
 
+
       // metodo que projecta a direçao do jogador no espaço de acçao
       public Vector3 ProjectDirection()
       {
@@ -83,5 +85,8 @@ public class CharacterSystem : MonoBehaviour
       public GameObject GetPlayerGO() { return this.gameObject; }
       // retorna o transform referente ao jogador
       public Transform GetPlayerTransform() { return GetPlayerGO().transform; }
+      // rotarna o CustomCharController do player
+      public CustomCharController GetCustomController()
+      { return GetPlayerGO().GetComponent<CustomCharController>(); }
 
 }

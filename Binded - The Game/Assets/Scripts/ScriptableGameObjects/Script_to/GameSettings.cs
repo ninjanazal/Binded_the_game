@@ -26,15 +26,14 @@ public class GameSettings : ScriptableObject
     [Range(-45, 80)]
     public float MinVerticalCamAngle, MaxVerticalCamAngle;
 
+    // Multiplicador de tempo
+    [Header("Multiplicado de tempo")]
+    [Range(0f,1f)]
+    public float _timeMultiplier = 1f;
 
     // private Vars -------------------------------------------------------
-    // Multiplicador de tempo
-    private float _timeMultiplier = 1f;
 
-
-
-
-
+    
     // funcs
     #region Funcs
     // tempo

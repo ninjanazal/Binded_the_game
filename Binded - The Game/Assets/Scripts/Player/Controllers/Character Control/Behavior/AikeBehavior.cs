@@ -12,6 +12,8 @@ public class AikeBehavior
       private CharacterInfo _char_info;
       // referencia para as definiçoes do jogo
       private GameSettings _game_settings;
+      // referencia ao custom Char controller
+      private CustomCharController _custom_char_controller;
 
 
       // variaveis do comportamento
@@ -31,6 +33,8 @@ public class AikeBehavior
             _char_info = _char_system.char_infor;
             // guarda referencia para as definiçoes de sistema
             _game_settings = _char_system.game_setting;
+            // guarda referencia para o customCharController do jogador
+            _custom_char_controller = _char_system.GetCustomController();
       }
 
       // comportamento da forma
@@ -48,35 +52,24 @@ public class AikeBehavior
       {
             // avalia o input direcional (Vertical)
             // caso o w esteja pressionado
-            if (Input.GetKey(KeyCode.W))
+            
+            // caso exista input vertical
+            if (Input.GetAxis("Vertical") != 0f)
             {
-                  //pressionar W, aumenta a velocidade do jogador                  
-                  _playerAcceleration = _char_info.AikeAceleration *
-                    _game_settings.TimeMultiplication();
+                  // varia a aceleraçao utilizando o inout system do Unity
+                  _playerAcceleration = _char_info.AikeAceleration * 
+                        Mathf.Abs(Input.GetAxis("Vertical")) *
+                        _game_settings.TimeMultiplication();
 
                   // define a direcçao alvo igual á direclao da camera
-                  _target_direction = _char_system.ProjectDirection();
+                  _target_direction = _char_system.ProjectDirection() *
+                       Input.GetAxis("Vertical");
+
 
                   // move enquanto acerta a rotaçao alvo
                   _player_transform.forward = Vector3.Lerp(_player_transform.forward,
                     _target_direction,
                     _char_info.AikeRotationSpeed * _game_settings.TimeMultiplication());
-            }
-            // caso o s esteja pressionado
-            else if (Input.GetKey(KeyCode.S))
-            {
-
-            }
-            // avalia o input direcional (horizontal)
-            // caso o A esteja pressionado
-            if (Input.GetKey(KeyCode.A))
-            {
-
-            }
-            // caso o D esteja pressionado
-            else if (Input.GetKey(KeyCode.D))
-            {
-
             }
 
             // determina se ouve input na acelaraçao 
@@ -89,6 +82,7 @@ public class AikeBehavior
             else
                   // caso tenha ocorrido, adiciona a velocidade
                   _char_system._player_speed += _playerAcceleration;
+
 
             // impede que a velocidade nao seja maior que a maxima
             _char_system._player_speed = Mathf.Clamp(_char_system._player_speed,

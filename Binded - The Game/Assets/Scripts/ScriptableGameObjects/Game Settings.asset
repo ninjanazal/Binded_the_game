@@ -17,3 +17,4 @@ MonoBehaviour:
   CameraDistance: 2
   MinVerticalCamAngle: -30
   MaxVerticalCamAngle: 40
+  _timeMultiplier: 1
