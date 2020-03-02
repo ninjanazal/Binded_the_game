@@ -174,8 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f0aec98fe67a5478fa45f0a2db97cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseGravity: {x: 0, y: -9.8, z: 0}
-  MaxGravitySpeed: 0
+  BaseGravityAcceleration: {x: 0, y: -9.8, z: 0}
 --- !u!114 &1588658707
 MonoBehaviour:
   m_ObjectHideFlags: 0

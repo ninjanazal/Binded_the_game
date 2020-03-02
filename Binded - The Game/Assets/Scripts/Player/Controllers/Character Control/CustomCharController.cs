@@ -1,112 +1,130 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 // custom controller para o movimento de jogadores
 [RequireComponent(typeof(CharacterController))]
 public class CustomCharController : MonoBehaviour
 {
-      // variaveis gerais para o controllo do personagem
-      #region publicVars
-      [Header("Valores gerais do controlador")]
-      public Vector3 BaseGravity;
-      //valor maximo de gravidade
-      public float MaxGravitySpeed;
+   // variaveis gerais para o controllo do personagem
+   #region publicVars
+   [Header("Valores gerais do controlador")]
+   public Vector3 BaseGravityAcceleration; // valor basico da aceleraçao da gravidade
 
-      #endregion
+   #endregion
 
-      #region privateVars
-      // private vars
-      // referencia ao systema de personage
-      private CharacterSystem char_system;
-      // referencia para o transform do jogador
-      private CharacterController char_Controller;
-      // referencia ao transform do jogador
-      private Transform char_transform;
+   #region privateVars
+   // private vars
+   private CharacterSystem char_system_;    // referencia ao systema de personage
+   private CharacterController char_controller_;    // referencia para o transform do jogador
+   private Transform char_transform_;    // referencia ao transform do jogador
 
+   // variaveis de jogo
+   // velocidade geral do jogador
+   private float player_speed_;    // velocidade do jogador
+   private float player_currentFrame_acceleration_;    // acceleraçao actual de input
 
-      // variaveis de jogo
-      // velocidade geral do jogador
-      // velocidade do jogador
-      private float player_speed;
-      // acceleraçao actual de input
-      private float _player_currentFrame_acceleration;
+   private Vector3 gravity_motion_ = Vector3.zero; // deslocamento calculado pela gravidade
+   private float falling_time_ = 0f;   // tempo de queda
+   private Vector3 calculated_motion_;    // movimento resultante do frame
+   #endregion
 
+   private void Start()
+   {
+      // referencia para o transform local
+      char_controller_ = this.GetComponent<CharacterController>();
+      // guarda referencia para o sistema de personage
+      char_system_ = this.GetComponent<CharacterSystem>();
+      // guarda referencia para o transform do jogador
+      char_transform_ = this.transform;
+   }
 
-      // movimento resultante do frame
-      private Vector3 _calculated_motion;
-
-      #endregion
-
-      private void Start()
+   // update logico do controller
+   private void Update()
+   {
+      // determina se o jogador está ou nao grounded
+      if (!char_controller_.isGrounded)
       {
-            // referencia para o transform local
-            char_Controller = this.GetComponent<CharacterController>();
-            // guarda referencia para o sistema de personage
-            char_system = this.GetComponent<CharacterSystem>();
-
-            // guarda referencia para o transform do jogador
-            char_transform = this.transform;
+         falling_time_ += char_system_.game_setting.TimeMultiplication();
+         // caso o jogador nao esteja no chao, a gravidade é adicionada
+         // ao vector de movimento
+         gravity_motion_ += BaseGravityAcceleration * Mathf.Pow(falling_time_, 3f);
       }
+      // caso esteja no chao, a gravidade é anulada
+      else { gravity_motion_ = Vector3.zero; falling_time_ *= 0f; }
 
-      // update logico do controller
-      private void Update()
+      // adiciona o deslocamento causado pela gravida
+      calculated_motion_ += gravity_motion_;
+
+      // adiciona o deslocamento causado pelo deslocamento
+      calculated_motion_ += char_transform_.forward * player_speed_ *
+                  char_system_.game_setting.TimeMultiplication();
+
+      // jogador continua a mover-se, com base no resultado
+      if (calculated_motion_ != Vector3.zero) char_controller_.Move(calculated_motion_);
+
+      // vector resultante do movimento é colocado a 0
+      calculated_motion_ = Vector3.zero;
+
+      CustomCharDebug();
+   }
+
+
+   // determina se o personagem esta em contacto com o chao    
+
+
+   // deloca o jogador
+   public void AikeBaseMove(float acceleration)
+   {
+      // deve calcular o mvimento a ser realizado
+      player_currentFrame_acceleration_ = acceleration;
+
+      // confirma a velocidade com base na aceleraçao introduzida
+      VelocityControl();
+   }
+
+   // handler para salto do Aike
+   public void AikeBaseJump(Vector3 jumpDir)
+   {
+      // o salto apena é possivel se o jogador estiver em contacto com uma superficie
+      // ou seja, se esteja apoiado segundo a sua base
+      // ** para ja grounded
+      if (char_controller_.isGrounded)
       {
-            // determina se o jogador está ou nao grounded
-            if (!char_Controller.isGrounded)
-            {
-                  // caso o jogador nao esteja no chao, a gravidade é adicionada
-                  // ao vector de movimento
-                  _calculated_motion += BaseGravity *
-                        char_system.game_setting.TimeMultiplication();
-            }
-            
-            // adiciona a velocidade ao controlador
-            _calculated_motion += char_transform.forward * player_speed *
-                        char_system.game_setting.TimeMultiplication();
-
-            // jogador continua a mover-se, com base no resultado
-            if (_calculated_motion != Vector3.zero)
-                  char_Controller.Move(_calculated_motion);
-
-
-            // vector resultante do movimento é colocado a 0
-            _calculated_motion = Vector3.zero;
-      }
-
-
-
-      // deloca o jogador
-      public void SimpleMove(float acceleration)
-      {
-            // deve calcular o mvimento a ser realizado
-            _player_currentFrame_acceleration = acceleration;
-
-            // confirma a velocidade com base na aceleraçao introduzida
-            VelocityControl();
-      }
-
-      // metodo para determinar se o jogador esta grounded
-      // metodo para analizar a velocidade do jogador
-      private void VelocityControl()
-      {
-            // determina se nao existe aceleraçao e o jogador continua com velocidade
-            if (_player_currentFrame_acceleration == 0 && player_speed > 0)
-            {
-                  // se passar esta condiçao, a velocidade de deslocamento deve 
-                  // abrandar de acordo com o drag determinado nas definiçoes do jogador
-                  player_speed -= char_system.char_infor.AikeDrag *
-                        char_system.game_setting.TimeMultiplication();
-            }
-            //caso tenha ocorrido input e exista aceleraçao
-            else
-                  player_speed += _player_currentFrame_acceleration;
-
-            // para que a velocidade nao cresça infinitamente, cada forma tem uma velocidade maxima
-            // determinada
-            player_speed = Mathf.Clamp(player_speed, 0f, char_system.char_infor.AikeMaxSpeed);
-
+         // é adicionado uma força contraria á gravidade com a intensidade de salto
 
       }
+   }
+
+   // metodo para analizar a velocidade do jogador
+   private void VelocityControl()
+   {
+      if (char_controller_.isGrounded)
+      {
+         // determina se nao existe aceleraçao e o jogador continua com velocidade
+         if (player_currentFrame_acceleration_ == 0 && player_speed_ > 0)
+         {
+            // se passar esta condiçao, a velocidade de deslocamento deve 
+            // abrandar de acordo com o drag determinado nas definiçoes do jogador
+            player_speed_ -= char_system_.char_infor.AikeDrag *
+                  char_system_.game_setting.TimeMultiplication();
+         }
+         //caso tenha ocorrido input e exista aceleraçao
+         else
+            player_speed_ += player_currentFrame_acceleration_;
+      }
+
+
+      // para que a velocidade nao cresça infinitamente, cada forma tem uma velocidade maxima
+      // determinada
+      player_speed_ = Mathf.Clamp(player_speed_, 0f, char_system_.char_infor.AikeMaxSpeed);
+
+
+   }
+
+   // debug method
+   protected void CustomCharDebug()
+   {
+      // debug de velocidade
+      Debug.Log(char_controller_.velocity.magnitude);
+   }
 }
