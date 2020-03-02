@@ -58,7 +58,6 @@ public class CharacterSystem : MonoBehaviour
 
    }
 
-
    // metodo que projecta a direçao do jogador no espaço de acçao
    public Vector3 ProjectDirection()
    {

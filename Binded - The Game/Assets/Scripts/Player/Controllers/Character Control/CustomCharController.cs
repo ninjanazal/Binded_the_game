@@ -26,6 +26,7 @@ public class CustomCharController : MonoBehaviour
    private Vector3 gravity_motion_ = Vector3.zero; // deslocamento calculado pela gravidade
    private float falling_time_ = 0f;   // tempo de queda
    private Vector3 calculated_motion_;    // movimento resultante do frame
+   private Vector3 calculated_vertical_dir_;  // vector de deslocamento de salto
    #endregion
 
    private void Start()
@@ -47,13 +48,22 @@ public class CustomCharController : MonoBehaviour
          falling_time_ += char_system_.game_setting.TimeMultiplication();
          // caso o jogador nao esteja no chao, a gravidade é adicionada
          // ao vector de movimento
-         gravity_motion_ += BaseGravityAcceleration * Mathf.Pow(falling_time_, 3f);
+         gravity_motion_ += BaseGravityAcceleration * Mathf.Pow(falling_time_, 2f);
       }
       // caso esteja no chao, a gravidade é anulada
       else { gravity_motion_ = Vector3.zero; falling_time_ *= 0f; }
 
-      // adiciona o deslocamento causado pela gravida
-      calculated_motion_ += gravity_motion_;
+      // caso exista valor de salto
+      if (calculated_vertical_dir_ != Vector3.zero)
+      {
+         // adiciona o deslocamento
+         gravity_motion_ += calculated_vertical_dir_;
+         // reseta o valor do deslocamento adicionado anteriormento
+         calculated_vertical_dir_ = Vector3.zero;
+      }
+
+      // adiciona o deslocamento vertical
+      calculated_motion_ += gravity_motion_ * char_system_.game_setting.TimeMultiplication();
 
       // adiciona o deslocamento causado pelo deslocamento
       calculated_motion_ += char_transform_.forward * player_speed_ *
@@ -65,11 +75,9 @@ public class CustomCharController : MonoBehaviour
       // vector resultante do movimento é colocado a 0
       calculated_motion_ = Vector3.zero;
 
-      CustomCharDebug();
+      // debug do custom charController
+      CustomCharControllerDebug();
    }
-
-
-   // determina se o personagem esta em contacto com o chao    
 
 
    // deloca o jogador
@@ -91,7 +99,7 @@ public class CustomCharController : MonoBehaviour
       if (char_controller_.isGrounded)
       {
          // é adicionado uma força contraria á gravidade com a intensidade de salto
-
+         calculated_vertical_dir_ += jumpDir.normalized * char_system_.char_infor.AikeJumpForce;
       }
    }
 
@@ -117,14 +125,19 @@ public class CustomCharController : MonoBehaviour
       // para que a velocidade nao cresça infinitamente, cada forma tem uma velocidade maxima
       // determinada
       player_speed_ = Mathf.Clamp(player_speed_, 0f, char_system_.char_infor.AikeMaxSpeed);
-
-
    }
 
-   // debug method
-   protected void CustomCharDebug()
+   // linhas de debug do char controller
+   private void CustomCharControllerDebug()
    {
-      // debug de velocidade
-      Debug.Log(char_controller_.velocity.magnitude);
+      //Debug.Log("Valor do deslocamento vertical: " + gravity_motion_);
+      // linha de debug, que demonstra a velocidade verticas
+      Debug.DrawLine(char_transform_.position, char_transform_.position + gravity_motion_.normalized, Color.magenta);
+   }
+
+
+   private void OnControllerColliderHit(ControllerColliderHit hit)
+   {
+      Debug.Log(hit.point);
    }
 }

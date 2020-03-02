@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AikeBehavior
 {
+
    private CharacterSystem _char_system;      // referencia para o character system
    private Transform _player_transform;    // referencia ao transform do jogador
    private CharacterInfo _char_info;    // referencia para as informaçoes do player
@@ -13,6 +14,9 @@ public class AikeBehavior
    // variaveis do comportamento
    private float playerAcceleration_;    // aceleraçao calculado
    private Vector3 target_direction_;    // direcçao alvo 
+
+   //input
+   private bool jump_pressed_ = false; // guarda se o jump foi pressionado
 
 
    // construtor da classe
@@ -30,11 +34,8 @@ public class AikeBehavior
       _custom_char_controller = _char_system.GetCustomController();
    }
 
-   // comportamento da forma
-   public void Behavior() => InputHandler();    // gera o input do jogador
-
-   // manager de input
-   private void InputHandler()
+   // comportamento da forma   
+   public void Behavior()
    {
       // avalia o input direcional (Vertical)
       // caso exista input vertical
@@ -64,6 +65,7 @@ public class AikeBehavior
          target_direction_ += Quaternion.Euler(0f, 90f, 0f)
          * _char_system.ProjectDirection() * Input.GetAxis("Horizontal");
       }
+
       // normaliza a direcçao
       target_direction_.Normalize();
 
@@ -72,6 +74,11 @@ public class AikeBehavior
          // aponta o jogador para a direcçao resultante
          _player_transform.forward = Vector3.Lerp(_player_transform.forward, target_direction_,
                _char_info.AikeRotationSpeed * _game_settings.TimeMultiplication());
+
+      // chama o salto sempre que o botao for pressionado
+      if (Input.GetButtonDown("Jump"))
+         _custom_char_controller.AikeBaseJump(_player_transform.up);
+
 
       // chama o movimento no caracterController
       _custom_char_controller.AikeBaseMove(playerAcceleration_);
