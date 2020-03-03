@@ -15,10 +15,6 @@ public class AikeBehavior
    private float playerAcceleration_;    // aceleraçao calculado
    private Vector3 target_direction_;    // direcçao alvo 
 
-   //input
-   private bool jump_pressed_ = false; // guarda se o jump foi pressionado
-
-
    // construtor da classe
    public AikeBehavior(CharacterSystem charSystem)
    {
@@ -29,7 +25,7 @@ public class AikeBehavior
       // guarda referencia para as informaçoes do jogador
       _char_info = _char_system.char_infor;
       // guarda referencia para as definiçoes de sistema
-      _game_settings = _char_system.game_setting;
+      _game_settings = _char_system.game_settings_;
       // guarda referencia para o customCharController do jogador
       _custom_char_controller = _char_system.GetCustomController();
    }

@@ -187,6 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0167a0f835f92084ca27ed1cf495a7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_setting: {fileID: 11400000, guid: 50bb74f0e34105249b083991f4ec4fd8, type: 2}
+  game_settings_: {fileID: 11400000, guid: 50bb74f0e34105249b083991f4ec4fd8, type: 2}
   char_infor: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
   _player_speed: 0

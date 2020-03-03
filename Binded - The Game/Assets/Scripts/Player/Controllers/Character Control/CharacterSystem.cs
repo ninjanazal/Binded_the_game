@@ -9,7 +9,7 @@ public class CharacterSystem : MonoBehaviour
    #region public fields
    // public fields ----------------------------------------
    [Header("Definiçoes necessarias")]
-   public GameSettings game_setting;      // definiçoes de jogo
+   public GameSettings game_settings_;      // definiçoes de jogo
    public CharacterInfo char_infor;      // informaçao do jogador
 
    #endregion
