@@ -73,7 +73,7 @@ public class AikeBehavior
 
       // chama o salto sempre que o botao for pressionado
       if (Input.GetButtonDown("Jump"))
-         _custom_char_controller.AikeBaseJump(_player_transform.up);
+         _custom_char_controller.AikeBaseJump();
 
 
       // chama o movimento no caracterController

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   AikeMaxSpeed: 5
-  AikeAceleration: 20
+  AikeAceleration: 30
   AikeRotationSpeed: 30
   AikeDrag: 50
-  AikeJumpForce: 6
+  AikeJumpForce: 3
+  AikeAngleGrabWall: 15
   ArifMaxSpeed: 15
   ArifAceleration: 5
   ArifRotationSpeed: 4

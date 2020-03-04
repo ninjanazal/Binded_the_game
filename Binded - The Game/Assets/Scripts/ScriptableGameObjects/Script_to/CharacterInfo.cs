@@ -23,6 +23,7 @@ public class CharacterInfo : ScriptableObject
    public float AikeRotationSpeed = 5f;   // velocidade de rotaçao
    public float AikeDrag = 5f;      // drag de movimento
    public float AikeJumpForce = 50f;      // força de salto
+   public float AikeAngleGrabWall = 15f;  // angluo maximo para que Aike agarre a parede
    #endregion
 
    #region ArifVars

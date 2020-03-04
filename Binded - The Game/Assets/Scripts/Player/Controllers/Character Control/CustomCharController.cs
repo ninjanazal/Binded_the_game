@@ -9,7 +9,6 @@ public class CustomCharController : MonoBehaviour
    #region publicVars
    [Header("Valores gerais do controlador")]
    public Vector3 BaseGravityAcceleration; // valor basico da aceleraçao da gravidade
-
    #endregion
 
    #region privateVars
@@ -31,6 +30,8 @@ public class CustomCharController : MonoBehaviour
    private ControllerColliderHit last_hit_;   // ground check
    private bool is_grounded_ = false; // indica se o jogador esta em contacto com o chao
    private bool jumping = false; // indica se o jogador está em salto ou nao
+
+   private bool climbing = false;   // guarda se o jogador esta num estado de climb ou nao
    #endregion
 
    private void Start()
@@ -48,50 +49,19 @@ public class CustomCharController : MonoBehaviour
    // update logico do controller
    private void Update()
    {
-      Debug.Log(jumping);
-      // determina se o jogador está ou nao grounded
-      if (!char_controller_.isGrounded || !is_grounded_)
+      switch (char_system_.char_infor.shape)
       {
-         falling_time_ += char_system_.game_settings_.TimeMultiplication();
-         // caso o jogador nao esteja no chao, a gravidade é adicionada
-         // ao vector de movimento
-         gravity_motion_ += BaseGravityAcceleration * Mathf.Pow(falling_time_, 2f);
+         case PlayerShape.Aike:
+            // logica de comportamento de controlo para Aike
+            // caso o jogador esteja a subir um objecto
+            if (climbing) CustomAikeClimbBehavior();
+            else CustomAikeFloorBehavior();
+            break;
+         case PlayerShape.Arif:
+            // logica de comportamento de comtrolo para Arif
+            break;
       }
-      // caso esteja no chao, a gravidade é anulada
-      else
-      {
-         // ao voltar a tocar numa superficie de contacto
-         // repoem as variaveis de direcçao e tempo
-         gravity_motion_ = Vector3.zero;
-         falling_time_ *= 0f;
-         jumping = false;
-      }
-
-      // caso exista valor de salto
-      if (jumping && calculated_vertical_dir_ != Vector3.zero && AnyGroundConfirmation())
-      {
-         // adiciona o deslocamento
-         gravity_motion_ += calculated_vertical_dir_;
-         // reseta o valor do deslocamento adicionado anteriormento
-         calculated_vertical_dir_ = Vector3.zero;
-      }
-      // adiciona o deslocamento vertical ao deslocamento geral
-      calculated_motion_ += gravity_motion_ *
-         char_system_.game_settings_.TimeMultiplication();
-
-      // adiciona o deslocamento causado pelo deslocamento
-      calculated_motion_ += CalculateMoveDir() * player_speed_ *
-                  char_system_.game_settings_.TimeMultiplication();
-
-      // jogador continua a mover-se, com base no resultado
-      if (calculated_motion_ != Vector3.zero) char_controller_.Move(calculated_motion_);
-      // vector resultante do movimento é colocado a 0
-      calculated_motion_ = Vector3.zero;
-
-      // debug do custom charController
-      CustomCharControllerDebug();
    }
-
 
 
    #region public methods
@@ -105,23 +75,84 @@ public class CustomCharController : MonoBehaviour
    }
 
    // handler para salto do Aike
-   public void AikeBaseJump(Vector3 jumpDir)
+   public void AikeBaseJump()
    {
       // o salto apena é possivel se o jogador estiver em contacto com uma superficie
       // ou seja, se esteja apoiado segundo a sua base
       // ** para ja grounded
-      if (AnyGroundConfirmation() && !jumping)
+      if (!jumping)
       {
          // é adicionado uma força contraria á gravidade com a intensidade de salto
-         calculated_vertical_dir_ = jumpDir.normalized * char_system_.char_infor.AikeJumpForce;
-         // define a variavel para true, indicando que o jogador esta a saltar
-         jumping = true;
+         if (calculated_vertical_dir_ == Vector3.zero)
+            calculated_vertical_dir_ = Vector3.up *
+               Mathf.Sqrt(0 - 2 * BaseGravityAcceleration.y * char_system_.char_infor.AikeJumpForce);
+         // ao saltar, o jogador de qualquer das formas deve sair de estado de climbing
+         if (climbing) climbing = false;
       }
    }
    #endregion
 
 
    #region private methods
+   // logica de update de Aike
+   // logica de update para Aike em contacto horizontal
+   private void CustomAikeFloorBehavior()
+   {
+      // adiciona o deslocamento causado pelo deslocamento
+      calculated_motion_ += ((CalculateMoveDir() * player_speed_) + gravity_motion_) *
+                  char_system_.game_settings_.TimeMultiplication();
+
+      // jogador continua a mover-se, com base no resultado
+      if (calculated_motion_ != Vector3.zero) char_controller_.Move(calculated_motion_);
+
+      // caso esteja no chao, a gravidade é anulada
+      if (char_controller_.isGrounded && is_grounded_)
+      {
+         // ao voltar a tocar numa superficie de contacto
+         // repoem as variaveis de direcçao e tempo
+         gravity_motion_ = Vector3.zero;
+         falling_time_ *= 0f;
+         // guarda que o jogador nao esta a saltar visto que tocou no chao
+         jumping = false;
+      }
+      // caso o jogador nao esteja no chao, a gravidade é adicionada
+      // ao vector de movimento
+      gravity_motion_ += BaseGravityAcceleration * Mathf.Pow(falling_time_, 2f);
+      // determina se o jogador está ou nao grounded
+      falling_time_ += char_system_.game_settings_.TimeMultiplication();
+
+      // caso exista valor de salto
+      if (!jumping && calculated_vertical_dir_ != Vector3.zero)
+      {
+         // define a variavel para true, indicando que o jogador esta a saltar
+         jumping = true;
+         // adiciona o deslocamento
+         gravity_motion_ += calculated_vertical_dir_;
+         // reseta o valor do deslocamento adicionado anteriormento
+         calculated_vertical_dir_ = Vector3.zero;
+      }
+
+      // debug do custom charController
+      CustomCharControllerDebug();
+
+      // vector resultante do movimento é colocado a 0
+      calculated_motion_ = Vector3.zero;
+
+   }
+   // comportamento de Aike quando esta num estado de climb
+   private void CustomAikeClimbBehavior()
+   {
+      // neste estado a gravidade nao deverá entrar em consideraçao
+      // estado entra se o jogador colidir numa determinada direcçao com um objecto
+      // que possa ser escalavel
+      // ajustar a rotaçao do objecto
+      if (last_hit_ != null)
+         char_transform_.up = Vector3.Lerp(char_transform_.up, last_hit_.normal, char_system_.char_infor.AikeRotationSpeed *
+            char_system_.game_settings_.TimeMultiplication());
+
+
+   }
+
    // metodo para analizar a velocidade do jogador
    private void VelocityControl()
    {
@@ -140,7 +171,6 @@ public class CustomCharController : MonoBehaviour
             player_speed_ += player_currentFrame_acceleration_;
       }
 
-
       // para que a velocidade nao cresça infinitamente, cada forma tem uma velocidade maxima
       // determinada
       player_speed_ = Mathf.Clamp(player_speed_, 0f, char_system_.char_infor.AikeMaxSpeed);
@@ -155,22 +185,9 @@ public class CustomCharController : MonoBehaviour
       else
       {
          // caso exista colisao, é determinado o vector de direcçao atravez a normal do objecto
-         return Vector3.Cross(char_controller_.transform.right, last_hit_.normal);
+         return Vector3.Cross(char_controller_.transform.right, last_hit_.normal).normalized;
       }
    }
-   // determina se em algum dos sistemas o objecto esta grounded
-   private bool AnyGroundConfirmation() { return (char_controller_.isGrounded || is_grounded_); }
-
-   // linhas de debug do char controller
-   private void CustomCharControllerDebug()
-   {
-      // linha de debug, que demonstra a velocidade verticas
-      Debug.DrawLine(char_transform_.position, char_transform_.position + gravity_motion_.normalized, Color.magenta);
-      Debug.DrawLine(char_controller_.transform.position,
-         char_controller_.transform.position + CalculateMoveDir().normalized, Color.yellow);
-   }
-   #endregion
-
 
    // chamada para interaçao com objectos ou detecçao de distancias
    private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -178,13 +195,16 @@ public class CustomCharController : MonoBehaviour
       // guarda o ultimo hit que o characterController obteve
       if (last_hit_ != hit)
       {
-         // determina o angulo de colisao
-         float coll_angle = Vector3.Angle(char_system_.transform.up, hit.normal);
+         // determina o angulo de colisao vertical
+         float coll_angle_vertical_ = Vector3.Angle(char_system_.transform.up, hit.normal);
+         // determina o angulo de colisao horizontal
+         float coll_angle_horizontal_ = Vector3.Angle(-char_system_.transform.forward, hit.normal);
 
+         // validaçao vertical da colisao
          // valida se o hit entra em algum dos estados necessarios
          // calcula o angulo entre a normal do ponto de colisao
          // e a direcçao up do jogador
-         if (coll_angle < char_controller_.slopeLimit)
+         if (coll_angle_vertical_ < char_controller_.slopeLimit)
          {
             // guarda que o jogador está em contacto com o chao
             is_grounded_ = true;
@@ -194,20 +214,38 @@ public class CustomCharController : MonoBehaviour
             jumping = false;
          }
          // caso o jogador tenha colidido com algo sobre si
-         else if (coll_angle > 130)
+         else if (coll_angle_vertical_ > 130)
          {
             // remove a velocidade positiva vertica
             gravity_motion_.y = (gravity_motion_.y > 0f) ? 0f : gravity_motion_.y;
          }
-         else
+         // o jogador nao tenha colidido com algum objecto a baixo do angulo de slope
+         // confimr se o char controller detectou se nao esta grounded
+         else is_grounded_ = false;
+
+         // validaçao horizontal da colisao
+         if (coll_angle_horizontal_ <= char_system_.char_infor.AikeAngleGrabWall)
          {
-            // o jogador nao tenha colidido com algum objecto a baixo do angulo de slope
-            // confimr se o char controller detectou se nao esta grounded
-            is_grounded_ = false;
+            // guarda a referencia para o hit   
+            last_hit_ = hit;
+            // caso isto ocorra , a colisao está dentro do angulo da colisao
+            // confirma se o objecto é trepavel
+            if (hit.gameObject.tag == "Climbable" && !climbing)
+               // se sim, deve alterar o comportamento do jogador
+               climbing = true;
          }
-
-
       }
+   }
+   #endregion
 
+   // ------------------------------------------- DEBUG
+   // linhas de debug do char controller
+   private void CustomCharControllerDebug()
+   {
+      // linha de debug, que demonstra a velocidade verticas
+      Debug.DrawLine(char_transform_.position, char_transform_.position + gravity_motion_.normalized, Color.magenta);
+      Debug.DrawLine(char_controller_.transform.position,
+         char_controller_.transform.position + CalculateMoveDir().normalized, Color.yellow);
+      Debug.DrawLine(char_transform_.position, char_transform_.position + calculated_motion_.normalized, Color.black);
    }
 }
