@@ -113,8 +113,8 @@ public class CameraController : MonoBehaviour
             // utilizando um ray da direçao do player ate á posiçao da camera
             // caso colida com algum objecto , deve aproximar a camera
 
-            if (Physics.Raycast(_offseted_cam_target, (_cam_calculated_pos - _offseted_cam_target).normalized,
-             out clippingHit, Vector3.Distance(_cam_calculated_pos, _offseted_cam_target), mask))
+            if (Physics.Raycast(_camTarget.position, (_cam_calculated_pos - _camTarget.position).normalized,
+             out clippingHit, Vector3.Distance(_cam_calculated_pos, _camTarget.position), mask))
             {
                   // se este teste for positivo, a camera deve ser deslocada para a posicao de alvo mais um offset 
                   // de distancia
