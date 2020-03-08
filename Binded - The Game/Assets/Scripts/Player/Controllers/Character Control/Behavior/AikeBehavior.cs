@@ -4,237 +4,259 @@ using UnityEngine;
 
 public class AikeBehavior : MonoBehaviour
 {
-    // variaveis de 
-    private CharacterSystem char_system_;      // referencia para o character system
-    private Transform char_transform_;    // referencia ao transform do jogador
-    private CharacterInfo char_info_;    // referencia para as informaçoes do player
-    private GameSettings game_settings_;    // referencia para as definiçoes do jogo
-    private CharacterController char_controller_;   // referencia para o character Controller
+   // variaveis de 
+   private CharacterSystem char_system_;      // referencia para o character system
+   private Transform char_transform_;    // referencia ao transform do jogador
+   private CharacterInfo char_info_;    // referencia para as informaçoes do player
+   private GameSettings game_settings_;    // referencia para as definiçoes do jogo
+   private CharacterController char_controller_;   // referencia para o character Controller
 
-    // variaveis do comportamento
-    private float char_acceleration_;    // aceleraçao calculado
-    private Vector3 target_direction_;    // direcçao alvo 
+   // variaveis do comportamento
+   private float char_acceleration_;    // aceleraçao calculado
+   private Vector3 target_direction_;    // direcçao alvo 
 
-    private float char_speed_ = 0f;  // velocidade do jogador
-    private Vector3 horizontal_motion_ = Vector3.zero;   // direcçao horizontal do movimento
-    private Vector3 vertical_motion_ = Vector3.zero;   // direcçao vertical do movimento
+   private float char_speed_ = 0f;  // velocidade do jogador
+   private Vector3 horizontal_motion_ = Vector3.zero;   // direcçao horizontal do movimento
+   private Vector3 vertical_motion_ = Vector3.zero;   // direcçao vertical do movimento
 
-    private Transform collision_target_;   // referencia para o transform do marcador de teste
+   private Transform collision_target_;   // referencia para o transform do marcador de teste
 
-    private bool is_climbing_ = false;  // define se o jogador esta num estado de subida ou nao
+   private bool is_climbing_ = false;  // define se o jogador esta num estado de subida ou nao
 
-    // construtor da classe
-    public void AikeBehaviorLoad(CharacterSystem charSystem)
-    {
-        // guarda referencia ao character system
-        char_system_ = charSystem;
-        // guarda referencia para 
-        char_transform_ = char_system_.GetPlayerTransform();
-        // guarda referencia para as informaçoes do jogador
-        char_info_ = char_system_.char_infor;
-        // guarda referencia para as definiçoes de sistema
-        game_settings_ = char_system_.game_settings_;
-        // guarda referencia para o charController
-        char_controller_ = char_system_.GetCharController();
-        // guarda a referencia para o marcador da posiçao do groundTest
-        collision_target_ = transform.GetChild(0).transform;
-    }
+   // construtor da classe
+   public void AikeBehaviorLoad(CharacterSystem charSystem)
+   {
+      // guarda referencia ao character system
+      char_system_ = charSystem;
+      // guarda referencia para 
+      char_transform_ = char_system_.GetPlayerTransform();
+      // guarda referencia para as informaçoes do jogador
+      char_info_ = char_system_.char_infor;
+      // guarda referencia para as definiçoes de sistema
+      game_settings_ = char_system_.game_settings_;
+      // guarda referencia para o charController
+      char_controller_ = char_system_.GetCharController();
+      // guarda a referencia para o marcador da posiçao do groundTest
+      collision_target_ = transform.GetChild(0).transform;
+   }
 
-    // comportamento da forma   
-    public void Behavior(ref float speed)
-    {
-        char_speed_ = speed;  // guarda o valor da velocidade no frame
-        InputManager(); // avalia o input     
-        Movement(); // determina direcçoes resultantes do movimento horizontal
-        VerticalMovement();  // determina direcçoes resultantes do movimento vertical
-        speed = char_speed_;  // guarda na referencia o valor da velocidade no final do ciclo
-    }
+   // comportamento da forma   
+   public void Behavior(ref float speed)
+   {
+      char_speed_ = speed;  // guarda o valor da velocidade no frame
+      InputManager(); // avalia o input     
+      Movement(); // determina direcçoes resultantes do movimento horizontal
+      VerticalMovement();  // determina direcçoes resultantes do movimento vertical
+      speed = char_speed_;  // guarda na referencia o valor da velocidade no final do ciclo
+   }
 
-    #region BehaviorHandlers
-    // Input -----------------------
-    // avalia o input no frame
-    private void InputManager()
-    {
-        // reseta a aceleraçao determinada e direcçao
-        char_acceleration_ = 0f;
-        target_direction_ = Vector3.zero;
+   #region BehaviorHandlers
+   // Input -----------------------
+   // avalia o input no frame
+   private void InputManager()
+   {
+      // reseta a aceleraçao determinada e direcçao
+      char_acceleration_ = 0f;
+      target_direction_ = Vector3.zero;
 
-        // avalia o input direcional (Vertical)
-        // caso exista input vertical
-        if (Input.GetAxis("Vertical") != 0f)
-        {
-            // determinar a direcçao do jogador quando esta na forma de Aike
-            // varia a aceleraçao utilizando o inout system do Unity
-            char_acceleration_ = char_info_.AikeAceleration *
-                  Mathf.Abs(Input.GetAxis("Vertical"));
+      // avalia o input direcional (Vertical)
+      // caso exista input vertical
+      if (Input.GetAxis("Vertical") != 0f)
+      {
+         // determinar a direcçao do jogador quando esta na forma de Aike
+         // varia a aceleraçao utilizando o inout system do Unity
+         char_acceleration_ = char_info_.AikeAceleration *
+               Mathf.Abs(Input.GetAxis("Vertical"));
 
-            // define a direcçao alvo igual á direclao da camera
-            target_direction_ += char_system_.ProjectDirection() *
-                 Input.GetAxis("Vertical");
-        }
+         // define a direcçao alvo igual á direclao da camera
+         target_direction_ += char_system_.ProjectDirection() *
+              Input.GetAxis("Vertical");
+      }
 
-        // caso exista input horizontal
-        if (Input.GetAxis("Horizontal") != 0f)
-        {
-            // determina a direcçao do jogador quando esta na forma de AIke
-            char_acceleration_ = char_info_.AikeAceleration *
-                  Mathf.Abs(Input.GetAxis("Horizontal"));
+      // caso exista input horizontal
+      if (Input.GetAxis("Horizontal") != 0f)
+      {
+         // determina a direcçao do jogador quando esta na forma de AIke
+         char_acceleration_ = char_info_.AikeAceleration *
+               Mathf.Abs(Input.GetAxis("Horizontal"));
 
-            // define a direcçao alvo resultante da direcçao
-            target_direction_ += (Quaternion.AngleAxis(90f, this.transform.up)
-              * char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
-        }
-        // normaliza a direcçao
-        target_direction_.Normalize();
-        AjustCharRotation(); // ajusta a rotaçao do personagem á normal do terreno
+         // define a direcçao alvo resultante da direcçao
+         target_direction_ += (Quaternion.AngleAxis(90f, this.transform.up)
+           * char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
+      }
+      // normaliza a direcçao
+      target_direction_.Normalize();
+      AjustCharRotation(); // ajusta a rotaçao do personagem á normal do terreno
 
-        // roda o player para a direcçao calculada
-        // so deve mudar de direcçao se estiveer no chao
-        if (target_direction_ != Vector3.zero && GroundedCheck())
-            char_transform_.rotation = Quaternion.Lerp(char_transform_.rotation,
-               Quaternion.LookRotation(Vector3.ProjectOnPlane(target_direction_, char_transform_.up),
-               char_transform_.up), char_info_.AikeRotationSpeed * game_settings_.TimeMultiplication());
+      // roda o player para a direcçao calculada
+      // so deve mudar de direcçao se estiveer no chao
+      if (target_direction_ != Vector3.zero && GroundedCheck())
+         char_transform_.rotation = Quaternion.Lerp(char_transform_.rotation,
+            Quaternion.LookRotation(Vector3.ProjectOnPlane(target_direction_, char_transform_.up),
+            char_transform_.up), char_info_.AikeRotationSpeed * game_settings_.TimeMultiplication());
 
 
-        // call for visual debug
-        DebugCalls();
-    }
+      // call for visual debug
+      DebugCalls();
+   }
 
-    // movimento horizontal  -----------------
-    // reproduz o movimento horizontal calculado no input
-    private void Movement()
-    {
-        // controla a velocidade
-        VelocityControl();
-        // define a direcçao do movimento do frame
-        horizontal_motion_ = (char_transform_.forward * char_speed_) * game_settings_.TimeMultiplication();
+   // movimento horizontal  -----------------
+   // reproduz o movimento horizontal calculado no input
+   private void Movement()
+   {
+      // controla a velocidade
+      VelocityControl();
+      // define a direcçao do movimento do frame
+      horizontal_motion_ = (char_transform_.forward * char_speed_) * game_settings_.TimeMultiplication();
 
-        // desloca o jogador de acordo com a direcçao calculado
-        char_controller_.Move(horizontal_motion_);
-    }
+      // desloca o jogador de acordo com a direcçao calculado
+      char_controller_.Move(horizontal_motion_);
+   }
 
-    //valida o valor da velocidade
-    private void VelocityControl()
-    {
-        // se estiver no chao
-        // caso exista velocidade mas nao haja aceleraçao
-        if (GroundedCheck())
-            if (char_acceleration_ == 0 && char_speed_ > 0)
-                // o player deve abrandar devido ao drag
-                char_speed_ -= char_info_.AikeDrag * game_settings_.TimeMultiplication();
-            else
-                // caso nao seja o caso a aceleraçao deve ser adicionada á velocidade
-                char_speed_ += char_acceleration_ * game_settings_.TimeMultiplication();
+   //valida o valor da velocidade
+   private void VelocityControl()
+   {
+      // se estiver no chao
+      // caso exista velocidade mas nao haja aceleraçao
+      if (GroundedCheck())
+         if (char_acceleration_ == 0 && char_speed_ > 0)
+            // o player deve abrandar devido ao drag
+            char_speed_ -= char_info_.AikeDrag * game_settings_.TimeMultiplication();
+         else
+            // caso nao seja o caso a aceleraçao deve ser adicionada á velocidade
+            char_speed_ += char_acceleration_ * game_settings_.TimeMultiplication();
 
-        // para impedir que a velocidade ultrapasse a velocidade maxima
-        char_speed_ = Mathf.Clamp(char_speed_, 0f, char_info_.AikeMaxSpeed);
-    }
+      // define a velocidade maxima caso esteja a correr ou a andar
+      if (Input.GetAxis("Run") != 0f)
+         char_speed_ = Mathf.Clamp(char_speed_, 0f, char_info_.AikeMaxSpeed);
+      else
+      {
+         // para impedir que a velocidade ultrapasse a velocidade maxima
+         if (char_speed_ > char_info_.AikeMaxWalkingSpeed)
+            // caso o jogador esteja a uma velocidade superior
+            char_speed_ = Mathf.Lerp(char_speed_, char_info_.AikeMaxWalkingSpeed, char_info_.AikeDrag *
+                game_settings_.TimeMultiplication());
+         // limita a velocidade
+         if (char_speed_ < 0)
+            char_speed_ = 0f;
+      }
 
-    // movimento vertical
-    private void VerticalMovement()
-    {
-        // implementaçao de gravidade
-        // determina se o jogador está grounded
-        vertical_motion_.y += (char_system_.GravityValue * char_info_.AikeGravityReflexition) *
-           game_settings_.TimeMultiplication();
-        // verifica a existencia de input para saltp
-        JumpCheck();
+   }
 
-        // move o player na direcçao determinada
-        char_controller_.Move(vertical_motion_ * game_settings_.TimeMultiplication());
-        // determina se o jogador está grounded
-        if (GroundedCheck() && vertical_motion_.y < 0f)
-        {
-            // Determina a direcçao da gravidade dependendo se o jogador esta a trepar ou nao
-            Vector3 gravity_direction = (is_climbing_) ? -char_transform_.up : -Vector3.up;
-            // orienta o vector de acordo com a direcçao determinada
+   // movimento vertical
+   private void VerticalMovement()
+   {
+      // implementaçao de gravidade
+      // determina se o jogador está grounded
+      vertical_motion_.y += (char_system_.GravityValue * char_info_.AikeGravityReflexition) *
+         game_settings_.TimeMultiplication();
+      // verifica a existencia de input para saltp
+      JumpCheck();
 
-            vertical_motion_ = Quaternion.FromToRotation(vertical_motion_, gravity_direction) * vertical_motion_;
-            // reseta o valor do movimento vertical
-            vertical_motion_ = gravity_direction * 2f;
-        }
-    }
+      // move o player na direcçao determinada
+      // caso o jogador nao esteja a escalar
+      if (!is_climbing_)
+      {
+         // move o jogador normalmento
+         char_controller_.Move(vertical_motion_ * game_settings_.TimeMultiplication());
+      }
+      else
+         // caso esteja sobre um objecto que possa trepar
+         // move o jogador na direcçao determinada ajustada á orientaçao da superficie
+         char_controller_.Move(Quaternion.FromToRotation(-Vector3.up, -char_transform_.up) *
+            vertical_motion_ * game_settings_.TimeMultiplication());
 
-    // verificaçao de salto
-    private void JumpCheck()
-    {
-        // caso base do jogador esteja em contacto com uma superficies
-        // verifica se existe input de salto
-        if (Input.GetButtonDown("Jump") && GroundedCheck())
-        {
-            // determina a força de salto necessaria para atingir a altura definida
-            vertical_motion_.y = Mathf.Sqrt(-2 * (char_system_.GravityValue) *
-               char_info_.AikeJumpHeight);
-        }
-    }
 
-    // retorna adirecçao vertical do jogador
-    private void AjustCharRotation()
-    {
-        // metodo para ajustar a rotaçao do jogador em relaçao ao terreno em que está apoiado
-        // utiliza um ray para determinar a direcçao do terreno
-        RaycastHit hit;      // hit de saida
-        Quaternion target_rotation_ = char_transform_.rotation;  // rotaçao alvo
-        Vector3 difined_normal_ = Vector3.up;   // normal definida
+      // determina se o jogador está grounded
+      if (GroundedCheck() && vertical_motion_.y < 0f)
+         // reseta o valor do movimento vertical
+         vertical_motion_.y = 0f;
+   }
 
-        // colisao com a frente do jogador
-        if (Physics.Raycast(char_transform_.position, char_transform_.forward, out hit,
-           (collision_target_.position - char_transform_.position).magnitude +
-           char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
-            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal            
-            difined_normal_ = hit.normal;
+   // verificaçao de salto
+   private void JumpCheck()
+   {
+      // caso base do jogador esteja em contacto com uma superficies
+      // verifica se existe input de salto
+      if (Input.GetButtonDown("Jump") && GroundedCheck())
+      {
+         // determina a força de salto necessaria para atingir a altura definida
+         vertical_motion_.y = Mathf.Sqrt(-2 * (char_system_.GravityValue) *
+            char_info_.AikeJumpHeight);
+      }
+   }
 
-        // caso nao exista na frente, testa na parte de tras
-        else if (Physics.Raycast(char_transform_.position, -char_transform_.forward, out hit,
-            (collision_target_.position - char_transform_.position).magnitude +
-            char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
-            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal
-            difined_normal_ = hit.normal;
+   // retorna adirecçao vertical do jogador
+   private void AjustCharRotation()
+   {
+      // metodo para ajustar a rotaçao do jogador em relaçao ao terreno em que está apoiado
+      // utiliza um ray para determinar a direcçao do terreno
+      RaycastHit hit;      // hit de saida
+      Quaternion target_rotation_ = char_transform_.rotation;  // rotaçao alvo
+      Vector3 difined_normal_ = Vector3.up;   // normal definida
 
-        // caso falha, testa se existe algo aos pes do jogador
-        else if (Physics.Raycast(char_transform_.position, -char_transform_.up, out hit,
-           (collision_target_.position - char_transform_.position).magnitude +
-           char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
-        {
-            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal           
-            difined_normal_ = hit.normal;
-            // determina se o jogador está sobre um objecto que pode ser escalavel
-            is_climbing_ = (hit.transform.tag == "Climbable") ? true : false;
-        }
-        // determina a target rotation
-        target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(
-            char_transform_.forward, difined_normal_).normalized, difined_normal_));
+      // colisao com a frente do jogador
+      if (Physics.Raycast(char_transform_.position, char_transform_.forward, out hit,
+         (collision_target_.position - char_transform_.position).magnitude +
+         char_system_.maxFloorDistance * 2f, char_system_.GroundMask) && hit.transform.tag == "Climbable")
+         // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal            
+         difined_normal_ = hit.normal;
 
-        // ajusta gradualmente a rotaçao actual á rotaçao determinada
-        char_transform_.rotation = Quaternion.LerpUnclamped(char_transform_.rotation, target_rotation_,
-           char_info_.AikeRotationSpeed * 2f * game_settings_.TimeMultiplication());
-    }
+      // caso nao exista na frente, testa na parte de tras
+      else if (Physics.Raycast(char_transform_.position, -char_transform_.forward, out hit,
+          (collision_target_.position - char_transform_.position).magnitude +
+          char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+         // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal
+         difined_normal_ = hit.normal;
 
-    // determina se o player está em contacto com chao
-    private bool GroundedCheck()
-    {
-        // determina o contacto com o chao sobre uma projecçao de uma esfera sobre a posiçao
-        // do marcador no player
-        // caso exista colisao na esfera com um objecto sobre a layer, retorna valor
-        return Physics.CheckSphere(collision_target_.position,
-        char_system_.maxFloorDistance, char_system_.GroundMask);
-    }
-    #endregion
+      // caso falha, testa se existe algo aos pes do jogador
+      else if (Physics.Raycast(char_transform_.position, -char_transform_.up, out hit,
+         (collision_target_.position - char_transform_.position).magnitude +
+         char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+      {
+         // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal           
+         difined_normal_ = hit.normal;
+         // determina se o jogador está sobre um objecto que pode ser escalavel
+         is_climbing_ = (hit.transform.tag == "Climbable") ? true : false;
+      }
+      // determina a target rotation
+      target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(
+          char_transform_.forward, difined_normal_).normalized, difined_normal_));
 
-    // metodo com calls de debug visual
-    private void DebugCalls()
-    {
-        // desenha a direçao da frent do objecto
-        Debug.DrawLine(char_transform_.position, char_transform_.position
-            + char_transform_.forward, Color.red);
-        // desenha a direcçao obtida atraves da direcçao da camera
-        Debug.DrawLine(char_transform_.position, char_transform_.position +
-            char_system_.ProjectDirection(), Color.green);
-        //desenha a direcçao alvo do jogador
-        Debug.DrawLine(char_transform_.position, char_transform_.position +
-          target_direction_, Color.blue);
-        // desenha o deslocamento vertical
-        Debug.DrawLine(char_transform_.position, char_transform_.position + vertical_motion_.normalized,
-         Color.magenta);
-    }
+      // ajusta gradualmente a rotaçao actual á rotaçao determinada
+      char_transform_.rotation = Quaternion.LerpUnclamped(char_transform_.rotation, target_rotation_,
+         char_info_.AikeRotationSpeed * 2f * game_settings_.TimeMultiplication());
+   }
+
+   // determina se o player está em contacto com chao
+   private bool GroundedCheck()
+   {
+      // determina o contacto com o chao sobre uma projecçao de uma esfera sobre a posiçao
+      // do marcador no player
+      // caso exista colisao na esfera com um objecto sobre a layer, retorna valor
+      return Physics.CheckSphere(collision_target_.position,
+      char_system_.maxFloorDistance, char_system_.GroundMask);
+   }
+   #endregion
+
+   // metodo com calls de debug visual
+   private void DebugCalls()
+   {
+      // desenha a direçao da frent do objecto
+      Debug.DrawLine(char_transform_.position, char_transform_.position
+          + char_transform_.forward, Color.red);
+      // desenha a direcçao obtida atraves da direcçao da camera
+      Debug.DrawLine(char_transform_.position, char_transform_.position +
+          char_system_.ProjectDirection(), Color.green);
+      //desenha a direcçao alvo do jogador
+      Debug.DrawLine(char_transform_.position, char_transform_.position +
+        target_direction_, Color.blue);
+      // desenha o deslocamento vertical
+      Debug.DrawLine(char_transform_.position, char_transform_.position + vertical_motion_.normalized,
+       Color.magenta);
+
+      // desenha linha da gravidade relativa á orientaçao do objecto
+      Debug.DrawLine(char_transform_.position, char_transform_.position +
+       (Quaternion.FromToRotation(-Vector3.up, -char_transform_.up) * vertical_motion_), Color.yellow);
+   }
 }

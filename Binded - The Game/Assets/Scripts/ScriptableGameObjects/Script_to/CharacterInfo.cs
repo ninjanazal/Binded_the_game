@@ -19,12 +19,12 @@ public class CharacterInfo : ScriptableObject
    // variavies relacionada com Aike
    [Header("Aike")]
    public float AikeGravityReflexition= 3.051f; // valor que simula a variaçao da gravidade com o peso
+   public float AikeMaxWalkingSpeed= 2.5f;   // valor da velocidade maxima que aike consegue andar
    public float AikeMaxSpeed = 3.0f;      // velocidade maxima
    public float AikeAceleration = 3.0f;   // aceleraçao
    public float AikeRotationSpeed = 5f;   // velocidade de rotaçao
    public float AikeDrag = 5f;      // drag de movimento
    public float AikeJumpHeight = 50f;      // força de salto
-   public float AikeAngleGrabWall = 15f;  // angluo maximo para que Aike agarre a parede
    #endregion
 
    #region ArifVars
