@@ -15,6 +15,6 @@ MonoBehaviour:
   MasterVolume: 1
   MouseSensitivity: 1
   CameraDistance: 3
-  MinVerticalCamAngle: -30
-  MaxVerticalCamAngle: 40
+  MinVerticalCamAngle: -10
+  MaxVerticalCamAngle: 50
   _timeMultiplier: 1
