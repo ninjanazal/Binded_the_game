@@ -65,7 +65,6 @@ public class CharacterSystem : MonoBehaviour
                     _arifBehavior.Behavior();
                 break;
         }
-
     }
 
     // metodo que projecta a direçao do jogador no espaço de acçao
@@ -78,9 +77,27 @@ public class CharacterSystem : MonoBehaviour
             // a projecçao é interpertada apenas nas componentes x e z
             case PlayerShape.Aike:
                 // caso esteja na fora de Aike a direçao é apenas os valores de x e de z
+                Vector3 xZ_prjection = new Vector3(char_infor.GetInputDir().x, 0f,
+                  char_infor.GetInputDir().z);
                 // projectar o vector no plano
-                return Vector3.ProjectOnPlane(new Vector3(char_infor.GetInputDir().x, 0f,
-                  char_infor.GetInputDir().z), this.transform.up);
+                // calcula a rotaçao do vector x angulos sobre o eixo dos x relativos ao jogador
+                Quaternion rotation_X = Quaternion.AngleAxis(this.transform.rotation.eulerAngles.x, this.transform.right);
+                // remove a componete de rotaçao sobre o Eixo dos y
+                rotation_X = Quaternion.Euler(rotation_X.eulerAngles.x, 0f, rotation_X.eulerAngles.z);
+                // calcula a rotaçao do vector x angulos sobre o eixo dos z relativos ao jogador
+                Quaternion rotation_y = Quaternion.AngleAxis(this.transform.rotation.eulerAngles.z, this.transform.forward);
+                // remove a componete de rotaçao sobre o exiso dos y
+                rotation_y = Quaternion.Euler(rotation_y.eulerAngles.x, 0f, rotation_y.eulerAngles.z);
+
+                // determina a rotaçao final do vector
+                Quaternion finalRot = rotation_X * rotation_y;
+                // remove a componeente de rotaçao sobre o eixo dos y
+                finalRot = Quaternion.Euler(finalRot.eulerAngles.x, 0f, finalRot.eulerAngles.z);
+
+                // determina o vector resultante da rotaçao sobre a projecçao planar 
+                Vector3 result_projecting = finalRot * xZ_prjection.normalized;
+                // projecta o vector resultante sobre o plano de normal up do jogador para reduçao de erros
+                return Vector3.ProjectOnPlane(result_projecting, this.transform.up);
             case PlayerShape.Arif:
                 // retorna todos os componentes do vector
                 return char_infor.GetInputDir().normalized;

@@ -21,6 +21,8 @@ public class AikeBehavior : MonoBehaviour
 
     private Transform collision_target_;   // referencia para o transform do marcador de teste
 
+    private bool is_climbing_ = false;  // define se o jogador esta num estado de subida ou nao
+
     // construtor da classe
     public void AikeBehaviorLoad(CharacterSystem charSystem)
     {
@@ -79,9 +81,8 @@ public class AikeBehavior : MonoBehaviour
                   Mathf.Abs(Input.GetAxis("Horizontal"));
 
             // define a direcçao alvo resultante da direcçao
-            target_direction_ += Vector3.ProjectOnPlane(Quaternion.AngleAxis(90f, this.transform.up)
-              * char_system_.ProjectDirection(), char_transform_.up) *
-              Input.GetAxis("Horizontal");
+            target_direction_ += (Quaternion.AngleAxis(90f, this.transform.up)
+              * char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
         }
         // normaliza a direcçao
         target_direction_.Normalize();
@@ -143,8 +144,15 @@ public class AikeBehavior : MonoBehaviour
         char_controller_.Move(vertical_motion_ * game_settings_.TimeMultiplication());
         // determina se o jogador está grounded
         if (GroundedCheck() && vertical_motion_.y < 0f)
+        {
+            // Determina a direcçao da gravidade dependendo se o jogador esta a trepar ou nao
+            Vector3 gravity_direction = (is_climbing_) ? -char_transform_.up : -Vector3.up;
+            // orienta o vector de acordo com a direcçao determinada
+
+            vertical_motion_ = Quaternion.FromToRotation(vertical_motion_, gravity_direction) * vertical_motion_;
             // reseta o valor do movimento vertical
-            vertical_motion_.y = -1f;
+            vertical_motion_ = gravity_direction * 2f;
+        }
     }
 
     // verificaçao de salto
@@ -158,7 +166,6 @@ public class AikeBehavior : MonoBehaviour
             vertical_motion_.y = Mathf.Sqrt(-2 * (char_system_.GravityValue) *
                char_info_.AikeJumpHeight);
         }
-
     }
 
     // retorna adirecçao vertical do jogador
@@ -168,22 +175,38 @@ public class AikeBehavior : MonoBehaviour
         // utiliza um ray para determinar a direcçao do terreno
         RaycastHit hit;      // hit de saida
         Quaternion target_rotation_ = char_transform_.rotation;  // rotaçao alvo
+        Vector3 difined_normal_ = Vector3.up;   // normal definida
 
-        if (Physics.Raycast(char_transform_.position, -char_transform_.up, out hit,
+        // colisao com a frente do jogador
+        if (Physics.Raycast(char_transform_.position, char_transform_.forward, out hit,
+           (collision_target_.position - char_transform_.position).magnitude +
+           char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal            
+            difined_normal_ = hit.normal;
+
+        // caso nao exista na frente, testa na parte de tras
+        else if (Physics.Raycast(char_transform_.position, -char_transform_.forward, out hit,
+            (collision_target_.position - char_transform_.position).magnitude +
+            char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal
+            difined_normal_ = hit.normal;
+
+        // caso falha, testa se existe algo aos pes do jogador
+        else if (Physics.Raycast(char_transform_.position, -char_transform_.up, out hit,
            (collision_target_.position - char_transform_.position).magnitude +
            char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
         {
-            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal
-            target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(
-               char_transform_.forward, hit.normal).normalized, hit.normal));
+            // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal           
+            difined_normal_ = hit.normal;
+            // determina se o jogador está sobre um objecto que pode ser escalavel
+            is_climbing_ = (hit.transform.tag == "Climbable") ? true : false;
         }
-        else
-            // caso nao tenha colisao, o player deve voltar á normal up do mundo
-            target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(char_transform_.forward,
-            Vector3.up).normalized, Vector3.up));
+        // determina a target rotation
+        target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(
+            char_transform_.forward, difined_normal_).normalized, difined_normal_));
 
         // ajusta gradualmente a rotaçao actual á rotaçao determinada
-        char_transform_.rotation = Quaternion.Lerp(char_transform_.rotation, target_rotation_,
+        char_transform_.rotation = Quaternion.LerpUnclamped(char_transform_.rotation, target_rotation_,
            char_info_.AikeRotationSpeed * 2f * game_settings_.TimeMultiplication());
     }
 

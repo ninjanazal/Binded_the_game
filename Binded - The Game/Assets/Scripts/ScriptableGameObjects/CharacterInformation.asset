@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   AikeGravityReflexition: 3.051
-  AikeMaxSpeed: 5
+  AikeMaxSpeed: 4
   AikeAceleration: 20
   AikeRotationSpeed: 10
   AikeDrag: 20
