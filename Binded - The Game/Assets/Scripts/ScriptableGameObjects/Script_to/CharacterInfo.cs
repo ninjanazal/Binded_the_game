@@ -30,7 +30,9 @@ public class CharacterInfo : ScriptableObject
    #region ArifVars
    // variavies relacionada com Aike
    [Header("Aike")]
-   public float ArifMaxSpeed = 10.0f;     // velocidade maxima
+   public float ArifMaxBaseSpeed = 10.0f;     // velocidade maxima
+   public float ArifMaxSpeed = 20.0f;  // velocidade maxima em "corrida"
+   public float ArifMinSpeed = 1.0f;   // velocidade minima que pode ter
    public float ArifAceleration = 5.0f;   // aceleraçao
    public float ArifRotationSpeed = 4f;   // velocidade de rotaçao
    public float ArifDrag = 6f;      // drag de movimento

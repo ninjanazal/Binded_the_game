@@ -20,7 +20,9 @@ MonoBehaviour:
   AikeRotationSpeed: 10
   AikeDrag: 20
   AikeJumpHeight: 3
-  ArifMaxSpeed: 15
+  ArifMaxBaseSpeed: 10
+  ArifMaxSpeed: 20
+  ArifMinSpeed: 2
   ArifAceleration: 5
-  ArifRotationSpeed: 4
-  ArifDrag: 6
+  ArifRotationSpeed: 3
+  ArifDrag: 2
