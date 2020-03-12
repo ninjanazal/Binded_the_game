@@ -28,6 +28,7 @@ public class CharacterSystem : MonoBehaviour
    private ArifBehavior _arifBehavior; // comportamento do Aike
 
    private Transform groundPositionMarker;   // referencia á posiçao do marcador de ground
+   private CharacterController char_controller_;   // referencia ao controlador de personagem
 
    // variaveis comuns
    private float char_speed = 0f;  // velocidade do jogador
@@ -36,6 +37,9 @@ public class CharacterSystem : MonoBehaviour
    // Start is called before the first frame update
    void Awake()
    {
+      // guarda referencia para o character controller
+      char_controller_ = this.GetComponent<CharacterController>();
+
       // guarda referencias aos scripts de comportamento
       // caso consigo guardar referencia, inicia
       if (_aikeBehavior = this.GetComponent<AikeBehavior>())
@@ -43,7 +47,6 @@ public class CharacterSystem : MonoBehaviour
       // caso consiga guardar referencia, inicia
       if (_arifBehavior = this.GetComponent<ArifBehavior>())
          _arifBehavior.ArifBehaviorLoad(this);
-
    }
 
    // Update is called once per frame
@@ -51,7 +54,7 @@ public class CharacterSystem : MonoBehaviour
    {
       // confirma se ouve alteraçao á forma
       ChangeShapeChecker();
-      
+
       // com base na forma do jogador, corre o comportamento adequado
       switch (char_infor.shape)
       {
@@ -68,6 +71,7 @@ public class CharacterSystem : MonoBehaviour
                _arifBehavior.Behavior(ref char_speed);
             break;
       }
+      Debug.Log(char_controller_.velocity.magnitude);
    }
 
    // metodos internos
@@ -127,7 +131,7 @@ public class CharacterSystem : MonoBehaviour
    public Transform GetPlayerTransform() { return GetPlayerGO().transform; }
    // rotarna o CustomCharController do player
    public CharacterController GetCharController()
-   { return this.GetComponent<CharacterController>(); }
+   { return char_controller_; }
 
    // Debug, on gizmos
    private void OnDrawGizmos()

@@ -166,7 +166,7 @@ public class AikeBehavior : MonoBehaviour
          // caso esteja sobre um objecto que possa trepar
          // move o jogador na direcçao determinada ajustada á orientaçao da superficie
          // caso ja esteja em queda
-         if (vertical_motion_.y < 0f)
+         if (vertical_motion_.y <= 0f)
             char_controller_.Move(Quaternion.FromToRotation(-Vector3.up, -char_transform_.up) *
                vertical_motion_ * game_settings_.TimeMultiplication());
          // caso ainda exista velocidade positiva, relativa ao salto

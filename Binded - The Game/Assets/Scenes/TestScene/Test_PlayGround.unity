@@ -3101,7 +3101,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 670224309865224971, guid: d6e9dc1a984628f4284fbbb49be2f0a6,
+        type: 3}
     - target: {fileID: 4902052542336758625, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_SlopeLimit
@@ -3115,7 +3116,7 @@ PrefabInstance:
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.45
+      value: 1.215
       objectReference: {fileID: 0}
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}

@@ -34,7 +34,9 @@ public class CharacterInfo : ScriptableObject
    public float ArifMaxSpeed = 20.0f;  // velocidade maxima em "corrida"
    public float ArifMinSpeed = 1.0f;   // velocidade minima que pode ter
    public float ArifAceleration = 5.0f;   // aceleraçao
+   public float ArifBreakSpeed = 10f;  // força de travagem 
    public float ArifRotationSpeed = 4f;   // velocidade de rotaçao
+   public float ArifRollSpeed = 10f;   // rotaçao de roll
    public float ArifDrag = 6f;      // drag de movimento
    #endregion
 

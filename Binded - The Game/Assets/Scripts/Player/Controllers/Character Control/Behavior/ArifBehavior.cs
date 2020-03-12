@@ -18,6 +18,7 @@ public class ArifBehavior : MonoBehaviour
    private float char_rotationSpeed;   // velocidade de damp da rotaçao
    private Vector3 free_motion_ = Vector3.zero; // direcçao de deslocamento calculada
    private Vector3 vertical_motion_ = Vector3.zero;   // direcçao vertical do movimento
+   private float calculated_roll_value_ = 0f;  // valor do angulo sobre o vector z 
 
    private Transform collision_target_;   // referencia para o transform do marcador de teste
 
@@ -77,19 +78,19 @@ public class ArifBehavior : MonoBehaviour
             char_acceleration_ += char_info_.ArifAceleration *
                Mathf.Abs(Input.GetAxis("Vertical"));
          // caso esteja a travar
-         else if (Input.GetAxis("Vertical") < 0f)
+         else
             // deve reduzir a velocidade de acordo com o valor de drag
-            char_acceleration_ -= char_info_.ArifDrag * Mathf.Abs(Input.GetAxis("Vertical"));
-      }
+            char_acceleration_ -= char_info_.ArifBreakSpeed * Mathf.Abs(Input.GetAxis("Vertical"));
 
-      // caso exista input horizontal
-      if (Input.GetAxis("Horizontal") != 0f)
-      {
-         // adiciona o valor da aceleraçao de acordo com o input
-         char_acceleration_ += char_info_.ArifAceleration * Mathf.Abs(Input.GetAxis("Horizontal"));
-         // determina a direcçao causada por este input
-         target_direction_ += (Quaternion.AngleAxis(90f, char_transform_.up) *
-           _char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
+         // caso exista input horizontal
+         if (Input.GetAxis("Horizontal") != 0f)
+         {
+            // adiciona o valor da aceleraçao de acordo com o input
+            char_acceleration_ += char_info_.ArifAceleration * Mathf.Abs(Input.GetAxis("Horizontal"));
+            // determina a direcçao causada por este input
+            target_direction_ += (Quaternion.AngleAxis(90f, char_transform_.up) *
+              _char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
+         }
       }
 
       // normaliza a direcçao
@@ -100,6 +101,17 @@ public class ArifBehavior : MonoBehaviour
          char_transform_.forward = Vector3.Lerp(char_transform_.forward,
             target_direction_, char_info_.ArifRotationSpeed * game_settings_.TimeMultiplication());
 
+      // determina o valor de roll de acordo com o angulo formado entre a direcçao alvo
+      // e a direcçao do jogador
+      // altera o roll do objecto de acordo com       
+      calculated_roll_value_ =
+         Vector3.SignedAngle(target_direction_, char_transform_.forward, char_transform_.up);
+
+      // adiciona á rotaçao, o valor de roll determinado anteriormente
+      char_transform_.rotation =
+         Quaternion.Euler(char_transform_.eulerAngles.x, char_transform_.eulerAngles.y,
+         Mathf.LerpAngle(char_transform_.localEulerAngles.z, calculated_roll_value_,
+            char_info_.AikeRotationSpeed * game_settings_.TimeMultiplication()));
 
    }
 

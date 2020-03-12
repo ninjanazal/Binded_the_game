@@ -24,5 +24,7 @@ MonoBehaviour:
   ArifMaxSpeed: 20
   ArifMinSpeed: 2
   ArifAceleration: 5
+  ArifBreakSpeed: 10
   ArifRotationSpeed: 3
+  ArifRollSpeed: 500
   ArifDrag: 2
