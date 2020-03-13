@@ -26,14 +26,11 @@ public class GameSettings : ScriptableObject
     [Range(-45, 80)]
     public float MinVerticalCamAngle, MaxVerticalCamAngle;
 
-    // Multiplicador de tempo
-    [Header("Multiplicado de tempo")]
-    [Range(0f,1f)]
-    public float _timeMultiplier = 1f;
-
     // private Vars -------------------------------------------------------
+    // Multiplicador de tempo
+    private float _timeMultiplier = 1f;
 
-    
+
     // funcs
     #region Funcs
     // tempo
@@ -44,7 +41,7 @@ public class GameSettings : ScriptableObject
         _timeMultiplier = value;
     }
     // ajuste ao arranjo do tempo em jogo
-    public float TimeMultiplication()
+    public float PlayerTimeMultiplication()
     {
         // retorna o tempo basal ajustado á multiplicaçao
         return Time.deltaTime * _timeMultiplier;
