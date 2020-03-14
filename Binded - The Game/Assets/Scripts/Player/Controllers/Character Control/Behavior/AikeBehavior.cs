@@ -217,21 +217,21 @@ public class AikeBehavior : MonoBehaviour
         // colisao com a frente do jogador
         if (Physics.Raycast(char_transform_.position, char_transform_.forward, out hit,
            (collision_target_.position - char_transform_.position).magnitude +
-           char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+           char_system_.maxAikeFloorDistance * 2f, char_system_.GroundMask))
             // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal            
             difined_normal_ = hit.normal;
 
         // caso nao exista na frente, testa na parte de tras
         else if (Physics.Raycast(char_transform_.position, -char_transform_.forward, out hit,
             (collision_target_.position - char_transform_.position).magnitude +
-            char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+            char_system_.maxAikeFloorDistance * 2f, char_system_.GroundMask))
             // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal
             difined_normal_ = hit.normal;
 
         // caso falha, testa se existe algo aos pes do jogador
         else if (Physics.Raycast(char_transform_.position, -char_transform_.up, out hit,
            (collision_target_.position - char_transform_.position).magnitude +
-           char_system_.maxFloorDistance * 2f, char_system_.GroundMask))
+           char_system_.maxAikeFloorDistance * 2f, char_system_.GroundMask))
         {
             // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal           
             difined_normal_ = hit.normal;
@@ -254,7 +254,7 @@ public class AikeBehavior : MonoBehaviour
         // do marcador no player
         // caso exista colisao na esfera com um objecto sobre a layer, retorna valor
         return Physics.CheckSphere(collision_target_.position,
-        char_system_.maxFloorDistance, char_system_.GroundMask);
+        char_system_.maxAikeFloorDistance, char_system_.GroundMask);
     }
     #endregion
 

@@ -30,10 +30,10 @@ public class CharacterInfo : ScriptableObject
 
     #region ArifVars
     // variavies relacionada com Aike
-    [Header("Aike")]
+    [Header("Arif")]
     public float ArifGravityReflexition = 0.5f; // valor que simula a variaçao da gravidade com o peso
-    public float ArifMaxBaseSpeed = 10.0f;     // velocidade maxima
     public float ArifMaxSpeed = 20.0f;  // velocidade maxima em "corrida"
+    public float ArifBaseSpeed = 10.0f;     // velocidade maxima
     public float ArifMinSpeed = 1.0f;   // velocidade minima que pode ter
     public float ArifAceleration = 5.0f;   // aceleraçao
     public float ArifBreakSpeed = 10f;  // força de travagem 

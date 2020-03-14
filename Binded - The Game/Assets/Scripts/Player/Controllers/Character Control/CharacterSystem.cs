@@ -17,7 +17,10 @@ public class CharacterSystem : MonoBehaviour
     [Header("Valores de comportamento")]
     public float GravityValue = -9.81f; // valor da gravidade
     public LayerMask GroundMask;  // mascara para a layer de ground
-    public float maxFloorDistance = 0.4f; // distancia maxima que o player é considerado grounded
+    public float maxAikeFloorDistance = 0.4f; // distancia maxima que o player é considerado grounded
+
+    public float ArifCollisionDistance = 1f;    // distancia de colisao para o Arif
+    public LayerMask ArifGroundMask;    // mascara de colisao para Arif
 
     #endregion
 
@@ -142,19 +145,25 @@ public class CharacterSystem : MonoBehaviour
     // retorna o transform referente ao jogador
     public Transform GetPlayerTransform() { return GetPlayerGO().transform; }
     // rotarna o CustomCharController do player
-    public CharacterController GetCharController()
-    { return char_controller_; }
+    public CharacterController GetCharController() { return char_controller_; }
 
     // Debug, on gizmos
     private void OnDrawGizmos()
     {
+        //Aike
         // desenha esfera na posiçao de colisao determinada
-        if (Physics.CheckSphere(this.transform.GetChild(0).transform.position, maxFloorDistance, GroundMask))
+        if (Physics.CheckSphere(this.transform.GetChild(0).transform.position, maxAikeFloorDistance, GroundMask))
             // define a cor
             Gizmos.color = Color.green;
         else Gizmos.color = Color.red;
-
-        Gizmos.DrawWireSphere(this.transform.GetChild(0).transform.position, maxFloorDistance);
+        // desenha uma wiresphere na posiçao de contacto com o chao, utilizado por Aike
+        Gizmos.DrawWireSphere(this.transform.GetChild(0).transform.position, maxAikeFloorDistance);
+        
+        //Arif
+        if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance,ArifGroundMask))
+            Gizmos.color = Color.green;
+        else Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, ArifCollisionDistance);
 
     }
 }

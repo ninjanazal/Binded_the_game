@@ -121,7 +121,6 @@ public class ArifBehavior : MonoBehaviour
                 char_roll_angle_, calculated_roll_value_,
                 char_info_.ArifRollSpeed * game_settings_.PlayerTimeMultiplication());
 
-        Debug.Log("rawAngle: " + calculated_roll_value_ + " smooth: " + char_roll_angle_);
         // adiciona á rotaçao, o valor de roll determinado anteriormente
         char_transform_.rotation = Quaternion.Euler(char_transform_.rotation.eulerAngles.x,
             char_transform_.rotation.eulerAngles.y, char_roll_angle_);
@@ -154,18 +153,22 @@ public class ArifBehavior : MonoBehaviour
 
         // define a velocidade maxima caso o jogador esteja com o shift pressionado
         if (Input.GetAxis("Run") != 0f)
-            char_speed = Mathf.Clamp(char_speed, char_info_.ArifMinSpeed, char_info_.ArifMaxSpeed);
+            char_speed = Mathf.Clamp(char_speed, 0f, char_info_.ArifMaxSpeed);
         else
         {
             // para impedir que ao alterar a velocidade simplemente seja alterada para a definida
-            if (char_speed > char_info_.ArifMaxBaseSpeed)
-                char_speed = Mathf.Lerp(char_speed, char_info_.ArifMaxBaseSpeed, char_info_.ArifDrag *
+            if (char_speed > char_info_.ArifBaseSpeed)
+            {
+                // lerp para a velocidade pretendida
+                char_speed = Mathf.Lerp(char_speed, char_info_.ArifBaseSpeed, char_info_.ArifBreakSpeed *
                    game_settings_.PlayerTimeMultiplication());
-
+            }
             // para que a velocidade seja inferir á velocidade minima
             if (char_speed < char_info_.ArifMinSpeed)
                 char_speed = char_info_.ArifMinSpeed;
         }
+
+        Debug.Log(char_speed);
     }
 
     // conpensaçao da gravidade

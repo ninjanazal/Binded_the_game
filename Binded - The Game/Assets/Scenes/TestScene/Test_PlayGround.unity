@@ -1908,7 +1908,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 1
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -1918,7 +1918,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -3057,6 +3057,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1588658707, guid: bf138a751ea07e04e85b75fd99238333, type: 3}
+      propertyPath: maxAikeFloorDistance
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588658707, guid: bf138a751ea07e04e85b75fd99238333, type: 3}
+      propertyPath: ArifCollisionDistance
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588658707, guid: bf138a751ea07e04e85b75fd99238333, type: 3}
+      propertyPath: ArifGroundMask.m_Bits
+      value: 513
+      objectReference: {fileID: 0}
     - target: {fileID: 431425137547231327, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_IsActive
@@ -3081,17 +3093,17 @@ PrefabInstance:
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.45
+      value: 1.655
       objectReference: {fileID: 0}
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.215
+      value: 6.69
       objectReference: {fileID: 0}
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.753
+      value: -8.034
       objectReference: {fileID: 0}
     - target: {fileID: 7825488917120565568, guid: bf138a751ea07e04e85b75fd99238333,
         type: 3}
