@@ -74,7 +74,7 @@ public class CharacterSystem : MonoBehaviour
                     _arifBehavior.Behavior(ref char_speed);
                 break;
         }
-        //Debug.Log(char_controller_.velocity.magnitude);
+        Debug.Log(char_controller_.velocity.magnitude);
     }
 
     // metodos internos
@@ -163,6 +163,7 @@ public class CharacterSystem : MonoBehaviour
         if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance,ArifGroundMask))
             Gizmos.color = Color.green;
         else Gizmos.color = Color.red;
+        // desenha capsula de colisao
         Gizmos.DrawWireSphere(this.transform.position, ArifCollisionDistance);
 
     }

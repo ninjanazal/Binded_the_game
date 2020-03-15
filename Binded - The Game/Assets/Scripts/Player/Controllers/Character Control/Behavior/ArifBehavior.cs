@@ -20,8 +20,6 @@ public class ArifBehavior : MonoBehaviour
     private Vector3 vertical_motion_ = Vector3.zero;   // direcçao vertical do movimento
     private float calculated_roll_value_ = 0f;  // valor do angulo sobre o vector z 
 
-    private Transform collision_target_;   // referencia para o transform do marcador de teste
-
 
     // inicia o comportamento de Arif
     public void ArifBehaviorLoad(CharacterSystem charSystem)
@@ -36,8 +34,6 @@ public class ArifBehavior : MonoBehaviour
         char_info_ = _char_system_.char_infor;
         // guarda referencia para o character controller
         char_controller_ = _char_system_.GetCharController();
-        // guarda referencia para o marcador da posiçao do groundTest
-        collision_target_ = transform.GetChild(0).transform;
 
     }
 
@@ -103,6 +99,7 @@ public class ArifBehavior : MonoBehaviour
             char_transform_.forward = Vector3.Lerp(char_transform_.forward,
                target_direction_, char_info_.ArifRotationSpeed * game_settings_.PlayerTimeMultiplication());
         else
+            // caso nao exista input, o modelo deve se orientar
             char_transform_.forward = Vector3.Lerp(char_transform_.forward,
                 Vector3.ProjectOnPlane(char_transform_.forward, Vector3.up),
                 char_info_.ArifRotationSpeed * game_settings_.PlayerTimeMultiplication());
@@ -147,28 +144,44 @@ public class ArifBehavior : MonoBehaviour
         if (char_acceleration_ == 0 && char_speed > 0)
             // caso o jogador nao esteja a acelarar, o player deve sofrer influencia do drag
             char_speed -= char_info_.ArifDrag * game_settings_.PlayerTimeMultiplication();
-        else
-            // caso contrario é adicionada a velocidade
-            char_speed += char_acceleration_ * game_settings_.PlayerTimeMultiplication();
-
-        // define a velocidade maxima caso o jogador esteja com o shift pressionado
-        if (Input.GetAxis("Run") != 0f)
-            char_speed = Mathf.Clamp(char_speed, 0f, char_info_.ArifMaxSpeed);
+        // caso esteja a travar
+        else if (char_acceleration_ < 0f) { char_speed += char_acceleration_ * game_settings_.PlayerTimeMultiplication(); }
         else
         {
-            // para impedir que ao alterar a velocidade simplemente seja alterada para a definida
-            if (char_speed > char_info_.ArifBaseSpeed)
+            // define a velocidade maxima caso o jogador esteja com o shift pressionado
+            if (Input.GetAxis("Run") != 0f)
             {
-                // lerp para a velocidade pretendida
-                char_speed = Mathf.Lerp(char_speed, char_info_.ArifBaseSpeed, char_info_.ArifBreakSpeed *
-                   game_settings_.PlayerTimeMultiplication());
+                // caso contrario é adicionada a velocidade
+                char_speed += char_acceleration_ * game_settings_.PlayerTimeMultiplication();
+                // limata o valor da velocidade ao maximo definido
+                char_speed = Mathf.Clamp(char_speed, 0f, char_info_.ArifMaxSpeed);
             }
-            // para que a velocidade seja inferir á velocidade minima
-            if (char_speed < char_info_.ArifMinSpeed)
-                char_speed = char_info_.ArifMinSpeed;
-        }
+            else
+            {
+                // para impedir que ao alterar a velocidade simplemente seja alterada para a definida
+                // sendo a velocidade actual superior á velocidade do estado
+                if (char_speed > char_info_.ArifBaseSpeed)
+                {
+                    // lerp para a velocidade pretendida, ajustando a velocidade
+                    char_speed = Mathf.Lerp(char_speed, char_info_.ArifBaseSpeed, char_info_.ArifDrag
+                    * game_settings_.PlayerTimeMultiplication());
+                }
+                // caso contrario, o jogador vai á velocidade pretendida, é criado um clamp ao valor
+                else
+                {
+                    // caso contrario é adicionada a velocidade
+                    char_speed += char_acceleration_ * game_settings_.PlayerTimeMultiplication();
+                    // limata o valor da velocidade ao maximo definido
+                    char_speed = Mathf.Clamp(char_speed, 0f, char_info_.ArifMaxSpeed);
 
-        Debug.Log(char_speed);
+                }
+            }
+
+        }
+        // para que a velocidade seja inferir á velocidade minima
+        if (char_speed < char_info_.ArifMinSpeed)
+            char_speed = char_info_.ArifMinSpeed;
+
     }
 
     // conpensaçao da gravidade

@@ -281,6 +281,8 @@ public class AikeBehavior : MonoBehaviour
             // reseta o valor da gravidade e altera a forma
             vertical_motion_.y = 0f;
             changing_shape_ = false;    // indica que terminou a logica de mudança de forma
+            char_transform_.rotation = Quaternion.LookRotation(char_system_.ProjectDirection(),
+                char_info_.GetInputUpDir());
             char_info_.changeShape(); // altera a foram
         }
         else
