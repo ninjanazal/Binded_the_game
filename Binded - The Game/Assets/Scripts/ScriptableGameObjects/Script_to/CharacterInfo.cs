@@ -48,7 +48,7 @@ public class CharacterInfo : ScriptableObject
     /// <summary>
     /// Switch the player shaper
     ///</summary>
-    public void changeShape()
+    public void ChangeShape()
     {
         // altera para a forma nao actual
         shape = (shape == PlayerShape.Aike) ? PlayerShape.Arif : PlayerShape.Aike;

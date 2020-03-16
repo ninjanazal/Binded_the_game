@@ -40,7 +40,7 @@ public class AikeBehavior : MonoBehaviour
         // guarda referencia para o charController
         char_controller_ = char_system_.GetCharController();
         // guarda a referencia para o marcador da posiçao do groundTest
-        collision_target_ = transform.GetChild(0).transform;
+        collision_target_ = char_system_.GetColliderMarker();
     }
 
     // comportamento da forma   
@@ -118,6 +118,7 @@ public class AikeBehavior : MonoBehaviour
 
         // desloca o jogador de acordo com a direcçao calculado
         char_controller_.Move(horizontal_motion_);
+
     }
 
     //valida o valor da velocidade
@@ -210,12 +211,11 @@ public class AikeBehavior : MonoBehaviour
     {
         // metodo para ajustar a rotaçao do jogador em relaçao ao terreno em que está apoiado
         // utiliza um ray para determinar a direcçao do terreno
-        RaycastHit hit;      // hit de saida
         Quaternion target_rotation_ = char_transform_.rotation;  // rotaçao alvo
         Vector3 difined_normal_ = Vector3.up;   // normal definida
 
         // colisao com a frente do jogador
-        if (Physics.Raycast(char_transform_.position, char_transform_.forward, out hit,
+        if (Physics.Raycast(char_transform_.position, char_transform_.forward, out RaycastHit hit,
            (collision_target_.position - char_transform_.position).magnitude +
            char_system_.maxAikeFloorDistance * 2f, char_system_.GroundMask))
             // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal            
@@ -236,7 +236,7 @@ public class AikeBehavior : MonoBehaviour
             // caso exista uma colisao valida, ajusta a direcçao de acordo com a normal           
             difined_normal_ = hit.normal;
             // determina se o jogador está sobre um objecto que pode ser escalavel
-            is_climbing_ = (hit.transform.tag == "Climbable") ? true : false;
+            is_climbing_ = (hit.transform.CompareTag("Climbable")) ? true : false;
         }
         // determina a target rotation
         target_rotation_ = (Quaternion.LookRotation(Vector3.ProjectOnPlane(
@@ -266,6 +266,7 @@ public class AikeBehavior : MonoBehaviour
         {
             // inicia a alteraçao da forma
             changing_shape_ = true;
+
             // caso o jogador esteja no chao, deve saltar
             vertical_motion_.y = Mathf.Sqrt(-2 * (char_system_.GravityValue) *
             char_info_.AikeJumpHeight);
@@ -278,12 +279,14 @@ public class AikeBehavior : MonoBehaviour
         if (vertical_motion_.y <= 0f)
         {
             // caso tenha atingido o valor maximo do salto
-            // reseta o valor da gravidade e altera a forma
-            vertical_motion_.y = 0f;
+            vertical_motion_.y = 0f;    // reseta o valor da gravidade e altera a forma
             changing_shape_ = false;    // indica que terminou a logica de mudança de forma
-            char_transform_.rotation = Quaternion.LookRotation(char_system_.ProjectDirection(),
+
+            // Jogador fica voltado na direcçao da camera
+            char_transform_.rotation = Quaternion.LookRotation(char_info_.GetInputDir(),
                 char_info_.GetInputUpDir());
-            char_info_.changeShape(); // altera a foram
+
+            char_info_.ChangeShape(); // altera a foram
         }
         else
             changing_shape_ = true; // caso esteja a saltar incia o processo de alteraçao da foram

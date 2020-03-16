@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // componentes obrigatorios a este
-[RequireComponent(typeof(CharacterController),
-   typeof(AikeBehavior), typeof(ArifBehavior))]
+[RequireComponent(typeof(CharacterController), typeof(AikeBehavior), typeof(ArifBehavior))]
 public class CharacterSystem : MonoBehaviour
 {
     #region public fields
@@ -18,9 +17,16 @@ public class CharacterSystem : MonoBehaviour
     public float GravityValue = -9.81f; // valor da gravidade
     public LayerMask GroundMask;  // mascara para a layer de ground
     public float maxAikeFloorDistance = 0.4f; // distancia maxima que o player é considerado grounded
-
+    public Transform groundPositionMarker;   // referencia á posiçao do marcador de ground
+    
+    [Space(10f)]
     public float ArifCollisionDistance = 1f;    // distancia de colisao para o Arif
     public LayerMask ArifGroundMask;    // mascara de colisao para Arif
+
+    // variaveis de estado
+    [Header("Variaveis de estado")]
+    public float AikeMaxValidContactSpeed = 10f;    // velocidade maxima de queda que aike sobrevive
+    public float ArifMaxSwitchSpeed = 20f;  // velocidade maxima de transformaçao para o arif
 
     #endregion
 
@@ -30,11 +36,12 @@ public class CharacterSystem : MonoBehaviour
     private AikeBehavior _aikeBehavior; // comportamento da forma
     private ArifBehavior _arifBehavior; // comportamento do Aike
 
-    private Transform groundPositionMarker;   // referencia á posiçao do marcador de ground
     private CharacterController char_controller_;   // referencia ao controlador de personagem
 
     // variaveis comuns
     private float char_speed = 0f;  // velocidade do jogador
+    private bool is_alive_ = true; // determina o estado do jogador
+
     #endregion
 
     // Start is called before the first frame update
@@ -52,8 +59,17 @@ public class CharacterSystem : MonoBehaviour
             _arifBehavior.ArifBehaviorLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    // loop de update Unity
+    private void Update()
+    {
+        // caso esteja vivo
+        if (is_alive_)
+            CharacterUpdate();  // corre o update do character 
+    }
+
+
+    // update do character
+    void CharacterUpdate()
     {
         // confirma se ouve alteraçao á forma
         ChangeShapeChecker();
@@ -63,17 +79,18 @@ public class CharacterSystem : MonoBehaviour
         {
             // caso a forma actual seja o Aike
             case PlayerShape.Aike:
+                AikeStateController();  // avalia se existe morte do jogador
                 if (_aikeBehavior)
-                    // corre o comportamento de Aike
-                    _aikeBehavior.Behavior(ref char_speed);
+                    _aikeBehavior.Behavior(ref char_speed); // corre o comportamento de Aike
                 break;
             // caso seja Arif
             case PlayerShape.Arif:
                 if (_arifBehavior)
-                    // corre o comportamento de Arif
-                    _arifBehavior.Behavior(ref char_speed);
+                    ArifStateController();  // avalia se existe alteraçao ou morte do jogador
+                _arifBehavior.Behavior(ref char_speed); // corre o comportamento de Arif
                 break;
         }
+        // debug da velocidade actual
         Debug.Log(char_controller_.velocity.magnitude);
     }
 
@@ -99,7 +116,32 @@ public class CharacterSystem : MonoBehaviour
         }
     }
 
+    // Metodo que avalia a transiçao automatica do estado do jogador
+    private void AikeStateController()
+    {
+        // avalia se a velocidade em que o jogador entrou em contacto está dentro do limite
+        if (Physics.CheckSphere(groundPositionMarker.position, maxAikeFloorDistance, ArifGroundMask) &&
+            char_controller_.velocity.magnitude > AikeMaxValidContactSpeed)
+            // o jogador morre
+            is_alive_ = false;
 
+    }
+    private void ArifStateController()
+    {
+        // determina se ocorreu colisao
+        if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance, ArifGroundMask))
+            // avalia a colisao da esfera de contacto da fora
+            if (char_controller_.velocity.magnitude > ArifMaxSwitchSpeed)
+                // caso a colisao ocorra a uma velocidade superior á estabelecida
+                // o jogador morre
+                is_alive_ = false;
+            else
+                // caso seja inferior, o jogador deve trocar de forma
+                _arifBehavior.ArifToAikeChange();
+    }
+
+
+    #region Public methods
     // metodo que projecta a direçao do jogador no espaço de acçao
     public Vector3 ProjectDirection()
     {
@@ -110,13 +152,15 @@ public class CharacterSystem : MonoBehaviour
             // a projecçao é interpertada apenas nas componentes x e z
             case PlayerShape.Aike:
                 // caso esteja na fora de Aike a direçao é apenas os valores de x e de z
-                Vector3 xZ_prjection = new Vector3(char_infor.GetInputDir().x, 0f,
-                  char_infor.GetInputDir().z);
+                Vector3 xZ_prjection = new Vector3(char_infor.GetInputDir().x, 0f, char_infor.GetInputDir().z);
+
                 // projectar o vector no plano
                 // calcula a rotaçao do vector x angulos sobre o eixo dos x relativos ao jogador
                 Quaternion rotation_X = Quaternion.AngleAxis(this.transform.rotation.eulerAngles.x, this.transform.right);
+
                 // remove a componete de rotaçao sobre o Eixo dos y
                 rotation_X = Quaternion.Euler(rotation_X.eulerAngles.x, 0f, rotation_X.eulerAngles.z);
+
                 // calcula a rotaçao do vector x angulos sobre o eixo dos z relativos ao jogador
                 Quaternion rotation_y = Quaternion.AngleAxis(this.transform.rotation.eulerAngles.z, this.transform.forward);
                 // remove a componete de rotaçao sobre o exiso dos y
@@ -142,11 +186,17 @@ public class CharacterSystem : MonoBehaviour
 
     // retorna o gameObject referente ao player
     public GameObject GetPlayerGO() { return this.gameObject; }
+
     // retorna o transform referente ao jogador
     public Transform GetPlayerTransform() { return GetPlayerGO().transform; }
+
     // rotarna o CustomCharController do player
     public CharacterController GetCharController() { return char_controller_; }
 
+    // retorna o transform do marcador de posiçao para o teste de colisao com o chao
+    public Transform GetColliderMarker() { return groundPositionMarker; }
+
+    #endregion
     // Debug, on gizmos
     private void OnDrawGizmos()
     {
@@ -158,13 +208,12 @@ public class CharacterSystem : MonoBehaviour
         else Gizmos.color = Color.red;
         // desenha uma wiresphere na posiçao de contacto com o chao, utilizado por Aike
         Gizmos.DrawWireSphere(this.transform.GetChild(0).transform.position, maxAikeFloorDistance);
-        
+
         //Arif
-        if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance,ArifGroundMask))
+        if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance, ArifGroundMask))
             Gizmos.color = Color.green;
         else Gizmos.color = Color.red;
         // desenha capsula de colisao
         Gizmos.DrawWireSphere(this.transform.position, ArifCollisionDistance);
-
     }
 }

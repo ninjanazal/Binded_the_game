@@ -61,7 +61,6 @@ public class ArifBehavior : MonoBehaviour
         // avalia o input directional (Vertical)
         // caso exista input vertical
         if (Input.GetAxis("Vertical") != 0f)
-        {
             // define a direcçao alvo igual á direcçao da camera projectada para o
             // dependendo do input, incrementa ou decrementa a aceleraçao
             if (Input.GetAxis("Vertical") > 0f)
@@ -80,15 +79,13 @@ public class ArifBehavior : MonoBehaviour
                 // deve reduzir a velocidade de acordo com o valor de drag
                 char_acceleration_ -= char_info_.ArifBreakSpeed * Mathf.Abs(Input.GetAxis("Vertical"));
 
-            // caso exista input horizontal
-            if (Input.GetAxis("Horizontal") != 0f)
-            {
-                // adiciona o valor da aceleraçao de acordo com o input
-                char_acceleration_ += char_info_.ArifAceleration * Mathf.Abs(Input.GetAxis("Horizontal"));
-                // determina a direcçao causada por este input
-                target_direction_ += (Quaternion.AngleAxis(90f, char_info_.GetInputUpDir()) *
-                  _char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
-            }
+
+        // caso exista input horizontal
+        if (Input.GetAxis("Horizontal") != 0f)
+        {
+            // determina a direcçao causada por este input
+            target_direction_ += (Quaternion.AngleAxis(90f, char_info_.GetInputUpDir()) *
+              _char_system_.ProjectDirection() * Input.GetAxis("Horizontal")).normalized;
         }
 
         // normaliza a direcçao
@@ -100,17 +97,16 @@ public class ArifBehavior : MonoBehaviour
                target_direction_, char_info_.ArifRotationSpeed * game_settings_.PlayerTimeMultiplication());
         else
             // caso nao exista input, o modelo deve se orientar
-            char_transform_.forward = Vector3.Lerp(char_transform_.forward,
-                Vector3.ProjectOnPlane(char_transform_.forward, Vector3.up),
+            char_transform_.rotation = Quaternion.Lerp(char_transform_.rotation, Quaternion.LookRotation(
+                Vector3.ProjectOnPlane(char_transform_.forward, Vector3.up), Vector3.up),
                 char_info_.ArifRotationSpeed * game_settings_.PlayerTimeMultiplication());
-
 
         // determina o valor de roll de acordo com o angulo formado entre a direcçao alvo
         // e a direcçao do jogador
         // altera o roll do objecto de acordo com       
         calculated_roll_value_ =
-           Vector3.SignedAngle(Vector3.ProjectOnPlane(
-               target_direction_, char_transform_.up), char_transform_.forward, char_transform_.up);
+               Vector3.SignedAngle(Vector3.ProjectOnPlane(
+                   target_direction_, char_transform_.up), char_transform_.forward, char_transform_.up);
 
         // caso o valor do angulo for maior que a rotaçao no fram
         // calcula o valor intermedio para que a rotaçao seja mais homogenea
@@ -119,8 +115,9 @@ public class ArifBehavior : MonoBehaviour
                 char_info_.ArifRollSpeed * game_settings_.PlayerTimeMultiplication());
 
         // adiciona á rotaçao, o valor de roll determinado anteriormente
-        char_transform_.rotation = Quaternion.Euler(char_transform_.rotation.eulerAngles.x,
-            char_transform_.rotation.eulerAngles.y, char_roll_angle_);
+        if (Mathf.Abs(char_roll_angle_) > char_info_.ArifRollSpeed * game_settings_.PlayerTimeMultiplication())
+            char_transform_.rotation = Quaternion.Euler(char_transform_.rotation.eulerAngles.x,
+                char_transform_.rotation.eulerAngles.y, char_roll_angle_);
 
     }
 
@@ -199,7 +196,7 @@ public class ArifBehavior : MonoBehaviour
     public void ArifToAikeChange()
     {
         // altera a forma para Aike
-        char_info_.changeShape();
+        char_info_.ChangeShape();
     }
 
     // debug call

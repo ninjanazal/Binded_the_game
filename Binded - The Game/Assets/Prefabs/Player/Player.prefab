@@ -127,10 +127,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   maxAikeFloorDistance: 0.07
+  groundPositionMarker: {fileID: 687369287980415316}
   ArifCollisionDistance: 0.19
   ArifGroundMask:
     serializedVersion: 2
     m_Bits: 513
+  AikeMaxValidContactSpeed: 21
+  ArifMaxSwitchSpeed: 20
 --- !u!1001 &8565098780815399254
 PrefabInstance:
   m_ObjectHideFlags: 0
