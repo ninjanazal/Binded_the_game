@@ -79,7 +79,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0.08
   m_Radius: 0.07
-  m_SlopeLimit: 75
+  m_SlopeLimit: 30
   m_StepOffset: 0.14
   m_SkinWidth: 0.045
   m_MinMoveDistance: 0.001
@@ -126,7 +126,14 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 512
-  maxFloorDistance: 0.05
+  maxAikeFloorDistance: 0.07
+  groundPositionMarker: {fileID: 687369287980415316}
+  ArifCollisionDistance: 0.19
+  ArifGroundMask:
+    serializedVersion: 2
+    m_Bits: 513
+  AikeMaxValidContactSpeed: 21
+  ArifMaxSwitchSpeed: 20
 --- !u!1001 &8565098780815399254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,7 +199,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: d6e9dc1a984628f4284fbbb49be2f0a6,
         type: 3}
       propertyPath: m_Name
-      value: PlayerRender
+      value: AikeRender
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e9dc1a984628f4284fbbb49be2f0a6, type: 3}

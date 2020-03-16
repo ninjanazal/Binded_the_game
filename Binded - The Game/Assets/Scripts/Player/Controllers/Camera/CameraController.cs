@@ -62,6 +62,8 @@ public class CameraController : MonoBehaviour
         AvoidCameraClipping();
         // actualiza a posiçao de input na informaçao do jogador
         char_Information.UpdateInputDir(_main_camera.transform.forward);
+        // actualiza o up da camera
+        char_Information.UpdateInputDirUp(_main_camera.transform.up);
     }
 
     // metodo de comportamento da camera 
@@ -118,6 +120,6 @@ public class CameraController : MonoBehaviour
 
         // move a camera a posiçao determinada
         _main_camera.transform.position =
-             Vector3.Lerp(_main_camera.transform.position, _cam_calculated_pos, game_settings.TimeMultiplication() / SecToRotation);
+             Vector3.Lerp(_main_camera.transform.position, _cam_calculated_pos, game_settings.PlayerTimeMultiplication() / SecToRotation);
     }
 }

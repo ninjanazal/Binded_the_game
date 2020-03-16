@@ -14,13 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   AikeGravityReflexition: 3.051
-  AikeMaxWalkingSpeed: 3
-  AikeMaxSpeed: 8
+  AikeMaxWalkingSpeed: 2
+  AikeMaxSpeed: 5
   AikeAceleration: 20
   AikeRotationSpeed: 10
   AikeDrag: 20
   AikeJumpHeight: 3
-  ArifMaxSpeed: 15
-  ArifAceleration: 5
-  ArifRotationSpeed: 4
-  ArifDrag: 6
+  ArifGravityReflexition: 0.1
+  ArifMaxSpeed: 20
+  ArifBaseSpeed: 6
+  ArifMinSpeed: 2
+  ArifAceleration: 10
+  ArifBreakSpeed: 8
+  ArifRotationSpeed: 2
+  ArifRollSpeed: 10
+  ArifDrag: 1
