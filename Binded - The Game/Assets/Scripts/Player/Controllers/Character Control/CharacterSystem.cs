@@ -90,8 +90,6 @@ public class CharacterSystem : MonoBehaviour
                 _arifBehavior.Behavior(ref char_speed); // corre o comportamento de Arif
                 break;
         }
-        // debug da velocidade actual
-        Debug.Log(char_controller_.velocity.magnitude);
     }
 
     // metodos internos
