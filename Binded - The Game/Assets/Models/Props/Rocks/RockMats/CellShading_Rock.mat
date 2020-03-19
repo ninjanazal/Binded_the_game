@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _DitherTex:
+        m_Texture: {fileID: 2800000, guid: fe74834c0fbebb24cb4a83241e88ca3c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: cf910c5f08dde0641bf166f606aca858, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -34,11 +38,15 @@ Material:
     m_Floats:
     - _Glossiness: 0.523
     - _LightCutoff: 0.685
+    - _MaxDistance: 2
+    - _MinDistance: 1
+    - _OutlineWidth: 0.003
     - _RimSize: 0.186
     - _ShadowBands: 3
     - _ShadowedRim: 0
     m_Colors:
     - _Color: {r: 0.7924528, g: 0.7737629, b: 0.7737629, a: 1}
     - _Emission: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0.2924528, g: 0.28555533, b: 0.28555533, a: 1}
     - _SpecularColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 0.9372549}
