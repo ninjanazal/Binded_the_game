@@ -105,7 +105,8 @@ GameObject:
   - component: {fileID: 7073907576281583033}
   - component: {fileID: 5642913626873690970}
   - component: {fileID: 1578108251561100441}
-  m_Layer: 0
+  - component: {fileID: 1176106755457796833}
+  m_Layer: 9
   m_Name: Maple_Tree.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,6 +174,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1176106755457796833
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5439748374073363997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8294582250451452721, guid: 877c365ae2e028545909ac17aa4a44a1, type: 3}
 --- !u!1 &8002457132210524529
 GameObject:
   m_ObjectHideFlags: 0

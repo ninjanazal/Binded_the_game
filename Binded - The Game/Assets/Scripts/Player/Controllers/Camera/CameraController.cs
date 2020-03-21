@@ -38,6 +38,9 @@ public class CameraController : MonoBehaviour
     {
         // cache a referencia para a camera principal
         _main_camera = Camera.main;
+        // activa textura de profundidade
+        _main_camera.depthTextureMode = DepthTextureMode.Depth;
+
         // inica o vetor de yaw e pitch
         _input_pitch_yaw = Vector2.zero;
         // garda cache para o player

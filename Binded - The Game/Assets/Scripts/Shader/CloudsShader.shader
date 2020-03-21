@@ -2,10 +2,10 @@
 {
     Properties
     {
-        [HDR]_BaseColor("Cor de base", Color) = (1,1,1,1)
-        _NoiseTex("Textura de Noise", 2D) ="white" {}   // imagem de noise
-        _NoiseThreshold("Threshold do noise", Range(0,1)) = 0.5   // threshold do noise
-        _DisplaceAmount("Amount displace", float) = 2
+        [HDR]_BaseColor("Cor de base", Color) = (1,1,1,1)           // cor Base
+        _NoiseTex("Textura de Noise", 2D) ="white" {}               // imagem de noise
+        _NoiseThreshold("Threshold do noise", Range(0,1)) = 0.5     // threshold do noise
+        _DisplaceAmount("Amount displace", float) = 2               // valor de displace
     }
     SubShader
     {
@@ -20,7 +20,7 @@
 
         Pass
         {
-            Cull Back
+            //Cull Back
 
             CGPROGRAM
             #pragma vertex vert
@@ -54,7 +54,8 @@
             fixed _NoiseThreshold;  // threshold do noise
             float _DisplaceAmount;
 
-            float RemapVal (float val, float from1, float to1, float from2, float to2){
+            float RemapVal (float val, float from1, float to1, float from2, float to2)
+            {
                 return ((val - from1) / (to1 -from1) * (to2 - from2) + from2);
             }
 
