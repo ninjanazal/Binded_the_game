@@ -42,6 +42,9 @@ public class CharacterSystem : MonoBehaviour
     public float char_speed = 0f;  // velocidade do jogador
     public float char_gravitySpeed;
     public bool is_alive_ = true; // determina o estado do jogador
+
+    private PlayerRenderManager player_render_manager_;    // referencia para o render de efeitos do personagem
+
     #endregion
 
     // Start is called before the first frame update
@@ -59,6 +62,9 @@ public class CharacterSystem : MonoBehaviour
         // caso consiga guardar referencia, inicia
         if (_arifBehavior = this.GetComponent<ArifBehavior>())
             _arifBehavior.ArifBehaviorLoad(this);
+
+        // guarda referencia para o jogador
+        player_render_manager_ = GetComponentInChildren<PlayerRenderManager>();
     }
 
     // loop de update Unity
@@ -67,6 +73,9 @@ public class CharacterSystem : MonoBehaviour
         // caso esteja vivo
         if (is_alive_)
             CharacterUpdate();  // corre o update do character 
+
+        // actualiza o render Manager
+        UpdateRenderManager();
     }
 
 
@@ -96,6 +105,7 @@ public class CharacterSystem : MonoBehaviour
                 }
                 break;
         }
+        // actualiza a velocidade gravitacional localmente facultada pelo Controllador base
         char_gravitySpeed = char_controller_.velocity.magnitude;
     }
 
@@ -146,8 +156,15 @@ public class CharacterSystem : MonoBehaviour
             {
                 // caso seja inferior, o jogador deve trocar de forma
                 _arifBehavior.ArifToAikeChange();
-            }
+            }       
     }
+
+    // metodo para actualizar informaçoes com o renderManager
+    private void UpdateRenderManager()
+    {
+        // actualiza o render de trails com a velocidade
+        player_render_manager_.TrailsSetter(char_speed);    }
+
 
 
     #region Public methods

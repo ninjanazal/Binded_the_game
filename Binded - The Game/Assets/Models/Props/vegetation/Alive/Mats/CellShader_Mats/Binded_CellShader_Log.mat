@@ -75,7 +75,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.407
     - _GlossyReflections: 1
-    - _LightCutoff: 0.303
+    - _LightCutoff: 0.47
     - _MaxDistance: 1
     - _Metallic: 0
     - _MinDistance: 0.5
@@ -85,7 +85,7 @@ Material:
     - _OutlineWidth: 0.001
     - _Parallax: 0.02
     - _RimSize: 0.172
-    - _ShadowBands: 1
+    - _ShadowBands: 2
     - _ShadowedRim: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -94,8 +94,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+    - _Emission: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.20754719, g: 0.15849249, b: 0.14782842, a: 1}
     - _RimColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
-    - _SpecularColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
+    - _SpecularColor: {r: 0.103773594, g: 0.1023051, b: 0.1023051, a: 1}

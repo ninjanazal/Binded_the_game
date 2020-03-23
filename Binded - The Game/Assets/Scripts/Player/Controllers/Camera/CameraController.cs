@@ -55,6 +55,9 @@ public class CameraController : MonoBehaviour
         mask = ~LayerMask.GetMask("Ignore CameraClipping");
         // inia a posiçao alvo da camera igual á actual
         _cam_calculated_pos = _main_camera.transform.position;
+
+        // activa os callbacks para a camera
+        IEnumeratorCallBacks.Instance.Activate(game_settings);
     }
 
     private void Update()
@@ -63,6 +66,9 @@ public class CameraController : MonoBehaviour
         CameraInputBehaviour();
         // determina se a camera esta em clipping ou nao
         AvoidCameraClipping();
+        // actualiza o valor de fov
+        UpdateFOVValue();
+
         // actualiza a posiçao de input na informaçao do jogador
         char_Information.UpdateInputDir(_main_camera.transform.forward);
         // actualiza o up da camera
@@ -124,5 +130,12 @@ public class CameraController : MonoBehaviour
         // move a camera a posiçao determinada
         _main_camera.transform.position =
              Vector3.Lerp(_main_camera.transform.position, _cam_calculated_pos, game_settings.PlayerTimeMultiplication() / SecToRotation);
+    }
+
+    // actualiza o valor de fov 
+    private void UpdateFOVValue()
+    {
+        // aplica o valor das settings no fov da camera
+        _main_camera.fieldOfView = game_settings.CameraFOV;
     }
 }

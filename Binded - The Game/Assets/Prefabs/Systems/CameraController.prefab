@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3636249831866868336}
   - component: {fileID: 3636249831866868351}
+  - component: {fileID: 149964833}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -132,3 +133,15 @@ MonoBehaviour:
   camera_offset: {x: 0, y: 0.3, z: 0}
   SecToRotation: 0.1
   MinCameraDistance: 0.5
+--- !u!114 &149964833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636249831866868350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815643bbda5c345479c59f81b311b168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
