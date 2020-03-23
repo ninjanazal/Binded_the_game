@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8388608350223758034}
   m_Layer: 9
   m_Name: ShieldBeacon
-  m_TagString: Untagged
+  m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 33b83fec65f98334aad51e95a71530b8, type: 3}
+  - {fileID: 2100000, guid: 6a6a7e22869b68c48914b1e2753a3583, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

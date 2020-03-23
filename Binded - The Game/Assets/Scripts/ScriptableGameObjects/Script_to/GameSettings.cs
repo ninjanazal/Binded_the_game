@@ -19,7 +19,7 @@ public class GameSettings : ScriptableObject
     public float MouseSensitivity = 2f;
 
     // Distancia da camera ao alvo
-    [Range(0.5f, 5f)]
+    [Range(0.5f, 8f)]
     public float CameraDistance = 5f;
 
     // clap de angulo vertica

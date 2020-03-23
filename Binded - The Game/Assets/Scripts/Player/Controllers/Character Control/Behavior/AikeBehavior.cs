@@ -186,7 +186,7 @@ public class AikeBehavior : MonoBehaviour
         // determina se o jogador está grounded
         if (GroundedCheck() && vertical_motion_.y < 0f)
             // reseta o valor do movimento vertical
-            vertical_motion_.y = 0f;
+            vertical_motion_.y = -2f;
     }
 
     // verificaçao de salto

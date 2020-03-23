@@ -18,7 +18,7 @@ public class CharacterSystem : MonoBehaviour
     public LayerMask GroundMask;  // mascara para a layer de ground
     public float maxAikeFloorDistance = 0.4f; // distancia maxima que o player é considerado grounded
     public Transform groundPositionMarker;   // referencia á posiçao do marcador de ground
-    
+
     [Space(10f)]
     public float ArifCollisionDistance = 1f;    // distancia de colisao para o Arif
     public LayerMask ArifGroundMask;    // mascara de colisao para Arif
@@ -39,14 +39,16 @@ public class CharacterSystem : MonoBehaviour
     private CharacterController char_controller_;   // referencia ao controlador de personagem
 
     // variaveis comuns
-    private float char_speed = 0f;  // velocidade do jogador
-    private bool is_alive_ = true; // determina o estado do jogador
-
+    public float char_speed = 0f;  // velocidade do jogador
+    public float char_gravitySpeed;
+    public bool is_alive_ = true; // determina o estado do jogador
     #endregion
 
     // Start is called before the first frame update
     void Awake()
     {
+        Shader.WarmupAllShaders();  // para impedir que shaders sejam compilados durante o processo de jogo
+
         // guarda referencia para o character controller
         char_controller_ = this.GetComponent<CharacterController>();
 
@@ -79,17 +81,22 @@ public class CharacterSystem : MonoBehaviour
         {
             // caso a forma actual seja o Aike
             case PlayerShape.Aike:
-                AikeStateController();  // avalia se existe morte do jogador
                 if (_aikeBehavior)
+                {
+                    AikeStateController();  // avalia se existe morte do jogador
                     _aikeBehavior.Behavior(ref char_speed); // corre o comportamento de Aike
+                }
                 break;
             // caso seja Arif
             case PlayerShape.Arif:
                 if (_arifBehavior)
+                {
                     ArifStateController();  // avalia se existe alteraçao ou morte do jogador
-                _arifBehavior.Behavior(ref char_speed); // corre o comportamento de Arif
+                    _arifBehavior.Behavior(ref char_speed); // corre o comportamento de Arif
+                }
                 break;
         }
+        char_gravitySpeed = char_controller_.velocity.magnitude;
     }
 
     // metodos internos
@@ -115,15 +122,17 @@ public class CharacterSystem : MonoBehaviour
     }
 
     // Metodo que avalia a transiçao automatica do estado do jogador
+    // estado sobre o AIkE
     private void AikeStateController()
     {
         // avalia se a velocidade em que o jogador entrou em contacto está dentro do limite
         if (Physics.CheckSphere(groundPositionMarker.position, maxAikeFloorDistance, ArifGroundMask) &&
             char_controller_.velocity.magnitude > AikeMaxValidContactSpeed)
             // o jogador morre
-            is_alive_ = false;
+            KillPlayer();
 
     }
+    // estado sobre o ARIF
     private void ArifStateController()
     {
         // determina se ocorreu colisao
@@ -132,10 +141,12 @@ public class CharacterSystem : MonoBehaviour
             if (char_controller_.velocity.magnitude > ArifMaxSwitchSpeed)
                 // caso a colisao ocorra a uma velocidade superior á estabelecida
                 // o jogador morre
-                is_alive_ = false;
+                KillPlayer();
             else
+            {
                 // caso seja inferior, o jogador deve trocar de forma
                 _arifBehavior.ArifToAikeChange();
+            }
     }
 
 
@@ -194,6 +205,8 @@ public class CharacterSystem : MonoBehaviour
     // retorna o transform do marcador de posiçao para o teste de colisao com o chao
     public Transform GetColliderMarker() { return groundPositionMarker; }
 
+    // metodo que mata o jogador
+    public void KillPlayer() { is_alive_ = false; char_speed = 0f; }   // reseta a velocidade e o estado
     #endregion
     // Debug, on gizmos
     private void OnDrawGizmos()

@@ -44,7 +44,7 @@
         // substitui todos os valores dos pixeis renderizados para 1
         Stencil
         {
-            Ref 1
+            Ref 200
             Comp Always
             Pass Replace
         }
@@ -171,8 +171,8 @@
             Stencil 
             {
                 // apenas passa pixeis que tenham o valor de ref maior que a ref 1
-                Ref 1
-                Comp Greater
+                Ref 200
+                Comp GEqual
             }
             
             CGPROGRAM

@@ -10,12 +10,9 @@
     SubShader
     {
         Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite Off
+        ZWrite On
         
-        Tags { 
-            "Queue" = "Transparent"              
-        }
-
+        Tags { "Queue" = "Transparent" }
         LOD 100
 
         Pass

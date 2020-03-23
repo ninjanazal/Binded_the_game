@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3265306620109754128
 Transform:
@@ -48,7 +48,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 30000
+      - m_Value: 7000
         m_Name: SpawnPerSec
         m_Overridden: 1
     m_Vector2f:

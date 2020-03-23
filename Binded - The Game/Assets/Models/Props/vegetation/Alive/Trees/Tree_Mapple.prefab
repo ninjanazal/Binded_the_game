@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6861862971880522075}
   m_Layer: 9
   m_Name: Maple_Tree.001
-  m_TagString: Climbable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6437096889445114722}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tree_Mapple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
