@@ -71,7 +71,7 @@ Material:
     - _BumpScale: 1
     - _CameraDepthval: 104.42
     - _ClipAmount: 0.684
-    - _ClipFloatuation: 0.369
+    - _ClipFloatuation: 0.259
     - _Cutoff: 0.5
     - _DepthVal: 5
     - _DetailNormalMapScale: 1
@@ -101,7 +101,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.9713498, g: 0.754361, b: 0.9811321, a: 0.18431373}
+    - _Color: {r: 0.8018868, g: 0.6349498, b: 0.31394622, a: 0.18431373}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}

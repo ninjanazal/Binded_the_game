@@ -149,21 +149,27 @@ public class CharacterSystem : MonoBehaviour
         if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance, ArifGroundMask))
             // avalia a colisao da esfera de contacto da fora
             if (char_controller_.velocity.magnitude > ArifMaxSwitchSpeed)
+            {
                 // caso a colisao ocorra a uma velocidade superior á estabelecida
                 // o jogador morre
                 KillPlayer();
+                // e em seguida volte á forma de Aike
+                _arifBehavior.ArifToAikeChange();
+            }
+
             else
             {
                 // caso seja inferior, o jogador deve trocar de forma
                 _arifBehavior.ArifToAikeChange();
-            }       
+            }
     }
 
     // metodo para actualizar informaçoes com o renderManager
     private void UpdateRenderManager()
     {
         // actualiza o render de trails com a velocidade
-        player_render_manager_.TrailsSetter(char_speed);    }
+        player_render_manager_.TrailsSetter(char_speed);
+    }
 
 
 

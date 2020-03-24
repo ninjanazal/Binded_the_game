@@ -33,7 +33,6 @@
         Tags {
             "RenderType"="Opaque" 
             "LightMode" = "ForwardBase"
-            //"PassFlags" = "OnlyDirectional"
         }
         LOD 200
         
