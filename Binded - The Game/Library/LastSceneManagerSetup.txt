@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/AssetTest_Scene/AssetTest_Scene.unity
+- path: Assets/Scenes/Gaol_Map/Gaol_Scene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
