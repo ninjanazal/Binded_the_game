@@ -73,18 +73,18 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.366
+    - _Glossiness: 0
     - _GlossyReflections: 1
-    - _LightCutoff: 0.255
+    - _LightCutoff: 0.647
     - _MaxDistance: 1
     - _Metallic: 0
     - _MinDistance: 0.5
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineClipDistance: 2
-    - _OutlineWidth: 0.00248
+    - _OutlineWidth: 0.001
     - _Parallax: 0.02
-    - _RimSize: 0.338
+    - _RimSize: 0.614
     - _ShadowBands: 2
     - _ShadowedRim: 1
     - _SmoothnessTextureChannel: 0

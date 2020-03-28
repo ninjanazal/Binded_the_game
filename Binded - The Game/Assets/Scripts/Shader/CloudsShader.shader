@@ -38,6 +38,7 @@
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                UNITY_FOG_COORDS(1)
             };
 
             // declaraçao de varss
@@ -72,6 +73,8 @@
 
                 o.uv.x += _SinTime.x*0.2; 
                 o.uv.y += _Time.y * 0.1;
+                
+                UNITY_TRANSFER_FOG(o, o.vertex);
                 return o;
             }
 
@@ -85,6 +88,7 @@
                 col.w = smoothstep(1,(noiseTexVal.x > _NoiseThreshold + remapSin) ? 0.001 : 1 , .1);
                 if(col.w != 0){col.w = _BaseColor.w;}
                 
+                UNITY_APPLY_FOG(i.fogCoord,col);
                 return col;
             }
             ENDCG
