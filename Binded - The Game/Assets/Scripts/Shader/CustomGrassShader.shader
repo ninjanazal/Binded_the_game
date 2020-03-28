@@ -24,7 +24,7 @@ Shader "Binded/CustomGrassShader"
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent" "RenderType"="Opaque"
+        Tags {"Queue" = "Transparent" "RenderType"="Transparent"
                "IgnoreProjector" = "True" "LightMode" = "ForwardBase"}
         LOD 200 // vertexLit detail
 
@@ -33,7 +33,7 @@ Shader "Binded/CustomGrassShader"
             ZWrite On            
             Cull Off // desenhar de todos os lados
     
-            Blend One OneMinusSrcAlpha
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             // definiçao de vertex, frag e geometry shaders func
             #pragma vertex vert
