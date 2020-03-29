@@ -25,7 +25,7 @@ Shader "Binded/CustomGrassShader"
     SubShader
     {
         Tags {"Queue" = "Transparent" "RenderType"="Transparent"
-               "IgnoreProjector" = "True" "LightMode" = "ForwardBase"}
+               "LightMode" = "ForwardBase"}
         LOD 200 // vertexLit detail
 
         Pass

@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelInfo : MonoBehaviour
+[CreateAssetMenu(fileName ="LevelName",menuName ="Binded/Level")]
+public class LevelInfo : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // defeniçao do nome do nivel
+    public KLevelName LevelName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // energia para abrir o portal
+    public int EnergyRequired;
+
 }
