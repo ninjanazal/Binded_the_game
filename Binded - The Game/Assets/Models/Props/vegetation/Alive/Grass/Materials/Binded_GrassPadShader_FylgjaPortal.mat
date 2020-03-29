@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorTexture:
-        m_Texture: {fileID: 2800000, guid: 4bf84ef2e8ed8e24e9a0f891645cca77, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1bbb88d67b4666f4a94412106d337c90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -85,11 +85,11 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartColor: 1
+    - _StartColor: 0.66
     - _UVSec: 0
     - _WindForce: 2
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.504717, g: 0.89807427, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

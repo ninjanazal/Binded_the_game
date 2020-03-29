@@ -6,13 +6,13 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlackLayer
-  m_DiffuseTexture: {fileID: 2800000, guid: ed3e37884a64e7043866578ecc4bbec2, type: 3}
+  m_Name: RedTerrainLayer
+  m_DiffuseTexture: {fileID: 2800000, guid: ebac17ca68394464a8bcbb66941b3844, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 200, y: 200}
+  m_TileSize: {x: 40, y: 40}
   m_TileOffset: {x: 0, y: 0}
-  m_Specular: {r: 0, g: 0, b: 0, a: 0}
+  m_Specular: {r: 1, g: 1, b: 1, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
   m_NormalScale: 1

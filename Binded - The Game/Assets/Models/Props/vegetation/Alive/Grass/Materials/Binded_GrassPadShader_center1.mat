@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorTexture:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: 52cbf23d85b89b84caadd6e95dddf37d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -42,12 +42,12 @@ Material:
     - _GrassWidth: 0.27
     - _Metallic: 0.094
     - _RandomAmount: 0.6
-    - _StartColor: 1
+    - _StartColor: 0.887
     - _WindForce: 2
     - _WindSpeed: 0.24
     - _WindStength: 0
     m_Colors:
     - _BackgroundColor: {r: 1, g: 0.5801887, b: 0.5801887, a: 1}
-    - _BaseColor: {r: 0.5311499, g: 0.7169812, b: 0.42274833, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.6236205, g: 0.9245283, b: 0.71646035, a: 1}
     - _ForegroundColor: {r: 0, g: 0, b: 1, a: 1}
