@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
     private RaycastHit clippingHit;    // hit usado para o test
 
 
-    private void Awake()
+    private void Start()
     {
         // cache a referencia para a camera principal
         _main_camera = Camera.main;
