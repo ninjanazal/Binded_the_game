@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   current_level_: 1
-  current_portal_: 0

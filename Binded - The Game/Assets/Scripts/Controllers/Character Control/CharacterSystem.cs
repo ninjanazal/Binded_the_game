@@ -35,6 +35,7 @@ public class CharacterSystem : MonoBehaviour
     //                            Referencias
     private AikeBehavior _aikeBehavior; // comportamento da forma
     private ArifBehavior _arifBehavior; // comportamento do Aike
+    private bool can_switch_form_ = true;   // determina se o jogador pode mudar de forma
 
     private CharacterController char_controller_;   // referencia ao controlador de personagem
 
@@ -85,6 +86,8 @@ public class CharacterSystem : MonoBehaviour
         // confirma se ouve alteraçao á forma
         ChangeShapeChecker();
 
+        // confirma se o efeito de visao está a ser utilizado
+        AbilityCheck();
         // com base na forma do jogador, corre o comportamento adequado
         switch (char_infor.shape)
         {
@@ -114,8 +117,11 @@ public class CharacterSystem : MonoBehaviour
     private void ChangeShapeChecker()
     {
         // determina se o jogador pressionou ou nao o botao de alteraçao de forma
-        if (Input.GetButtonDown("ChangeShape"))
+        if (Input.GetButtonDown("ChangeShape") && can_switch_form_)
         {
+            // o jogador ao trocar de forma deve sair do efeito da camera
+            if (CameraEffectsManager.Instance.usingEffect) CameraEffectsManager.Instance.EnableEffects();
+
             // determina em que estado o jogador esta
             switch (char_infor.shape)
             {
@@ -130,6 +136,16 @@ public class CharacterSystem : MonoBehaviour
             }
         }
     }
+
+    // alteraçao da visao do jogador
+    private void AbilityCheck()
+    {
+        // se o jogador estiver pressionar o botao para activar a habilidade
+        if (Input.GetButtonDown("ActivateAbility"))        
+            // chama metodo sobre os efeitos da camera
+            CameraEffectsManager.Instance.EnableEffects();
+    }
+
 
     // Metodo que avalia a transiçao automatica do estado do jogador
     // estado sobre o AIkE
@@ -148,7 +164,7 @@ public class CharacterSystem : MonoBehaviour
         // determina se ocorreu colisao
         if (Physics.CheckSphere(this.transform.position, ArifCollisionDistance, ArifGroundMask))
             // avalia a colisao da esfera de contacto da fora
-            if (char_controller_.velocity.magnitude > ArifMaxSwitchSpeed)
+            if (char_speed > ArifMaxSwitchSpeed)
             {
                 // caso a colisao ocorra a uma velocidade superior á estabelecida
                 // o jogador morre
@@ -171,7 +187,13 @@ public class CharacterSystem : MonoBehaviour
         player_render_manager_.TrailsSetter(char_speed);
     }
 
+    // retorna se o jogador está ou nao vivo
+    public bool GetPlayerState() { return is_alive_; }
+    // metodo chamado pelo controlador do nivel para dar respawn no jogador caso ele morra
+    public void RespawnPlayer() { is_alive_ = true; }
 
+    // indica se o jogador pode ou nao mudar de forma
+    public void CanGoArif(bool canSwitch) { can_switch_form_ = canSwitch; }
 
     #region Public methods
     // metodo que projecta a direçao do jogador no espaço de acçao

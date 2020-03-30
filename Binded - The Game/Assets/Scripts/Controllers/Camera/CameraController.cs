@@ -22,6 +22,9 @@ public class CameraController : MonoBehaviour
     [Header("Distancia minima da cam ao alvo")]
     public float MinCameraDistance = 0.5f;
 
+    [Header("Efeitos de camera")]
+    public Material CameraDimmerMat;    // material com shader de dim
+
     // private vars ------------------------------------------
     private Camera _main_camera;    // camera principal
     private Vector3 _input_pitch_yaw;    // pitch e yaw determinado
@@ -58,6 +61,7 @@ public class CameraController : MonoBehaviour
 
         // activa os callbacks para a camera
         IEnumeratorCallBacks.Instance.Activate(game_settings);
+
     }
 
     private void Update()
@@ -138,4 +142,6 @@ public class CameraController : MonoBehaviour
         // aplica o valor das settings no fov da camera
         _main_camera.fieldOfView = game_settings.CameraFOV;
     }
+
+   
 }

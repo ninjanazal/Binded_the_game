@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 // singleton responsavel pelos efeitos e manipulaçao da camera
+
 public class IEnumeratorCallBacks : MonoBehaviour
 {
     // singleton dos callbacks para alteraçao externa de paramentros
@@ -21,12 +23,9 @@ public class IEnumeratorCallBacks : MonoBehaviour
     // on awake
     void Awake()
     {
-        // confirma a existencia de algum CameraCallBacks na cena
-        if (_instance != null && _instance != this)
-            Destroy(this);  // caso existe, destroy o object
-        else
-            _instance = this;    // caso contrario, esta é a instancia
+        _instance = this;    // caso contrario, esta é a instancia
     }
+
     // chamada pela camera para activas as funçoes
     public void Activate(GameSettings settings)
     {
@@ -34,6 +33,7 @@ public class IEnumeratorCallBacks : MonoBehaviour
         game_settings = settings;   // guarda referencia para as settings do jogo
 
     }
+
 
     // callback para alterar a distancia da camera
     public void SetNewCameraDistance(float newDistance, float vel)
@@ -68,6 +68,15 @@ public class IEnumeratorCallBacks : MonoBehaviour
         }
     }
 
+
+    // callback para carregar uma scena nova
+    public void LoadNewScene(int sceneIndex)
+    {
+        // se os callbacks estiverem activos
+        if (is_enabled)        
+            StartCoroutine(LoadSceneCorroutine(sceneIndex)); // chama a corroutina
+        
+    }
 
     // metodos enumerados
     #region IEnumerators
@@ -109,7 +118,7 @@ public class IEnumeratorCallBacks : MonoBehaviour
                 break;
             }
             // ponot de paragem para o proximo ciclo "Async"
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         // repoem a fov para a normal
@@ -132,6 +141,31 @@ public class IEnumeratorCallBacks : MonoBehaviour
         }
         // ao terminar volta a colocar o tempo normal
         game_settings.SetTimeMultiplier(1f);
+    }
+
+    // coroutina para o carregamento de scenas 
+    private IEnumerator LoadSceneCorroutine(int sceneIndex)
+    {
+        // abranda o jogador
+        game_settings.SetTimeMultiplier(0.1f);
+        // inicia o load async da cena
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
+
+        // impede que assim que a cena esteja pronto carregue imediatamente
+        loadOperation.allowSceneActivation = false; 
+        // enquanto estiver em load
+        while (loadOperation.progress < 0.9f)
+        {
+            // TODO LOADING STATE
+            Debug.Log(loadOperation.progress);
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
+        // restaura a razao do time
+        game_settings.SetTimeMultiplier(1f);
+
+        // activa a cena
+        loadOperation.allowSceneActivation = true;
     }
 
     #endregion

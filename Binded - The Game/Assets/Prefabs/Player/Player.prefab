@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 598352949}
   - component: {fileID: 598352950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353493470}
   - component: {fileID: 1353493471}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2017805431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArifTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   AikeMaxValidContactSpeed: 25
-  ArifMaxSwitchSpeed: 25
+  ArifMaxSwitchSpeed: 30
   char_speed: 0
   char_gravitySpeed: 0
   is_alive_: 1
@@ -598,6 +598,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 910daea2eb1d58846bba94c256d7a402,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 910daea2eb1d58846bba94c256d7a402, type: 3}
 --- !u!4 &5006512736839156592 stripped
@@ -668,6 +673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TransformParticleEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385401612996582662, guid: 6ad4a64fa30bdc841a161672108d0092,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5575409735814839574, guid: 6ad4a64fa30bdc841a161672108d0092,
         type: 3}
