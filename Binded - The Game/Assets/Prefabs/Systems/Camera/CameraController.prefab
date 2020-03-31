@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game_settings_: {fileID: 11400000, guid: 50bb74f0e34105249b083991f4ec4fd8, type: 2}
   camDimmEffec: {fileID: 2100000, guid: e480dd3271d8705458324d8a1dae7ef1, type: 2}
+  usingEffect: 0
   effect_camera_: {fileID: 7113603049681462697}
 --- !u!1 &3636249831866868350
 GameObject:
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815643bbda5c345479c59f81b311b168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
 --- !u!1 &8914532208385592554
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +227,7 @@ Camera:
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

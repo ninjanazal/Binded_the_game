@@ -15,7 +15,8 @@ public class IEnumeratorCallBacks : MonoBehaviour
 
     // vars internas
     private bool is_enabled = false;    // define se os callbecks respondem ou nao
-    GameSettings game_settings; // defeniçoes do jogo
+    private GameSettings game_settings; // defeniçoes do jogo
+    public CharacterInfo char_info_;    // informaçoes do jogador
 
     private IEnumerator new_camera_distance_coroutine;    // corotina que contrala a disntancia da camera
     private IEnumerator pulse_fov_effect;   // corroutina que controla o efeito de pulsar o fov
@@ -74,8 +75,7 @@ public class IEnumeratorCallBacks : MonoBehaviour
     {
         // se os callbacks estiverem activos
         if (is_enabled)        
-            StartCoroutine(LoadSceneCorroutine(sceneIndex)); // chama a corroutina
-        
+            StartCoroutine(LoadSceneCorroutine(sceneIndex)); // chama a corroutina        
     }
 
     // metodos enumerados
@@ -118,9 +118,10 @@ public class IEnumeratorCallBacks : MonoBehaviour
                 break;
             }
             // ponot de paragem para o proximo ciclo "Async"
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
+        yield return new WaitForSeconds(0.1f);
         // repoem a fov para a normal
         while (game_settings.CameraFOV != game_settings.base_camera_fov)
         {
@@ -141,6 +142,8 @@ public class IEnumeratorCallBacks : MonoBehaviour
         }
         // ao terminar volta a colocar o tempo normal
         game_settings.SetTimeMultiplier(1f);
+        // indica que o jogador terminou de mudar de forma
+        char_info_.ChangeEnded();
     }
 
     // coroutina para o carregamento de scenas 

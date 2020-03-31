@@ -453,13 +453,13 @@ MonoBehaviour:
   GravityValue: -9.81
   GroundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   maxAikeFloorDistance: 0.07
   groundPositionMarker: {fileID: 687369287980415316}
   ArifCollisionDistance: 0.24
   ArifGroundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   AikeMaxValidContactSpeed: 25
   ArifMaxSwitchSpeed: 30
   char_speed: 0

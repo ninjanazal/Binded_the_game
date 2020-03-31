@@ -461,10 +461,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2050266194, guid: 7e180a7617c6cef4a8231dd8898d80d2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 494894113106370238, guid: 7e180a7617c6cef4a8231dd8898d80d2,
         type: 3}
       propertyPath: m_Name
       value: Fenrir
+      objectReference: {fileID: 0}
+    - target: {fileID: 494894113106370238, guid: 7e180a7617c6cef4a8231dd8898d80d2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077399642014526739, guid: 7e180a7617c6cef4a8231dd8898d80d2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041094734027456983, guid: 7e180a7617c6cef4a8231dd8898d80d2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3652359405002030454, guid: 7e180a7617c6cef4a8231dd8898d80d2,
         type: 3}

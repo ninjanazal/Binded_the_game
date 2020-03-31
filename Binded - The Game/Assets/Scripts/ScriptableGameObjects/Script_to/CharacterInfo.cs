@@ -12,6 +12,8 @@ public class CharacterInfo : ScriptableObject
     private Vector3 input_cam_dir_;  // direcçao da camera
     private Vector3 input_cam_up_;  // up da camera
 
+    private bool changing_state_ = false;    //valor guarda se o jogador está ou nao a mudar de forma 
+
     // informaçao sobre a forma do jogador
     [Header("Forma actual do jogador")]
     public PlayerShape shape;
@@ -57,12 +59,19 @@ public class CharacterInfo : ScriptableObject
     ///</summary>
     public void ChangeShape()
     {
+        // atribui que o jogador esta a mudar de forma
+        changing_state_ = true;
+
         // altera para a forma nao actual
         shape = (shape == PlayerShape.Aike) ? PlayerShape.Arif : PlayerShape.Aike;
         // caso exista um render manager registado
         if (render_manager_)
             render_manager_.ChangeOccurred(shape);  // envia que ocorreu uma alteraçao na forma
     }
+    // metodo chamado quando o jogador terminou de mudar de forma
+    public void ChangeEnded() { changing_state_ = false; }
+    // metodo chamado para indicar se o jogador está a mudar de forma ou nao
+    public bool IsChangingShape() { return changing_state_; }
 
     // atribui e retorna valor de direcçao de input
     public void UpdateInputDir(Vector3 direction) => input_cam_dir_ = direction;

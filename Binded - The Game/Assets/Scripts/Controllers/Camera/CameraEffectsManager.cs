@@ -54,21 +54,21 @@ public class CameraEffectsManager : MonoBehaviour
             // caso exista uma routina, para
             if (effectRoutine != null)
                 StopCoroutine(effectRoutine);   // para a routina
-            effectRoutine = ChangeValueto(0f, 1f, 0.2f);    // cria um novo iEnumerate
+            effectRoutine = ChangeValueto(0f, 1f, 0.4f);    // cria um novo iEnumerate
             StartCoroutine(effectRoutine);  // inicia a nova routina
         }
         // caso esteja a usar um efeito, tem de desativar
         else if (usingEffect)
         {
             StopCoroutine(effectRoutine);   // visto que para acontecer um disable ja existe um efeito, apenas para
-            effectRoutine = ChangeValuetoDisable(1f, 0f, 2f);   // cria o novo disable
+            effectRoutine = ChangeValuetoDisable(1f, 0f, 3f);   // cria o novo disable
             StartCoroutine(effectRoutine);  // começa a nova routina
         }
 
     }
 
     // metodo chamado para desativar o efeito
-    public void DisableEffects() { if (usingEffect) StartCoroutine(ChangeValuetoDisable(1f, 0f, 50f)); }
+    //public void DisableEffects() { if (usingEffect) StartCoroutine(ChangeValuetoDisable(1f, 0f, 50f)); }
 
     // ienumerador privado para acompanhar a activaçao de um efeito
     private IEnumerator ChangeValueto(float from, float to, float speed)

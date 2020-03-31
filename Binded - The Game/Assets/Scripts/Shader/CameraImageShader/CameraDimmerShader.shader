@@ -11,13 +11,13 @@
         Tags { "RenderType"="Opaque" }
         LOD 100
 
+        Cull Off ZWrite Off ZTest Always
+
         Pass
         {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            // make fog work
-            #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
 
@@ -49,11 +49,16 @@
             // frag
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
+                // cor da imagem do ecra
                 fixed4 col = tex2D(_MainTex, i.uv);
+                // cor resultante da media dos componetes da cor multiplicada por um valor de influencia, mais a cor 
+                // original multiplicada pelo valor oposto da mesma influencia
                 fixed4 col2 = ((col.r + col.g + col.b) / 3) * _DimmAmount + col *(1 - _DimmAmount);
-                col2 = 1- step(col.r, 0.5);
-                return (col / col2) % _DimmAmount;
+                
+                //col = 1- step(col.r, col2.r);
+                col = 1- step(col.r, 0.4);
+
+                return (2*col / col2) % _DimmAmount;
                 //return col2;
             }
             ENDCG

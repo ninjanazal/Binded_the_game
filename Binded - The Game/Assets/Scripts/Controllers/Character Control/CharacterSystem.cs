@@ -141,9 +141,14 @@ public class CharacterSystem : MonoBehaviour
     private void AbilityCheck()
     {
         // se o jogador estiver pressionar o botao para activar a habilidade
-        if (Input.GetButtonDown("ActivateAbility"))        
+        if (Input.GetButtonDown("ActivateAbility") && (!char_infor.IsChangingShape()))
             // chama metodo sobre os efeitos da camera
             CameraEffectsManager.Instance.EnableEffects();
+        else if (Input.GetButtonUp("ActivateAbility") && (!char_infor.IsChangingShape()))
+            if (CameraEffectsManager.Instance.usingEffect)
+                // chama metodo sobre os efeitos da camera
+                CameraEffectsManager.Instance.EnableEffects();
+
     }
 
 
@@ -154,8 +159,13 @@ public class CharacterSystem : MonoBehaviour
         // avalia se a velocidade em que o jogador entrou em contacto está dentro do limite
         if (Physics.CheckSphere(groundPositionMarker.position, maxAikeFloorDistance, ArifGroundMask) &&
             char_controller_.velocity.magnitude > AikeMaxValidContactSpeed)
+        {
+            // o jogador ao trocar de forma deve sair do efeito da camera
+            if (CameraEffectsManager.Instance.usingEffect) CameraEffectsManager.Instance.EnableEffects();
+
             // o jogador morre
             KillPlayer();
+        }
 
     }
     // estado sobre o ARIF
@@ -166,6 +176,9 @@ public class CharacterSystem : MonoBehaviour
             // avalia a colisao da esfera de contacto da fora
             if (char_speed > ArifMaxSwitchSpeed)
             {
+                // o jogador ao trocar de forma deve sair do efeito da camera
+                if (CameraEffectsManager.Instance.usingEffect) CameraEffectsManager.Instance.EnableEffects();
+
                 // caso a colisao ocorra a uma velocidade superior á estabelecida
                 // o jogador morre
                 KillPlayer();
@@ -175,6 +188,9 @@ public class CharacterSystem : MonoBehaviour
 
             else
             {
+                // o jogador ao trocar de forma deve sair do efeito da camera
+                if (CameraEffectsManager.Instance.usingEffect) CameraEffectsManager.Instance.EnableEffects();
+
                 // caso seja inferior, o jogador deve trocar de forma
                 _arifBehavior.ArifToAikeChange();
             }

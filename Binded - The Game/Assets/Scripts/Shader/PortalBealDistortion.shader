@@ -14,6 +14,7 @@
         GrabPass{}
         Pass
         {
+            Cull Off
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -48,6 +49,7 @@
             }
             
             // Voronoi 
+            // funçao copiada a partir do node do shader graph
             void Unity_Voronoi_float(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells)
             {
                 float2 g = floor(UV * CellDensity);
@@ -72,28 +74,30 @@
                 }
             }
 
-
-
-            
+            // vertex
             v2f vert (appdata v)
             {
                 v2f o;
+                // vertices transformados para clip space
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                // metodo para correctamente obter a posiçao das uvs da grabPass
                 o.uv = ComputeGrabScreenPos(o.vertex);
                 
-                //o.uv = float4(v.uv,0,1);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
+                // guarda na cor de saida a definida por parametro
                 fixed4 col = _BaseColor;
+                // cria um vector para o displace do voronoi
                 float4 voronoiDisplace = float4(0,0,0,0);
-
+                // chama o metodo de voronoi, com valores de saida x e y da var anterior
                 Unity_Voronoi_float(i.uv.xy, _AngleOff * _SinTime.y, _CellDensity, voronoiDisplace.x,voronoiDisplace.y);                
-                
+                // pega no valor da cor de frag na textura de grab, influenciado pelo voronoi e a intensidade
                 fixed4 grabColor = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uv + (voronoiDisplace.x * _Amount)));
-                return col % grabColor.x;
+                
+                return col % grabColor.x;   // divisao de resto sobre a cor de parametro e a cor de grabPass
                 //return voronoiDisplace.x;
             }
             ENDCG
