@@ -6,6 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestScene/Test_PlayGround.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/GAMESCENES/0- Gaol_Map/Gaol_Scene.unity
+    guid: fafa5098a3ac15646b2ba803cbd8931c
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/1- Hamr_Scene/Hamr_Scene.unity
+    guid: 476592124ee706349afa584d1cfa3a55
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/1.1- HamrBeacon_Scene/HamrBeacon_Scene.unity
+    guid: a73e0db0fcf6ecc48b0499ab6c81d358
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/2- Hugr_Scene/Hugr_Scene.unity
+    guid: 4d3dd344f174abe488ca1812dccdbbdc
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/2.2- HugrBeacon_Scene/HugrBeacon_Scene.unity
+    guid: 51b89867a96b729438ea0cad4093def8
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/3- Fylgja_Scene/Fylgja_Scene.unity
+    guid: 0a62322faa77ef24fa3cdc459a3314a6
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/3.1- FylgjaBeacon_Scene/FylgjaBeacon_Scene.unity
+    guid: b63925ae628087840b17dfc1819dfafe
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/4- Hamingja_Scene/Hamingja_Scene.unity
+    guid: e0f734fb2c37cfa41a06e2696374f61f
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/4.1- HamingjaBeacon_Scene/HamingjaBeacon_Scene.unity
+    guid: b6e7378a2d4e27945b1fab74d2f4d4be
   m_configObjects: {}

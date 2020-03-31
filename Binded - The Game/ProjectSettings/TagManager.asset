@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Climbable
+  - GrassBase
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - Ignore CameraClipping
   - GroundCheck
-  - 
+  - GroundCheck&IgnoreCamClip
   - 
   - 
   - 
