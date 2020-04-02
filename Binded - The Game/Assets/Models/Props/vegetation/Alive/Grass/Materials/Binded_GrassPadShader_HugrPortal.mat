@@ -75,17 +75,17 @@ Material:
     - _GlossyReflections: 1
     - _GrassBendValue: 0.31
     - _GrassCurvature: 1
-    - _GrassHeight: 1.6
-    - _GrassWidth: 1.4
+    - _GrassHeight: 2.71
+    - _GrassWidth: 0.04
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RandomAmount: 0.6
+    - _RandomAmount: 0.53
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartColor: 0.8
+    - _StartColor: 1
     - _UVSec: 0
     - _WindForce: 3
     - _ZWrite: 1

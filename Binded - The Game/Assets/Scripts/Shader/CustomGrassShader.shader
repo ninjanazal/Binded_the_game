@@ -28,10 +28,11 @@ Shader "Binded/CustomGrassShader"
                "LightMode" = "ForwardBase"}
         LOD 200 // vertexLit detail
 
+        ZWrite Off            
+        Cull Off // desenhar de todos os lados
+
         Pass
         {   
-            ZWrite On            
-            Cull Off // desenhar de todos os lados
     
             Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM

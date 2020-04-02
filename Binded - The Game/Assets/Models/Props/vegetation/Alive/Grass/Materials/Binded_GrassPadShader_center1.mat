@@ -42,7 +42,7 @@ Material:
     - _GrassWidth: 0.27
     - _Metallic: 0.094
     - _RandomAmount: 0.6
-    - _StartColor: 0.887
+    - _StartColor: 1
     - _WindForce: 2
     - _WindSpeed: 0.24
     - _WindStength: 0

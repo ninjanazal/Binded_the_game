@@ -9,12 +9,13 @@
     }
     SubShader
     {
-        Tags { "Queue"="Transparent+4" }
+        Tags { }
         LOD 100
         GrabPass{}
+        Cull Off ZWrite Off
+
         Pass
         {
-            Cull Off
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag

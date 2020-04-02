@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/GAMESCENES/1- Hamr_Scene/Hamr_Scene.unity
+- path: Assets/Scenes/GAMESCENES/0- Gaol_Map/Gaol_Scene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
