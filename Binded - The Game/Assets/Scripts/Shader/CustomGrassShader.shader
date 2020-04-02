@@ -24,17 +24,18 @@ Shader "Binded/CustomGrassShader"
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent" "RenderType"="Transparent"
-               "LightMode" = "ForwardBase"}
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 200 // vertexLit detail
-
-        ZWrite Off            
-        Cull Off // desenhar de todos os lados
-
+       
         Pass
         {   
-    
-            Blend SrcAlpha OneMinusSrcAlpha
+
+            ZWrite On // don't write to depth buffer 
+            // in order not to occlude other objects
+             Blend SrcAlpha OneMinusSrcAlpha 
+            // blend based on the fragment's alpha value 
+
+            //Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             // definiçao de vertex, frag e geometry shaders func
             #pragma vertex vert

@@ -9,11 +9,11 @@
     }
     SubShader
     {
-        Tags { }
+        Tags { "Queue"="Transparent+10" }
         LOD 100
         GrabPass{}
-        Cull Off ZWrite Off
-
+        ZWrite On
+        Cull Off
         Pass
         {
             CGPROGRAM

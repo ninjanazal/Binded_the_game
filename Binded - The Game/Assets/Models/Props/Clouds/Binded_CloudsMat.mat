@@ -71,7 +71,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DisplaceAmount: 24.92
+    - _DisplaceAmount: 23.31
     - _DstBlend: 10
     - _GlossMapScale: 0
     - _Glossiness: 0.297
@@ -79,7 +79,7 @@ Material:
     - _LightCutoff: 0.444
     - _Metallic: 0
     - _Mode: 3
-    - _NoiseThreshold: 0.883
+    - _NoiseThreshold: 0.873
     - _OcclusionStrength: 1
     - _OutlineWidth: 0
     - _Parallax: 0.02
