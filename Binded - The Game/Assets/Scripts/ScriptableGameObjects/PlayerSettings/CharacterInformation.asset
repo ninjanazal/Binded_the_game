@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b62f7b414fd8ad4f97588b07371ccc3, type: 3}
   m_Name: CharacterInformation
   m_EditorClassIdentifier: 
-  shape: 1
+  shape: 0
   AikeGravityReflexition: 3.051
   AikeMaxWalkingSpeed: 3
   AikeMaxSpeed: 8
@@ -25,7 +25,7 @@ MonoBehaviour:
   ArifBaseSpeed: 20
   ArifMinSpeed: 15
   ArifAceleration: 15
-  ArifBreakSpeed: 20
+  ArifBreakSpeed: 50
   ArifRotationSpeed: 2
   ArifRollSpeed: 3
   ArifDrag: 2

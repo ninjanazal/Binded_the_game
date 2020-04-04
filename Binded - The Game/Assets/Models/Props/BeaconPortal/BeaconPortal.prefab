@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2564580960698260435
 Transform:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2966335675033284657
 Transform:
@@ -74,12 +74,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7144529984111295541}
   - component: {fileID: 3677879959504158642}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BeaconPortalTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7144529984111295541
 Transform:
@@ -89,7 +89,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4663383491783791028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 9.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2966335675033284657}
@@ -106,8 +106,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5820389, y: 0.8423939, z: 3.1499405}
-  m_Center: {x: 0.03520584, y: 0.684072, z: 2.0540428}
+  m_Size: {x: 18.069603, y: 3.554716, z: 17.47697}
+  m_Center: {x: 0.3145008, y: 3.6224189, z: -0.5889683}
 --- !u!1 &5026065273275829341
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5474660832227100907
 Transform:
@@ -213,12 +213,12 @@ GameObject:
   - component: {fileID: 7815702791375252736}
   - component: {fileID: 5041537653953581627}
   - component: {fileID: 2497199286616467388}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PortalBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7815702791375252736
 Transform:
@@ -228,8 +228,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8905721394872300231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.059, y: 160.191, z: 1.64}
-  m_LocalScale: {x: 4.2409616, y: 159.84, z: 4.104}
+  m_LocalPosition: {x: -0.059, y: 6.31, z: 9.32}
+  m_LocalScale: {x: 18.957098, y: 4.157106, z: 18.34488}
   m_Children: []
   m_Father: {fileID: 2966335675033284657}
   m_RootOrder: 0
