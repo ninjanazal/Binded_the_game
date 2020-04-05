@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0ce18b702c9fd784591aeffc2d5528be, type: 3}
   m_ShaderKeywords: SHADOWED_RIM _EMISSION _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}

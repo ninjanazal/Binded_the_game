@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 
 // singleton responsavel pelos efeitos e manipulaçao da camera
@@ -20,7 +21,6 @@ public class IEnumeratorCallBacks : MonoBehaviour
 
     private IEnumerator new_camera_distance_coroutine;    // corotina que contrala a disntancia da camera
     private IEnumerator pulse_fov_effect;   // corroutina que controla o efeito de pulsar o fov
-
     // on awake
     void Awake()
     {
@@ -121,7 +121,8 @@ public class IEnumeratorCallBacks : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.2f);
+
         // repoem a fov para a normal
         while (game_settings.CameraFOV != game_settings.base_camera_fov)
         {

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MasterVolume: 1
   MouseSensitivity: 1
-  CameraDistance: 5.0001016
+  CameraDistance: 8
   MinVerticalCamAngle: -40
   MaxVerticalCamAngle: 70
   FOV_Pulse_Speed: 35
