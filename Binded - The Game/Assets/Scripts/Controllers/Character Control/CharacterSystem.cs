@@ -41,7 +41,6 @@ public class CharacterSystem : MonoBehaviour
 
     // variaveis comuns
     public float char_speed = 0f;  // velocidade do jogador
-    public float char_gravitySpeed;
     public bool is_alive_ = true; // determina o estado do jogador
 
     private PlayerRenderManager player_render_manager_;    // referencia para o render de efeitos do personagem
@@ -66,6 +65,9 @@ public class CharacterSystem : MonoBehaviour
 
         // guarda referencia para o jogador
         player_render_manager_ = GetComponentInChildren<PlayerRenderManager>();
+
+        // determina se consegue mudar de forma
+        can_switch_form_ = char_infor.CanChangeShape;
     }
 
     // loop de update Unity
@@ -85,9 +87,9 @@ public class CharacterSystem : MonoBehaviour
     {
         // confirma se ouve alteraçao á forma
         ChangeShapeChecker();
-
         // confirma se o efeito de visao está a ser utilizado
         AbilityCheck();
+
         // com base na forma do jogador, corre o comportamento adequado
         switch (char_infor.shape)
         {
@@ -108,8 +110,6 @@ public class CharacterSystem : MonoBehaviour
                 }
                 break;
         }
-        // actualiza a velocidade gravitacional localmente facultada pelo Controllador base
-        char_gravitySpeed = char_controller_.velocity.magnitude;
     }
 
     // metodos internos
@@ -151,7 +151,6 @@ public class CharacterSystem : MonoBehaviour
 
     }
 
-
     // Metodo que avalia a transiçao automatica do estado do jogador
     // estado sobre o AIkE
     private void AikeStateController()
@@ -168,6 +167,7 @@ public class CharacterSystem : MonoBehaviour
         }
 
     }
+
     // estado sobre o ARIF
     private void ArifStateController()
     {
@@ -203,13 +203,7 @@ public class CharacterSystem : MonoBehaviour
         player_render_manager_.TrailsSetter(char_speed);
     }
 
-    // retorna se o jogador está ou nao vivo
-    public bool GetPlayerState() { return is_alive_; }
-    // metodo chamado pelo controlador do nivel para dar respawn no jogador caso ele morra
-    public void RespawnPlayer() { is_alive_ = true; }
 
-    // indica se o jogador pode ou nao mudar de forma
-    public void CanGoArif(bool canSwitch) { can_switch_form_ = canSwitch; }
 
     #region Public methods
     // metodo que projecta a direçao do jogador no espaço de acçao
@@ -268,6 +262,39 @@ public class CharacterSystem : MonoBehaviour
 
     // metodo que mata o jogador
     public void KillPlayer() { is_alive_ = false; char_speed = 0f; }   // reseta a velocidade e o estado
+
+    // retorna se o jogador está ou nao vivo
+    public bool GetPlayerState() { return is_alive_; }
+
+    // metodo chamado pelo controlador do nivel para dar respawn no jogador caso ele morra
+    public void RespawnPlayer() { is_alive_ = true; char_speed = 0f; }
+    // overload para o metodo de respawn com nova posiçao
+    public void RespawnPlayer(Vector3 position, Quaternion rotation)
+    {
+        // para que o controlador do unity nao dê override nas alteraçoes
+        char_controller_.enabled = false;
+        // reseta a velocidade do controlador
+        char_controller_.velocity.Set(0f, 0f, 0f);
+
+        // define a nova posiçao do jogador
+        GetPlayerTransform().position = position;
+        // define a nova rotaçao do jogador
+        GetPlayerTransform().rotation = rotation;
+
+        // define que o jogador está vivo
+        is_alive_ = true;
+        // reseta a velocidade interna
+        char_speed = 0f;
+        // reactiva o controlador
+        char_controller_.enabled = true;
+    }
+
+    // indica se o jogador pode ou nao mudar de forma
+    public void CanGoArif(bool canSwitch)
+    {
+        can_switch_form_ = canSwitch;   // guarda localemente se pode mudar de forma
+        char_infor.CanChangeShape = canSwitch;  // guarda no estado do jogador
+    }
     #endregion
     // Debug, on gizmos
     private void OnDrawGizmos()

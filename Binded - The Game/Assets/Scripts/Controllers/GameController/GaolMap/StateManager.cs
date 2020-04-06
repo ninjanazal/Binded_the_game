@@ -23,6 +23,8 @@ public class StateManager : MonoBehaviour
     // referencias ao jogador
     private CharacterSystem char_system_;   // referencia ao controlador do jogador
     private Transform char_transform_;  // referencia para o transform do jogador
+    private CameraController cam_controller;    // referencia para o controlador da camera
+
     // referencias para a camera
 
     // on awake
@@ -46,7 +48,8 @@ public class StateManager : MonoBehaviour
         char_system_.game_settings_.SetTimeMultiplier(1f);
 
         // inicia a camera 
-        GameObject.Instantiate(CameraControllerObject, Spawner_point.position, Spawner_point.rotation);
+        cam_controller = GameObject.Instantiate(CameraControllerObject,
+            Spawner_point.position, Spawner_point.rotation).GetComponent<CameraController>();
 
         // determinar qual portal está aberto
         ConfirmPortals();
@@ -96,26 +99,26 @@ public class StateManager : MonoBehaviour
     public void OnTriggerEnterCallBack(KLevelName level, KLevelName beacon)
     {
         // determina a qual dos niveis o portal deve levar
-        if(game_state_.GetCurrentLevel == level || game_state_.GetCurrentLevel == beacon)
+        if (game_state_.GetCurrentLevel == level || game_state_.GetCurrentLevel == beacon)
         {
             // deve teleportar para o nivel
             IEnumeratorCallBacks.Instance.LoadNewScene(game_state_.GetCurrentLevelSceneIndex());
-        }       
+        }
     }
 
     // corroutina para dar respawn ao jogador
     private IEnumerator RespawnPlayer()
     {
-        // reduz o tempo para o jogador
-        char_system_.game_settings_.SetTimeMultiplier(0.2f);
-
         //coloca o jogador na posiçao de spawn
-        char_transform_.position = Spawner_point.position;
+        char_system_.RespawnPlayer(Spawner_point.position, Spawner_point.rotation);
+        // define a posiçao e rotaçao da camera
+        //cam_controller.SetCamTransfor(Spawner_point.position, Spawner_point.rotation);
 
-        // aguarda 1 segundo ate colocar o jogador como activo
+        // aguarda 1s antes de continuar
         yield return new WaitForSeconds(1);
-        // torna o estado do jogador como alive novamente
-        char_system_.RespawnPlayer();
+
+        // define a forma do jogador
+        char_info.shape = PlayerShape.Aike;
 
         // repoem o tempo para o jogador
         char_system_.game_settings_.SetTimeMultiplier(1f);

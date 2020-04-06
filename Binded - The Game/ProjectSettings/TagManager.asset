@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Climbable
   - GrassBase
+  - Orb
   layers:
   - Default
   - TransparentFX

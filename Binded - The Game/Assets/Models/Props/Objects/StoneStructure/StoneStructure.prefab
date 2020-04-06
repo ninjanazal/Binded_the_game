@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8114802182519559662}
   - component: {fileID: 6130138676956286682}
   - component: {fileID: 4324437769054231856}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TwoStonePilars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4857523425347710753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StoneStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6196620789483055367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

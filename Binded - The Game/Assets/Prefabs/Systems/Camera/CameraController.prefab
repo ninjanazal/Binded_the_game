@@ -111,11 +111,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3636249831866868336}
   - component: {fileID: 3636249831866868351}
-  - component: {fileID: 149964833}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -152,19 +151,6 @@ MonoBehaviour:
   SecToRotation: 0.1
   MinCameraDistance: 0.5
   CameraDimmerMat: {fileID: 2100000, guid: e480dd3271d8705458324d8a1dae7ef1, type: 2}
---- !u!114 &149964833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3636249831866868350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 815643bbda5c345479c59f81b311b168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
 --- !u!1 &8914532208385592554
 GameObject:
   m_ObjectHideFlags: 0
