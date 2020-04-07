@@ -87,7 +87,7 @@ public class PlayGameManager : MonoBehaviour
         // para o respawn, escolhe um ponto de spawn aleatorio dos pontos fornecidos
         // define a posiçao para o jogador com base no valor
         // determina um valor aleatorio dentro do alcançe para os pontos fornecidos
-        var randomVal = Random.Range(0, SpawnPoints.Length - 1);
+        var randomVal = Random.Range(0, SpawnPoints.Length);
 
         // com base no valor determinado, poem o jogador na posiçao
         char_system_.RespawnPlayer(SpawnPoints[randomVal].position, SpawnPoints[randomVal].rotation);

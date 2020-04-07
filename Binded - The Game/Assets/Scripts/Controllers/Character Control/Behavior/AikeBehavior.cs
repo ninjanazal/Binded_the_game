@@ -271,6 +271,8 @@ public class AikeBehavior : MonoBehaviour
             vertical_motion_.y = Mathf.Sqrt(-2 * (char_system_.GravityValue) *
             char_info_.AikeJumpHeight);
             // caso esteja no modo de salto, guarda a direçao
+            // ao mudar de forma, nao é distinguido em que tipo de superficie está
+            is_climbing_ = true;
             if (is_climbing_)
                 // guarda a normal do jogador
                 climb_jump_dir_ = char_transform_.up;

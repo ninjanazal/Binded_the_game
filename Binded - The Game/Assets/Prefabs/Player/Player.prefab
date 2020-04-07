@@ -348,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7559232517283698974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1212, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1364, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7825488917120565568}
@@ -454,16 +454,16 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 1536
-  maxAikeFloorDistance: 0.07
+  maxAikeFloorDistance: 0.08
   groundPositionMarker: {fileID: 687369287980415316}
   ArifCollisionDistance: 0.24
   ArifGroundMask:
     serializedVersion: 2
     m_Bits: 1536
-  AikeMaxValidContactSpeed: 25
+  AikeMaxValidContactSpeed: 26
   ArifMaxSwitchSpeed: 30
   char_speed: 0
-  char_gravitySpeed: 0
+  char_controller_speed: 0
   is_alive_: 1
 --- !u!1 &8421948560600992216
 GameObject:

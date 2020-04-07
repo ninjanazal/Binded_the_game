@@ -41,6 +41,7 @@ public class CharacterSystem : MonoBehaviour
 
     // variaveis comuns
     public float char_speed = 0f;  // velocidade do jogador
+    public float char_controller_speed; // velocidade do controlador
     public bool is_alive_ = true; // determina o estado do jogador
 
     private PlayerRenderManager player_render_manager_;    // referencia para o render de efeitos do personagem
@@ -110,6 +111,7 @@ public class CharacterSystem : MonoBehaviour
                 }
                 break;
         }
+        char_controller_speed = char_controller_.velocity.magnitude;
     }
 
     // metodos internos

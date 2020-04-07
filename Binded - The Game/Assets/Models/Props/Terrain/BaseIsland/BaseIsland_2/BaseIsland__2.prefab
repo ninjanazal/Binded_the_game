@@ -17,7 +17,7 @@ GameObject:
   m_TagString: GrassBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2683132637145713628
 Transform:
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398155693399554511}
-  m_LocalRotation: {x: -0.58767134, y: -0.393246, z: -0.393246, w: 0.58767134}
+  m_LocalRotation: {x: -0.58767027, y: -0.3932476, z: -0.3932476, w: 0.58767027}
   m_LocalPosition: {x: -25.7, y: -98.1, z: -8.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

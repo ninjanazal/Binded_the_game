@@ -33,8 +33,8 @@ public class ToPortalManager : MonoBehaviour
     public void OnOrbEnterCallBack()
     {
         // ao entregar uma orb, incrementa o valor
-        level_infor_.DeliveredEnergy++;
-        orbDelivered = level_infor_.DeliveredEnergy;
+        orbDelivered++;
+        level_infor_.DeliveredEnergy = orbDelivered;
         // determina se o valor de orbs entregues corresponde ao numero de activaçao
         isActivated = (orbDelivered >= level_infor_.EnergyRequired) ? ActivatePortal() : false;
     }

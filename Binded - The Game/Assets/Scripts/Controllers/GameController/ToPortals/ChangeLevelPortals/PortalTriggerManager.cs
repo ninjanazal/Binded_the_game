@@ -8,7 +8,7 @@ public class PortalTriggerManager : MonoBehaviour
     private ToPortalManager portal_manager_;    // referencia para o script mae
 
     // funçao chamada para registar o portal
-    public void RegistPortalManager(ToPortalManager manager){portal_manager_ = manager; Debug.Log("Registered");}
+    public void RegistPortalManager(ToPortalManager manager){portal_manager_ = manager;}
 
     private void OnTriggerEnter(Collider other)
     {

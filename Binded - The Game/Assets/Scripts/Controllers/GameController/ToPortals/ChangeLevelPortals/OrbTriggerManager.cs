@@ -17,7 +17,10 @@ public class OrbTriggerManager : MonoBehaviour
     {
         //determina se uma orb entrou
         if (portal_manager_ && other.CompareTag("Orb"))
+        {
             portal_manager_.OnOrbEnterCallBack();   // chama o metodo para o callBack
-
+            // chama o metodo que destroi a orb sem respawn
+            other.GetComponent<OrbBehaviour>().DestroyNorespawn();
+        }
     }
 }
