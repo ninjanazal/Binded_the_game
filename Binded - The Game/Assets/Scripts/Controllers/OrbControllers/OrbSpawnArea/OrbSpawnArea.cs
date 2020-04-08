@@ -26,10 +26,15 @@ public class OrbSpawnArea : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // define a cor do gizmos para branca
-        Gizmos.color = Color.white;
-
+        // define a cor do gizmos para cyan
+        Color gizmosColor = Color.cyan;
+        // define uma transparencia para a cor
+        gizmosColor.a = 0.4f;
+        // aplica a cor determinada
+        Gizmos.color = gizmosColor;
+        // define a matriz de transformaçao do gizmos de acordo com o transform do objecto
         Gizmos.matrix = this.transform.localToWorldMatrix;
-        Gizmos.DrawWireCube(Vector3.zero, area_size_);
+        // define o cubo
+        Gizmos.DrawCube(Vector3.zero, area_size_);
     }
 }

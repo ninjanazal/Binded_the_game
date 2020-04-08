@@ -45,6 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e33f4c771d01149b59031d757d1a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fenrir_arm_: {fileID: 1911000584721569441, guid: b5c86bb0e6ce26147a75db540aeeb61c,
+    type: 3}
+  fenrir_arm_count_: 0
+  look_for_interval: 2
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1077399642014526739
 GameObject:
   m_ObjectHideFlags: 0

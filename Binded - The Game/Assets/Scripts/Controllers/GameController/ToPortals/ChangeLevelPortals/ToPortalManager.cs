@@ -20,6 +20,8 @@ public class ToPortalManager : MonoBehaviour
         // guarda referencia para o trigger manager de orbs
         orb_trigger_manager_ = GetComponentInChildren<OrbTriggerManager>();
         orb_trigger_manager_.RegistPortal(this);    // regista o portal
+        // confirma o contador de orbs entregues no asset de nivel
+        level_infor_.DeliveredEnergy = 0;
     }
 
     // metodo chamado quando o jogador entrou no portal
@@ -27,6 +29,7 @@ public class ToPortalManager : MonoBehaviour
     {
         // ao ser chamado, deve iniciar a transiçao para a cena de teleportTO
         Debug.Log("PlayerEntered");
+        Debug.Log($"Teleporting to {teleportTo}");
     }
 
     // metodo chamado quando uma orb entra no portal

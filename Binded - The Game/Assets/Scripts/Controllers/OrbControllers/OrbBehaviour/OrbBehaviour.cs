@@ -51,7 +51,7 @@ public class OrbBehaviour : MonoBehaviour
         if (player_transform_)
         {
             // determina a distancia do jogador
-            float player_Distance = Vector3.Distance(this.transform.position, player_transform_.position);
+            float player_Distance = Vector3.Distance(this.transform.position, player_transform_.position + (calculater_dir_pos * distance_Offset));
             // caso exista, verifica a distancia do jogador em caso da existencia de antecipaçao em funçao do trigger
             if (player_Distance > orb_proximity_.GetColliderRange())
             {
@@ -62,32 +62,21 @@ public class OrbBehaviour : MonoBehaviour
             }
             else
                 // caso contrario avalia a distancia do jogador para determinar o tipo de comportamento
-                in_follow_mode_ = (player_Distance <= min_range_val) ? OrbitAround() : OrbMove(player_Distance);
+                OrbMove(player_Distance);
         }
     }
 
 
     // metodos internos
-    private bool OrbMove(float playerDistance)
+    private void OrbMove(float playerDistance)
     {
         // aponta a orb para a posiçao do jogador
         this.transform.LookAt(player_transform_.position);
-        // move caso a orb nao esteja já na distancia minima
-        //if (Vector3.Distance(this.transform.position, player_transform_.position) > distance_Offset)
         // desloca a orb na direçao do jogador a uma velocidade dependendo do estado
         this.transform.position = Vector3.Lerp(this.transform.position, player_transform_.position + (calculater_dir_pos * distance_Offset),
-         moveToSpeed * Time.deltaTime);
-
-        // retorna false para indicar que o jogador nao está num comportamento de follow
-        return false;
+        moveToSpeed * Time.deltaTime);
     }
 
-    private bool OrbitAround()
-    {
-        this.transform.RotateAround(player_transform_.position, player_transform_.up * distance_Offset, orbitSpeed * Time.deltaTime);
-        // retorna true para indicar que a orb está num estado de orbitra
-        return true;
-    }
 
     #region TriggerCallBacks
     // trigger callback
@@ -99,11 +88,11 @@ public class OrbBehaviour : MonoBehaviour
         calculater_dir_pos = (this.transform.position - player_transform_.position).normalized;
 
         // muda o tamanho ao entrar em contacto com o jogador
-        orb_renderer_.transform.localScale /= 2f;
+        orb_renderer_.transform.localScale /= 3f;
 
         // define o tamanho de inicio da particula
         ParticleSystem.MainModule main = orb_particle_system_.main;
-        main.startSize = 1f;
+        main.startSize = 0.5f;
 
         // ao entrar na proximidade do jogador muda a layer para nao ser afetada pela visao
         particle_object.layer = 0;
@@ -117,7 +106,7 @@ public class OrbBehaviour : MonoBehaviour
         player_transform_ = null;
         in_follow_mode_ = false;
         // muda o tamanho ao entrar em contacto com o jogador
-        orb_renderer_.transform.localScale *= 2f;
+        orb_renderer_.transform.localScale *= 3f;
 
         // define o tamanho de inicio da particula
         ParticleSystem.MainModule main = orb_particle_system_.main;

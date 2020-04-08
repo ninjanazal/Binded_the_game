@@ -278,15 +278,16 @@ public class CharacterSystem : MonoBehaviour
         // reseta a velocidade do controlador
         char_controller_.velocity.Set(0f, 0f, 0f);
 
+        // define que o jogador está vivo
+        is_alive_ = true;
+        // reseta a velocidade interna
+        char_speed = 0f;
+
         // define a nova posiçao do jogador
         GetPlayerTransform().position = position;
         // define a nova rotaçao do jogador
         GetPlayerTransform().rotation = rotation;
 
-        // define que o jogador está vivo
-        is_alive_ = true;
-        // reseta a velocidade interna
-        char_speed = 0f;
         // reactiva o controlador
         char_controller_.enabled = true;
     }
@@ -295,7 +296,7 @@ public class CharacterSystem : MonoBehaviour
     public void CanGoArif(bool canSwitch)
     {
         can_switch_form_ = canSwitch;   // guarda localemente se pode mudar de forma
-        char_infor.CanChangeShape = canSwitch;  // guarda no estado do jogador
+        char_infor.CanChangeShape = can_switch_form_;  // guarda no estado do jogador
     }
     #endregion
     // Debug, on gizmos

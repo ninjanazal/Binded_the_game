@@ -18,6 +18,9 @@ public class PlayGameManager : MonoBehaviour
     [Header("Referencia para actividades")]
     public RespawnPortalManager respawn_portal_manager; // referencia para o portal de respawn
 
+    [Header("Fenrir")]
+    public FenrirBehaviour fenrir_behaviour;    // referencia para o comportamento do fenrir em cena
+
     // variaveis internas
     // referencia para elementos do jogador
     private CharacterSystem char_system_;   // referencia para o controlador do jogador
@@ -72,6 +75,9 @@ public class PlayGameManager : MonoBehaviour
         // inicia a camera, guardando referencia para o controlador da camera
         cam_controller_ = GameObject.Instantiate(CameraControllerObject, StartSpawn.position, StartSpawn.rotation).
             GetComponent<CameraController>();
+
+        // apos o jogador estar iniciado, indica ao Fenrir a existencia deste
+        fenrir_behaviour.ActivateFenrir(char_transform_);
     }
 
 
@@ -89,16 +95,15 @@ public class PlayGameManager : MonoBehaviour
         // determina um valor aleatorio dentro do alcançe para os pontos fornecidos
         var randomVal = Random.Range(0, SpawnPoints.Length);
 
-        // com base no valor determinado, poem o jogador na posiçao
-        char_system_.RespawnPlayer(SpawnPoints[randomVal].position, SpawnPoints[randomVal].rotation);
-        // define a posiçao da camera
-        cam_controller_.SetCamTransfor(SpawnPoints[randomVal].position, SpawnPoints[randomVal].rotation);
-
         // define que o jogador pode alterar entre as formas
         char_system_.CanGoArif(true);
         // confirma a escala do tempo para o jogador
         char_system_.game_settings_.SetTimeMultiplier(1f);
-        
+
+        // com base no valor determinado, poem o jogador na posiçao
+        char_system_.RespawnPlayer(SpawnPoints[randomVal].position, SpawnPoints[randomVal].rotation);
+        // define a posiçao da camera
+        cam_controller_.SetCamTransfor(SpawnPoints[randomVal].position, SpawnPoints[randomVal].rotation);
     }
     #endregion
 

@@ -19,13 +19,12 @@ public class GrassGenerator : MonoBehaviour
     private void Awake()
     {
         mesh_filter_ = GetComponent<MeshFilter>();  // guarda referencia ao mesh filter do objecto
-        //FillMesh(); // chama func para preencher a mesh
         StartCoroutine(GenerateGrass());
 
     }
     private void OnEnable()
     {
-        //FillMesh();
+        mesh_filter_ = GetComponent<MeshFilter>();  // guarda referencia ao mesh filter do objecto
         StartCoroutine(GenerateGrass());
     }
     //metodo que determina os vertices da mesh
@@ -105,6 +104,7 @@ public class GrassGenerator : MonoBehaviour
     // coroutina para geraçao da erva
     private IEnumerator GenerateGrass()
     {
+        print("Running grassGenerator");
         // inicia o valor random seeded
         Random.InitState(seed_);
         // inicia lista de posiçoes com a quantidade definida para a quantidade de ervas
@@ -153,6 +153,7 @@ public class GrassGenerator : MonoBehaviour
             yield return null;
         }
         // assim que estiver determinado todas as posiçoes de contacto, cria a mesh
+        print("New mesh done!");
         generated_mesh_ = new Mesh();
         generated_mesh_.name = "GrassVertex";
         generated_mesh_.SetVertices(calculated_pos);
@@ -162,7 +163,7 @@ public class GrassGenerator : MonoBehaviour
         generated_mesh_.SetNormals(calculated_normals);
 
         mesh_filter_.mesh = generated_mesh_;    // atribui a mesh determinada ao filter
-        
+
         // espera o proximo ciclo
         yield return null;
 
