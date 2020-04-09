@@ -30,6 +30,9 @@ public class ToPortalManager : MonoBehaviour
         // ao ser chamado, deve iniciar a transiçao para a cena de teleportTO
         Debug.Log("PlayerEntered");
         Debug.Log($"Teleporting to {teleportTo}");
+
+        // inicia a call para mudar de cena
+        IEnumeratorCallBacks.Instance.LoadNewScene((int)teleportTo);
     }
 
     // metodo chamado quando uma orb entra no portal

@@ -29,9 +29,13 @@ public class OrbSpawnerManager : MonoBehaviour
     // call para spawnar uma nova particula
     public void SpawnNewOrb()
     {
+        Debug.Log("New orb spawning");
         // instancia uma orb numa area e posiçao aleatoria dentro dessa area
-        Instantiate(orb_to_spawn_, spawn_Areas_[Random.Range(0, spawn_Areas_.Length)].GetRandomPosInside(),
-            Quaternion.identity);
+        OrbBehaviour new_orb_ = Instantiate(orb_to_spawn_, spawn_Areas_[Random.Range(0, spawn_Areas_.Length)].GetRandomPosInside(),
+           Quaternion.identity).GetComponent<OrbBehaviour>();
+
+        // regista o spawner na nova orb
+        new_orb_.RegistSpawnManager(this);
     }
 
 
@@ -42,8 +46,11 @@ public class OrbSpawnerManager : MonoBehaviour
         for (int i = 0; i < total_inicial_spawn_count_; i++)
         {
             // instancia uma orb numa area e posiçao aleatoria dentro dessa area
-            Instantiate(orb_to_spawn_, spawn_Areas_[Random.Range(0, spawn_Areas_.Length)].GetRandomPosInside(),
-                Quaternion.identity);
+            OrbBehaviour new_orb_ = Instantiate(orb_to_spawn_, spawn_Areas_[Random.Range(0, spawn_Areas_.Length)].GetRandomPosInside(),
+                Quaternion.identity).GetComponent<OrbBehaviour>();
+
+            // regista o spawner na nova orb
+            new_orb_.RegistSpawnManager(this);
 
             // aguarda o proximo frame
             yield return null;

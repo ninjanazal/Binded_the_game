@@ -16,7 +16,6 @@ public class OrbBehaviour : MonoBehaviour
     // variaveis privadas
     private OrbProximityController orb_proximity_;  // referencia ao controlador de proximidade
     private Transform player_transform_;     // referencia para o transform passado por paramentro pelos metodos
-    private bool in_follow_mode_ = false;   // variavel que indica em que estado a orb está
     private float min_range_val;    // valor do trigger de follow
     private float distance_Offset;  // distancia que a orb deve guardar do alvo relativa com a distancia minima
     private Vector3 calculater_dir_pos;     // vector que determina a posiçao da orb relativa ao jogador
@@ -104,7 +103,6 @@ public class OrbBehaviour : MonoBehaviour
     {
         // caso o jogador saia do campo de observaçao, remove o transform e verifica o estado da orb
         player_transform_ = null;
-        in_follow_mode_ = false;
         // muda o tamanho ao entrar em contacto com o jogador
         orb_renderer_.transform.localScale *= 3f;
 

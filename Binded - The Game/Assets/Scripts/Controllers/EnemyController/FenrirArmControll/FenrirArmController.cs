@@ -85,8 +85,6 @@ public class FenrirArmController : MonoBehaviour
             // Determina se o ray atingiu uma orb 
             if (move_ray_hit.transform.CompareTag("Orb"))
             {
-                Debug.Log("Orb Hit");
-
                 // indica á orb para dar respawn novamente, tenta obter o controlador
                 if (move_ray_hit.transform.GetComponent<OrbBehaviour>())
                     // se existir um controlador, ordena o respawn

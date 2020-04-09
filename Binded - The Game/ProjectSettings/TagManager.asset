@@ -8,6 +8,7 @@ TagManager:
   - GrassBase
   - Orb
   - Fenrir
+  - ProjecterTarget
   layers:
   - Default
   - TransparentFX
