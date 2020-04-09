@@ -73,23 +73,23 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GrassBendValue: 0.42
-    - _GrassCurvature: 0.959
+    - _GrassBendValue: 0
+    - _GrassCurvature: 0.269
     - _GrassHeight: 2
     - _GrassWidth: 0.2
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RandomAmount: 0.2
+    - _RandomAmount: 0.97
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartColor: 0.767
+    - _StartColor: 0.847
     - _UVSec: 0
-    - _WindForce: 3
+    - _WindForce: 2
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

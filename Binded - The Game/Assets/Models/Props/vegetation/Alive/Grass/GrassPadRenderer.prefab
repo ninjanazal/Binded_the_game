@@ -87,7 +87,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8193854701638780711}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d2186e723c3cdf428ebcd852d66d66e, type: 3}
   m_Name: 
@@ -95,3 +95,5 @@ MonoBehaviour:
   seed_: 0
   pad_sizer_start_: {x: 150, y: 10, z: 150}
   grass_count_: 100000
+  saveMesh: 0
+  path_to_save_: Assets/Props/vegetation/GeneratedGrassPad

@@ -47,6 +47,11 @@ public class FenrirArmController : MonoBehaviour
             // define a posiçao do braço
             this.transform.position = next_position_;
         }
+        else
+        {
+            Destroy(this.gameObject, 2f);   // caso tenha sido desativada, deve ser destruida
+        }
+
     }
 
     // metodos publicos
@@ -62,7 +67,7 @@ public class FenrirArmController : MonoBehaviour
         activated_ = true;
         // guarda referencia para o trai do braço
         trail_renderer_ = GetComponent<TrailRenderer>();
-        
+
         // ao activar o braço, é definida uma call para destroir ao fim do tempo maximo
         Destroy(this.gameObject, arm_max_life_time);
 
@@ -78,8 +83,10 @@ public class FenrirArmController : MonoBehaviour
         if (Physics.SphereCast(move_ray, arm_radius_, out move_ray_hit, Vector3.Distance(this.transform.position, next_position_)))
         {
             // Determina se o ray atingiu uma orb 
-            if (move_ray_hit.collider.CompareTag("Orb"))
+            if (move_ray_hit.transform.CompareTag("Orb"))
             {
+                Debug.Log("Orb Hit");
+
                 // indica á orb para dar respawn novamente, tenta obter o controlador
                 if (move_ray_hit.transform.GetComponent<OrbBehaviour>())
                     // se existir um controlador, ordena o respawn

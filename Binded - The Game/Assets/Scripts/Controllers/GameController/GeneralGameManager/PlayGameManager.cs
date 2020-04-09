@@ -111,18 +111,21 @@ public class PlayGameManager : MonoBehaviour
     // definir o jogador para a sala de respanw
     private IEnumerator SetPlayerOnRespawn()
     {
+        // desativa a possibilidade de alteral de forma
+        char_system_.CanGoArif(false);
+
+        // define a forma do jogador como Aike
+        if (char_info_.shape != PlayerShape.Aike)
+            char_info_.ChangeShape();
+
         // deve colocar o jogador e a camera no campo de respawn
         // define o respaw do jogador na posiçao
         char_system_.RespawnPlayer(DeathSpawnPoint.position, DeathSpawnPoint.rotation);
         // define a posiçao e rotaçao da camera
         cam_controller_.SetCamTransfor(DeathSpawnPoint.position, Quaternion.identity);
+
         // aguarda 1s antes de continuar
         yield return new WaitForSeconds(1);
-
-        // desativa a possibilidade de alteral de forma
-        char_system_.CanGoArif(false);
-        // define a forma do jogador como Aike
-        char_info_.shape = PlayerShape.Aike;
 
         // confirma o multiplicador de tempo
         char_system_.game_settings_.SetTimeMultiplier(1f);

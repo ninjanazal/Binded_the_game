@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEditor;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshRenderer), (typeof(MeshFilter)))]
@@ -11,25 +13,37 @@ public class GrassGenerator : MonoBehaviour
     public int seed_ = 0; // seed para a aleatoriadade para posiçao dos vertices
     public Vector3 pad_sizer_start_ = Vector3.one; // tamanho do pad a ser calculado
     [Range(50, 100000)] public int grass_count_ = 50;  // numero de vertices da mesh
+    public bool saveMesh = false;   // determina se guarda a mesh
+    public string path_to_save_;    // caminha para guardar a mesh
 
     // private vars
     private Mesh generated_mesh_;   // mesh de vertices gerada
     private MeshFilter mesh_filter_; // mesh filter para aplicar o material com shader
 
+    private Coroutine generation_routine;   // referencia á rotina
     private void Awake()
     {
         mesh_filter_ = GetComponent<MeshFilter>();  // guarda referencia ao mesh filter do objecto
-        StartCoroutine(GenerateGrass());
+        this.enabled = false;
 
     }
     private void OnEnable()
     {
         mesh_filter_ = GetComponent<MeshFilter>();  // guarda referencia ao mesh filter do objecto
-        StartCoroutine(GenerateGrass());
+        // inica a geraçao
+        generation_routine = StartCoroutine(GenerateGrass());
     }
+
+    private void OnDisable()
+    {
+        // ao desativar, para a routine
+        StopCoroutine(generation_routine);
+    }
+
     //metodo que determina os vertices da mesh
     private void FillMesh()
     {
+        Debug.Log("Running task");
         // inicia o valor random seeded
         Random.InitState(seed_);
         // inicia lista de posiçoes com a quantidade definida para a quantidade de ervas
@@ -74,6 +88,7 @@ public class GrassGenerator : MonoBehaviour
                     calculated_normals.Add(grass_ray_hit_.normal);
                 }
             }
+            print("Running");
         }
         // assim que estiver determinado todas as posiçoes de contacto, cria a mesh
         generated_mesh_ = new Mesh();
@@ -85,6 +100,8 @@ public class GrassGenerator : MonoBehaviour
         generated_mesh_.SetNormals(calculated_normals);
 
         mesh_filter_.mesh = generated_mesh_;    // atribui a mesh determinada ao filter
+
+        Debug.Log("Finished");
     }
 
 
@@ -105,6 +122,8 @@ public class GrassGenerator : MonoBehaviour
     private IEnumerator GenerateGrass()
     {
         print("Running grassGenerator");
+
+
         // inicia o valor random seeded
         Random.InitState(seed_);
         // inicia lista de posiçoes com a quantidade definida para a quantidade de ervas
@@ -116,6 +135,9 @@ public class GrassGenerator : MonoBehaviour
         List<int> calculated_index_ = new List<int>();
         //lista de normais dos vertices determinados
         List<Vector3> calculated_normals = new List<Vector3>(grass_count_);
+
+        // numero de iteraçoes
+        int bladeCount = 0;
 
         // para cada erva, determina a posiçao com base em colisao de ray com meshes
         for (int i = 0; i < grass_count_; i++)
@@ -149,23 +171,47 @@ public class GrassGenerator : MonoBehaviour
                     calculated_normals.Add(grass_ray_hit_.normal);
                 }
             }
-            // espera o proximo ciclo
-            yield return null;
-        }
-        // assim que estiver determinado todas as posiçoes de contacto, cria a mesh
-        print("New mesh done!");
-        generated_mesh_ = new Mesh();
-        generated_mesh_.name = "GrassVertex";
-        generated_mesh_.SetVertices(calculated_pos);
-        generated_mesh_.SetUVs(0, calculated_uvs);
+            Debug.Log("GrassBlace " + i);
 
+            bladeCount++;
+            if (bladeCount == 1000)
+            {
+                // espera o proximo ciclo
+                yield return null;
+                bladeCount = 0;
+            }
+        }
+
+        // inicia uma nova mesh
+        generated_mesh_ = new Mesh();
+        // define o nome da mesh
+        generated_mesh_.name = this.gameObject.name + "_generatedGrassPad";
+        // passa os vertices determinados
+        generated_mesh_.SetVertices(calculated_pos);
+        // passa os uvs determinados
+        generated_mesh_.SetUVs(0, calculated_uvs);
+        // define os indices e o tipo de mesh
         generated_mesh_.SetIndices(calculated_index_.ToArray(), MeshTopology.Points, 0);
+        // passa as normais calculadas
         generated_mesh_.SetNormals(calculated_normals);
 
         mesh_filter_.mesh = generated_mesh_;    // atribui a mesh determinada ao filter
 
-        // espera o proximo ciclo
-        yield return null;
+        // assim que estiver determinado todas as posiçoes de contacto, cria a mesh
+        print("New mesh done!");
+        if (saveMesh)
+        {
+            string path = EditorUtility.SaveFilePanel("Save separate mesh asset", path_to_save_, generated_mesh_.name, "asset");
+            path = FileUtil.GetProjectRelativePath(path);
+            Mesh toSave = Object.Instantiate(mesh_filter_.sharedMesh);
+            MeshUtility.Optimize(toSave);
+            AssetDatabase.CreateAsset(toSave, path);
+            AssetDatabase.SaveAssets();
 
+            // define a mesh guardada
+            mesh_filter_.mesh = toSave;
+            // desativa o script, para que nao corra no inicio do ciclo
+            this.enabled = false;
+        }
     }
 }

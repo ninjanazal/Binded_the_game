@@ -70,6 +70,8 @@ public class CharacterInfo : ScriptableObject
         if (render_manager_)
             render_manager_.ChangeOccurred(shape);  // envia que ocorreu uma alteraçao na forma
     }
+
+
     // metodo chamado quando o jogador terminou de mudar de forma
     public void ChangeEnded() { changing_state_ = false; }
     // metodo chamado para indicar se o jogador está a mudar de forma ou nao
