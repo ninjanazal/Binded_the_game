@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToPortalManager : MonoBehaviour
 {
     [Header("Variaveis do portal")]
+    public GameState game_state_;   // referencia para o controlador de estado do jogogo
     public KLevelName teleportTo;   // varialvel regista para que nivel o portal teleporta
     public LevelInfo level_infor_;  // informaçao do nivel em que o portal se encontra
     public int orbDelivered = 0;   // indica o valor de orbs recebidas
@@ -31,6 +32,8 @@ public class ToPortalManager : MonoBehaviour
         Debug.Log("PlayerEntered");
         Debug.Log($"Teleporting to {teleportTo}");
 
+        // indica ao controlador do jogo que o nivel foi completo
+        game_state_.CompletedLevel();
         // inicia a call para mudar de cena
         IEnumeratorCallBacks.Instance.LoadNewScene((int)teleportTo);
     }

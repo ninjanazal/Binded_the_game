@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e73e0aa0dc3174f9b31111d7e90af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game_state_: {fileID: 11400000, guid: 5affbaa2ee7a5314b893bb0014c8e079, type: 2}
   teleportTo: 0
   level_infor_: {fileID: 0}
   orbDelivered: 0
