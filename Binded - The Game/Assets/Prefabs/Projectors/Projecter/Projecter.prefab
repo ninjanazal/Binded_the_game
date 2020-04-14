@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0b8d03c6939b340847e8919048680f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projecter_area_: {x: 5, y: 5, z: 5}
+  projecter_area_: {x: 10, y: 10, z: 10}
   project_to_:
   - {fileID: 0}
-  projecter_cell_size_: 0.1
+  projecter_cell_size_: 0.5
 --- !u!1 &7825259790709829000
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 7825259790709829000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.1, y: 5.1, z: 5.1}
+  m_LocalScale: {x: 10.1, y: 10.1, z: 10.1}
   m_Children: []
   m_Father: {fileID: 1619613707388208596}
   m_RootOrder: 0

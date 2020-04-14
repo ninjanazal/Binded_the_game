@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/GAMESCENES/1.1- HamrBeacon_Scene/HamrBeacon_Scene.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0

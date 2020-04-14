@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Binded_CloudsMat
-  m_Shader: {fileID: 4800000, guid: e5fc945a1ce09fb4e8c1c17e618f728d, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_Name: Binded_BeaconGrass
+  m_Shader: {fileID: 4800000, guid: e848aae7690ef2d49973e9c8ab17d438, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3001
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -21,6 +21,10 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorTexture:
+        m_Texture: {fileID: 2800000, guid: 9a3280b0d2f0f3e45ae3d0e54aa88124, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -47,14 +51,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 674e27ab664e88840924a45de5a55cfb, type: 3}
-        m_Scale: {x: 2, y: 20}
-        m_Offset: {x: 1, y: 1}
-    - _Normal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,39 +59,37 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecularMap:
-        m_Texture: {fileID: 0}
+    - _WindTexture:
+        m_Texture: {fileID: 2800000, guid: 2d4e27adbf4b11c4c8317b35d8921412, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphavalueForDistance: 0.332
     - _BumpScale: 1
+    - _ClipMaxDistance: 6.92
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DisplaceAmount: -24.3
-    - _DstBlend: 10
-    - _GlossMapScale: 0
-    - _Glossiness: 0.297
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightCutoff: 0.444
+    - _GrassBendValue: 0.161
+    - _GrassCurvature: 1
+    - _GrassHeight: 1.42
+    - _GrassWidth: 0.01
     - _Metallic: 0
-    - _Mode: 3
-    - _NoiseThreshold: 0.853
+    - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0
     - _Parallax: 0.02
-    - _RimSize: 0.034
-    - _ShadowBands: 3.13
-    - _ShadowedRim: 0
-    - _SmoothnessTextureChannel: 1
+    - _RandomAmount: 0.35
+    - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StartColor: 0
     - _UVSec: 0
-    - _ZWrite: 0
+    - _WindForce: 2
+    - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0.43137255}
-    - _Emission: {r: 1, g: 1, b: 1, a: 0.34901962}
-    - _EmissionColor: {r: 0.40096074, g: 0.39906943, b: 0.39906943, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

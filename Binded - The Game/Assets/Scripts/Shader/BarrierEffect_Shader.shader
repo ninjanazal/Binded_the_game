@@ -21,7 +21,7 @@ Shader "Binded/BarrierEffect_Shader"
     {
         //Blend SrcAlpha OneMinusSrcAlpha
         //Cull Back
-        //ZWrite On
+        ZWrite On
         
         Tags { 
             "RenderType"="Transparent"
