@@ -13881,12 +13881,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1665045760963424133, guid: 0813cc3e60c3f8f43951e2ed30b56e14,
         type: 3}
-      propertyPath: char_info_
-      value: 
-      objectReference: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c,
-        type: 2}
-    - target: {fileID: 1665045760963424133, guid: 0813cc3e60c3f8f43951e2ed30b56e14,
-        type: 3}
       propertyPath: StartSpawn
       value: 
       objectReference: {fileID: 1218464988}

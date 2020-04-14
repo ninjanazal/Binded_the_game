@@ -85,11 +85,11 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StartColor: 0.807
+    - _StartColor: 0.878
     - _UVSec: 0
     - _WindForce: 7
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.8666759, g: 1, b: 0.5707547, a: 0.77254903}
+    - _BaseColor: {r: 0.86316425, g: 1, b: 0.5613208, a: 0.77254903}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
