@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Climbable
   - GrassBase
+  - Orb
+  - Fenrir
+  - ProjecterTarget
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - Ignore CameraClipping
   - GroundCheck
   - GroundCheck&IgnoreCamClip
-  - 
+  - Grass
   - 
   - 
   - 

@@ -59,9 +59,6 @@ public class CameraController : MonoBehaviour
         // inia a posiçao alvo da camera igual á actual
         _cam_calculated_pos = _main_camera.transform.position;
 
-        // activa os callbacks para a camera
-        IEnumeratorCallBacks.Instance.Activate(game_settings);
-
     }
 
     private void Update()
@@ -143,5 +140,16 @@ public class CameraController : MonoBehaviour
         _main_camera.fieldOfView = game_settings.CameraFOV;
     }
 
-   
+
+    // metodos publicos
+    // metodo chamado para definir a posiçao da camera
+    public void SetCamTransfor(Vector3 position, Quaternion rotation)
+    {
+        // define a posicao dA camera controlada
+        _main_camera.transform.position = position;
+        // define a rotaçao da camera controlada
+        _main_camera.transform.rotation = rotation;
+    }
+
+
 }

@@ -1846,12 +1846,12 @@ MonoBehaviour:
   - {fileID: 0}
   cullMode: 2
   zWriteMode: 2
-  zTestMode: 0
+  zTestMode: 3
   colorMapping: 1
   uvMode: 1
   useSoftParticle: 0
   sortPriority: 0
-  sort: 0
+  sort: 2
   indirectDraw: 1
   castShadows: 0
   useExposureWeight: 0

@@ -21,7 +21,7 @@ Shader "Binded/BarrierEffect_Shader"
     {
         //Blend SrcAlpha OneMinusSrcAlpha
         //Cull Back
-        //ZWrite On
+        ZWrite On
         
         Tags { 
             "RenderType"="Transparent"
@@ -29,7 +29,7 @@ Shader "Binded/BarrierEffect_Shader"
             "ForceNoShadowCasting" = "True"
         }
         LOD 200
-
+        Cull Off
         CGPROGRAM
         #pragma surface surf Lambert alpha:fade noambient 
         #pragma target 4.0

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Binded_Jeep_CellBlack
   m_Shader: {fileID: 4800000, guid: 0ce18b702c9fd784591aeffc2d5528be, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: SHADOWED_RIM
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -72,7 +72,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.78
+    - _Glossiness: 0.223
     - _GlossyReflections: 1
     - _LightCutoff: 0.122
     - _Metallic: 0
@@ -83,7 +83,7 @@ Material:
     - _Parallax: 0.02
     - _RimSize: 0.166
     - _ShadowBands: 3
-    - _ShadowedRim: 0
+    - _ShadowedRim: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -91,8 +91,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-    - _Emission: {r: 0.7028302, g: 1, b: 0.89332366, a: 1}
+    - _Color: {r: 0.5518868, g: 0.9453521, b: 1, a: 1}
+    - _Emission: {r: 0.122641504, g: 0.122063, b: 0.122063, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.20784314, g: 0.15686275, b: 0.14901961, a: 0}
     - _RimColor: {r: 0.990566, g: 0.98589355, b: 0.98589355, a: 1}

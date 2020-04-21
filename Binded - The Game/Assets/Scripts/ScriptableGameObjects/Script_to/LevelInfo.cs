@@ -10,5 +10,7 @@ public class LevelInfo : ScriptableObject
 
     // energia para abrir o portal
     public int EnergyRequired;
+    // energia entregue
+    public int DeliveredEnergy;
 
 }

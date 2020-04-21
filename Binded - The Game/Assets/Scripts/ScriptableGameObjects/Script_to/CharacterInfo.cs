@@ -17,7 +17,7 @@ public class CharacterInfo : ScriptableObject
     // informaçao sobre a forma do jogador
     [Header("Forma actual do jogador")]
     public PlayerShape shape;
-    
+    public bool CanChangeShape; // indica se o jogador pode mudar de forma
 
     #region AikeVars
     // variavies relacionada com Aike
@@ -45,6 +45,8 @@ public class CharacterInfo : ScriptableObject
     public float ArifDrag = 6f;      // drag de movimento
     #endregion
 
+
+
     // variaveis de evento
     private PlayerRenderManager render_manager_;    // render manager
     // regista o render manager
@@ -68,6 +70,8 @@ public class CharacterInfo : ScriptableObject
         if (render_manager_)
             render_manager_.ChangeOccurred(shape);  // envia que ocorreu uma alteraçao na forma
     }
+
+
     // metodo chamado quando o jogador terminou de mudar de forma
     public void ChangeEnded() { changing_state_ = false; }
     // metodo chamado para indicar se o jogador está a mudar de forma ou nao
