@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bd51909fddd78984ab54bbe273d6d668
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
+  - aike_mesh_renderer_: {instanceID: 0}
+  - arif_mesh_renderer: {instanceID: 0}
+  - shape_switch_particle: {instanceID: 0}
+  - left_trail_: {instanceID: 0}
+  - right_trail_: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e1b01b0a761a0994a965d8cee07736ee
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
+  - StartSpawn: {instanceID: 0}
+  - DeathSpawnPoint: {instanceID: 0}
+  - PlayerObject: {instanceID: 0}
+  - CameraControllerObject: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
