@@ -13925,12 +13925,12 @@ PrefabInstance:
         type: 3}
       propertyPath: SpawnPoints.Array.data[3]
       value: 
-      objectReference: {fileID: 1218464988}
+      objectReference: {fileID: 2036151342}
     - target: {fileID: 1665045760963424133, guid: 0813cc3e60c3f8f43951e2ed30b56e14,
         type: 3}
       propertyPath: SpawnPoints.Array.data[4]
       value: 
-      objectReference: {fileID: 1218464988}
+      objectReference: {fileID: 835108787}
     - target: {fileID: 1665045760963424133, guid: 0813cc3e60c3f8f43951e2ed30b56e14,
         type: 3}
       propertyPath: SpawnPoints.Array.data[5]
