@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amount: 1
-    - _AngleOff: 10
+    - _AngleOff: 100
     - _BumpScale: 1
     - _CellDensity: 10
     - _Cutoff: 0.5
@@ -91,7 +91,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9483357, g: 0.95145595, b: 0.9528302, a: 1}
+    - _BaseColor: {r: 0.9669811, g: 1, b: 0.9700104, a: 1}
     - _Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
     - _Emission: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

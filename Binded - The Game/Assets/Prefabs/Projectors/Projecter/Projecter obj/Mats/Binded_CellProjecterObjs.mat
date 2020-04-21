@@ -11,8 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0ce18b702c9fd784591aeffc2d5528be, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -40,8 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -71,15 +71,15 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightCutoff: 0.5
+    - _LightCutoff: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineClipDistance: 1
-    - _OutlineWidth: 0.003
+    - _OutlineWidth: 0.00403
     - _Parallax: 0.02
     - _RimSize: 0
-    - _ShadowBands: 2
+    - _ShadowBands: 1.97
     - _ShadowedRim: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -87,9 +87,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.6273585, b: 0.6273585, a: 1}
-    - _Emission: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 0.20754719, g: 0.19526187, b: 0.18503028, a: 0}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}

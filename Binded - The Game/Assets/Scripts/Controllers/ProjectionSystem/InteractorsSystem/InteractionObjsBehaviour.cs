@@ -25,7 +25,6 @@ public class InteractionObjsBehaviour : MonoBehaviour
         // confirma se o objecto que entrou é o jogador
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player activation");
             // chama em cada um dos controladores registados o callBack
             foreach (var controller in interactable_Controllers_)
             {

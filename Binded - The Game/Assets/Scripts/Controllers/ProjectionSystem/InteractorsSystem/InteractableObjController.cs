@@ -15,8 +15,6 @@ public class InteractableObjController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // define uma rotaçao aleatoria inicial
-
         // ao iniciar, avalia se existem controladores
         if (interaction_objects_.Length > 0)
             // caso existam controladores, regista se nos objectos
