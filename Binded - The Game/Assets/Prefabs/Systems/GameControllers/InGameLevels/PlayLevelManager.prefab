@@ -61,8 +61,11 @@ MonoBehaviour:
   char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
   StartSpawn: {fileID: 0}
   DeathSpawnPoint: {fileID: 0}
-  SpawnPoints: []
-  PlayerObject: {fileID: 0}
-  CameraControllerObject: {fileID: 0}
+  SpawnPoints:
+  - {fileID: 0}
+  PlayerObject: {fileID: 7825488917120565572, guid: bf138a751ea07e04e85b75fd99238333,
+    type: 3}
+  CameraControllerObject: {fileID: 3636249831866868350, guid: 4919a37c28d7cc74db5975cac5a2df1d,
+    type: 3}
   respawn_portal_manager: {fileID: 0}
   fenrir_behaviour: {fileID: 0}
