@@ -43,3 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f48741432b816b4983c3de1ec128afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level_infor_: {fileID: 0}
+  spawn_Areas_: []
+  orb_to_spawn_: {fileID: 3096883700414322733, guid: 8136e5904896cc8439a48fceade8095f,
+    type: 3}
+  spawnAmountPercent: 1
