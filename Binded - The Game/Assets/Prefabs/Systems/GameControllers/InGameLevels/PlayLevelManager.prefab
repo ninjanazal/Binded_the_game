@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7861893372637939049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6919291706842873939}
+  - component: {fileID: 5647306399763820744}
+  - component: {fileID: 1665045760963424133}
+  m_Layer: 0
+  m_Name: PlayLevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6919291706842873939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861893372637939049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -26.91054, y: 15.741674, z: -86.29878}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5647306399763820744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861893372637939049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815643bbda5c345479c59f81b311b168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game_settings: {fileID: 11400000, guid: 50bb74f0e34105249b083991f4ec4fd8, type: 2}
+  char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
+--- !u!114 &1665045760963424133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861893372637939049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b01b0a761a0994a965d8cee07736ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  char_info_: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
+  StartSpawn: {fileID: 0}
+  DeathSpawnPoint: {fileID: 0}
+  SpawnPoints:
+  - {fileID: 0}
+  PlayerObject: {fileID: 7825488917120565572, guid: bf138a751ea07e04e85b75fd99238333,
+    type: 3}
+  CameraControllerObject: {fileID: 3636249831866868350, guid: 4919a37c28d7cc74db5975cac5a2df1d,
+    type: 3}
+  respawn_portal_manager: {fileID: 0}
+  fenrir_behaviour: {fileID: 0}

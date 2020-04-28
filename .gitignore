@@ -13,6 +13,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Aa]rtifacts/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
@@ -79,3 +80,4 @@ crashlytics-build.properties
 .history
 
 # End of https://www.gitignore.io/api/unity,visualstudiocode
+Binded - The Game/Library/

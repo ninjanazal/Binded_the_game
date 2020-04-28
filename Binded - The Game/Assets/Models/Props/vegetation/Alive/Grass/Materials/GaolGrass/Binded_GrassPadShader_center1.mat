@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Binded_GrassPadShader_center1
+  m_Shader: {fileID: 4800000, guid: e848aae7690ef2d49973e9c8ab17d438, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ColorTexture:
+        m_Texture: {fileID: 2800000, guid: 52cbf23d85b89b84caadd6e95dddf37d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WindTexture:
+        m_Texture: {fileID: 2800000, guid: 40891617ccb6882479a42570235f8a59, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphavalueForDistance: 0.002
+    - _ClipMaxDistance: 22
+    - _Cutoff: 0.016
+    - _Glossiness: 0.5
+    - _GrassBendValue: 0.294
+    - _GrassCurvature: 0.658
+    - _GrassHeight: 1.92
+    - _GrassWidth: 0.27
+    - _Metallic: 0.094
+    - _RandomAmount: 0.6
+    - _StartColor: 1
+    - _WindForce: 2
+    - _WindSpeed: 0.24
+    - _WindStength: 0
+    m_Colors:
+    - _BackgroundColor: {r: 1, g: 0.5801887, b: 0.5801887, a: 1}
+    - _BaseColor: {r: 1, g: 0.995283, b: 0.995283, a: 1}
+    - _Color: {r: 0.6236205, g: 0.9245283, b: 0.71646035, a: 1}
+    - _ForegroundColor: {r: 0, g: 0, b: 1, a: 1}
