@@ -9,6 +9,9 @@ using UnityEditor;
 [RequireComponent(typeof(MeshRenderer), (typeof(MeshFilter)))]
 public class GrassGenerator : MonoBehaviour
 {
+    // determina se está no editor, este script nao deve correr em run Time
+#if(UNITY_EDITOR)
+
     // public vars
     public int seed_ = 0; // seed para a aleatoriadade para posiçao dos vertices
     public Vector3 pad_sizer_start_ = Vector3.one; // tamanho do pad a ser calculado
@@ -214,4 +217,5 @@ public class GrassGenerator : MonoBehaviour
             this.enabled = false;
         }
     }
+#endif
 }

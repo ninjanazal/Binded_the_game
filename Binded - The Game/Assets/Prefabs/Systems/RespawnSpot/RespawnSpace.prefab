@@ -1900,7 +1900,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4300000, guid: 7f07bc7b3f6e67247b928cdcad9c818b, type: 2}
     - target: {fileID: 8193854701638780710, guid: b4be197072cc0e04c9d11ae4708e61c0,
         type: 3}
       propertyPath: pad_sizer_start_.x
@@ -1919,11 +1919,16 @@ PrefabInstance:
     - target: {fileID: 8193854701638780710, guid: b4be197072cc0e04c9d11ae4708e61c0,
         type: 3}
       propertyPath: grass_count_
-      value: 50000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 8193854701638780710, guid: b4be197072cc0e04c9d11ae4708e61c0,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193854701638780710, guid: b4be197072cc0e04c9d11ae4708e61c0,
+        type: 3}
+      propertyPath: saveMesh
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8193854701638780711, guid: b4be197072cc0e04c9d11ae4708e61c0,
