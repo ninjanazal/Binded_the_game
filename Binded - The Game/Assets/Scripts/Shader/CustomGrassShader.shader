@@ -29,12 +29,8 @@ Shader "Binded/CustomGrassShader"
        
         Pass
         {   
-
-            ZWrite On // don't write to depth buffer 
-            // in order not to occlude other objects
+            ZWrite on 
              Blend SrcAlpha OneMinusSrcAlpha 
-            // blend based on the fragment's alpha value 
-
             //Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             // definiçao de vertex, frag e geometry shaders func

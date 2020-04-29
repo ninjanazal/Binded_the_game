@@ -74,9 +74,9 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GrassBendValue: 0
-    - _GrassCurvature: 0.609
+    - _GrassCurvature: 1
     - _GrassHeight: 30
-    - _GrassWidth: 3
+    - _GrassWidth: 4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -87,7 +87,7 @@ Material:
     - _SrcBlend: 1
     - _StartColor: 0.878
     - _UVSec: 0
-    - _WindForce: 7
+    - _WindForce: 5
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.86316425, g: 1, b: 0.5613208, a: 0.77254903}
