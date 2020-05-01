@@ -136,7 +136,7 @@
             LightingStandard_GI(s,data, gi);
         }       
         
-        // permite que o objecto seja instanciado na GPU
+        // permite instanciaçao de parametros na gpu
         UNITY_INSTANCING_BUFFER_START(Props)
         UNITY_INSTANCING_BUFFER_END(Props)
 
