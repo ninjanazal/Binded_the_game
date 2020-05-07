@@ -73,8 +73,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GrassBendValue: 0.279
-    - _GrassCurvature: 0.24
+    - _GrassBendValue: 0.104
+    - _GrassCurvature: 0.634
     - _GrassHeight: 0.5
     - _GrassWidth: 0.09
     - _Metallic: 0
