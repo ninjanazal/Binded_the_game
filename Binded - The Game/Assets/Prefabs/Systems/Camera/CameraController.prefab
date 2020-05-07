@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game_settings: {fileID: 11400000, guid: 50bb74f0e34105249b083991f4ec4fd8, type: 2}
   char_Information: {fileID: 11400000, guid: d39f24ddac5ca7b41868c68b52bf095c, type: 2}
-  camera_offset: {x: 0, y: 0.3, z: 0}
+  camera_offset: {x: 0, y: 2, z: 0}
   SecToRotation: 0.1
   MinCameraDistance: 0.5
   CameraDimmerMat: {fileID: 2100000, guid: e480dd3271d8705458324d8a1dae7ef1, type: 2}

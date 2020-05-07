@@ -66,15 +66,15 @@ Material:
     m_Floats:
     - _AlphavalueForDistance: 0.029
     - _BumpScale: 1
-    - _ClipMaxDistance: 19.14
+    - _ClipMaxDistance: 20
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GrassBendValue: 0.279
-    - _GrassCurvature: 0.24
+    - _GrassBendValue: 0.104
+    - _GrassCurvature: 0.634
     - _GrassHeight: 0.5
     - _GrassWidth: 0.09
     - _Metallic: 0
@@ -87,7 +87,7 @@ Material:
     - _SrcBlend: 1
     - _StartColor: 0.524
     - _UVSec: 0
-    - _WindForce: 2
+    - _WindForce: 3
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
