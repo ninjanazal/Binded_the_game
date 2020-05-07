@@ -31,6 +31,7 @@ Shader "Binded/CustomGrassShader"
         {   
             ZWrite on 
              Blend SrcAlpha OneMinusSrcAlpha 
+
             //Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             // definiçao de vertex, frag e geometry shaders func

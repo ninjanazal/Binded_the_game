@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 79d8f68ff5f14284294c11d1e364e7f3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 992214861}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -1069,12 +1069,12 @@ PrefabInstance:
         type: 3}
       propertyPath: project_to_.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1044416851}
     - target: {fileID: 8325970663964064953, guid: 1933c19d2d47c9f43ac1ea0312de18cd,
         type: 3}
       propertyPath: project_to_.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1044416851}
     - target: {fileID: 8325970663964064953, guid: 1933c19d2d47c9f43ac1ea0312de18cd,
         type: 3}
       propertyPath: project_to_.Array.data[2]
@@ -1551,7 +1551,7 @@ Transform:
   - {fileID: 1817116395}
   - {fileID: 1750415313}
   m_Father: {fileID: 1620896505}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &895712324
 PrefabInstance:
@@ -1842,6 +1842,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 983233180}
   m_PrefabAsset: {fileID: 0}
+--- !u!108 &992214861 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 4967016462927440688, guid: ab8eaa77efb155a419b93084c2adcbb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 389930001}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1022023648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1962,6 +1968,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1022023648}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1044416851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4015609313687391131, guid: c728c9f4514847c4cafe6adbdfc70d3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 798831392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d0b3b4b596a184ea614f327a80534c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1340879448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2280,9 +2298,9 @@ Transform:
   - {fileID: 2083875036}
   - {fileID: 494863563}
   - {fileID: 983233182}
+  - {fileID: 857467727}
   - {fileID: 709984648}
   - {fileID: 798831393}
-  - {fileID: 857467727}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
