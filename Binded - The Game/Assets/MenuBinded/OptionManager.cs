@@ -8,14 +8,10 @@ public class OptionManager : MonoBehaviour
     public Dropdown graphicsdropdown;
     public Dropdown ResolutionDropDown;
     public Slider VolumeSlider;
-    public Resolution[] resolutions;
-    public GameOptions gameOptions;
-    public AudioSource volumesource;
+    private Resolution[] resolutions;
 
     private void OnEnable()
     {
-        gameOptions = new GameOptions();
-
         graphicsdropdown.onValueChanged.AddListener(delegate { OnGraphicsChange(); });
         ResolutionDropDown.onValueChanged.AddListener(delegate { OnResolutionChange(); });
         VolumeSlider.onValueChanged.AddListener(delegate { OnVolumeChange(); });
@@ -36,13 +32,13 @@ public class OptionManager : MonoBehaviour
     }
     public void OnGraphicsChange()
     {
-        QualitySettings.masterTextureLimit = gameOptions.graphicsquality = graphicsdropdown.value;
+        QualitySettings.masterTextureLimit = graphicsdropdown.value;
         
     }
 
     public void OnVolumeChange()
     {
-        volumesource.volume = gameOptions.Volume = VolumeSlider.value;
+        // altera valores do volume master
     }
 
     

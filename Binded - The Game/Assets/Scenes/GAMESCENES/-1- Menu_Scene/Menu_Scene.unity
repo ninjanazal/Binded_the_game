@@ -266,6 +266,116 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1927705960442298832, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -232.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705960442298832, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 185.46323
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705960442298833, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705960444842895, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: GraphicQuality Dropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705960529082468, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: Options - Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961051174566, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: Credits -Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961148919423, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961193241765, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961193241765, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961193241765, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961260570852, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: ResolutionsDropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961348356636, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: NewGame -Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961884045535, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961941774865, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Name
+      value: VolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961941774879, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961941774879, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961941774879, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705961941774879, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1242028485}
+    - target: {fileID: 1927705961941774879, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705962014198794, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705962117110075, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927705962117110075, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7261923320691156566, guid: df32fac64b9abc540ae0c3c60d7e88e2,
         type: 3}
       propertyPath: m_Name
@@ -273,3 +383,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df32fac64b9abc540ae0c3c60d7e88e2, type: 3}
+--- !u!1 &1242028485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1927705962107247401, guid: df32fac64b9abc540ae0c3c60d7e88e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083502928}
+  m_PrefabAsset: {fileID: 0}
