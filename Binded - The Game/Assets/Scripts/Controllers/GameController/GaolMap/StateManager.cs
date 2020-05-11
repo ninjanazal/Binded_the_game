@@ -51,6 +51,9 @@ public class StateManager : MonoBehaviour
         cam_controller = GameObject.Instantiate(CameraControllerObject,
             Spawner_point.position, Spawner_point.rotation).GetComponent<CameraController>();
 
+        // defini volume dos listenners
+        char_system_.game_settings_.SetListenerVolume();
+
         // determinar qual portal está aberto
         ConfirmPortals();
     }

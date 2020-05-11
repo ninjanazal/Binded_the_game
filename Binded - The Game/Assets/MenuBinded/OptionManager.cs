@@ -6,13 +6,21 @@ using UnityEngine.UI;
 // class de controlo do menu
 public class OptionManager : MonoBehaviour
 {
+    public KLevelName play_to;  // para que sene dar load
+
     public Dropdown graphics_dropdown;   // dropdown a ser preenchida com as qualidades graficas
     public Dropdown resolution_dropDown; // dropdown a ser preenchida com as resoluçoes disponiveis
     public Slider volume_slider;         // slider para controlo do volume
+    public GameSettings _settings;      // definiçoes de jogo
+
+    [Header("Sound")]
+    public AudioSource audio_source_interactions; // source do audio
+    public AudioClip button_hovered_; // Audio de hover do rato
+    public AudioClip button_pressed_;   // som ao pressionar o botao
 
     // variaveis privadas
     private Resolution[] resolutions_;   // array das resoluçoes disponiveis
-
+    private IEnumeratorCallBacks enum_callbacks;    // calbbacks
     private void OnEnable()
     {
         // atribui um delegate para callback aquando aletraçao do valor 
@@ -29,7 +37,8 @@ public class OptionManager : MonoBehaviour
             // preenche a dropdown com as resoluçoes disponiveis
             resolution_dropDown.options.Add(new Dropdown.OptionData(resolution.ToString()));
 
-
+        // guarda referencia ao  ienum callbacks
+        enum_callbacks = GetComponent<IEnumeratorCallBacks>();
     }
 
     // handler para alteraçao da resoluçao
@@ -50,8 +59,20 @@ public class OptionManager : MonoBehaviour
     public void OnVolumeChange()
     {
         // altera valores do volume master
-        AudioListener.volume = volume_slider.value;
+        _settings.SetNewVolume(volume_slider.value);
     }
 
+
+
+    #region CallbacksHandler
+    public void NewGamePressed() { enum_callbacks.LoadNewScene((int)play_to); }
+
+    // funçao  quando o rato passa sobre botao
+    public void MouseHoverCallback() { audio_source_interactions.PlayOneShot(button_hovered_); }
+
+    // funçao quando o botao é pressionado
+    public void MousePressButton() { audio_source_interactions.PlayOneShot(button_pressed_); }
+
+    #endregion
 
 }
