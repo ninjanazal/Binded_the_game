@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bab66e90cf8f04fa7b555c0a7e202c, type: 3}
   m_Name: 2- Hugr_Settings
   m_EditorClassIdentifier: 
-  LevelName: 5
-  EnergyRequired: 10
+  LevelName: 4
+  EnergyRequired: 7
   DeliveredEnergy: 0
