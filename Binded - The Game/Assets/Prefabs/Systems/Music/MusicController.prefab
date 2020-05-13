@@ -44,13 +44,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 50
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -145,4 +145,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 689e145e8e44f36408e051ca8863bf7a, type: 3}
   - {fileID: 8300000, guid: 19348b95e6564fc4185f6ea451b52505, type: 3}
   - {fileID: 8300000, guid: 689e145e8e44f36408e051ca8863bf7a, type: 3}
-  - {fileID: 8300000, guid: 19348b95e6564fc4185f6ea451b52505, type: 3}
+  - {fileID: 8300000, guid: 13aad02776a8322408eb0fe117aeb58b, type: 3}
