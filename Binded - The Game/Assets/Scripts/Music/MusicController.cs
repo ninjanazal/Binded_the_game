@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
     private static MusicController _instance;  // declaraçao de um singleton estatico
+
     public static MusicController Instance { get { return _instance; } }
     // variaveis publicas
     public AudioClip[] music_;  // musicas do jogo
@@ -13,7 +14,7 @@ public class MusicController : MonoBehaviour
     private AudioSource audioSource;
 
     // Start is called before the first frame update
-    private void OnEnable()
+    private void Awake()
     {
         // indica que o objecto nao deve ser destroido ao carregar uma scena
         Object.DontDestroyOnLoad(this);
