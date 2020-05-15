@@ -38,7 +38,6 @@ public class GameSettings : ScriptableObject
     private float camera_fov_ = 60;
 
 
-
     // funcs
     #region Funcs
     // tempo
@@ -65,6 +64,19 @@ public class GameSettings : ScriptableObject
     // funçao chamada para definir a FOV da camera
     public void StartCameraPulseFOVEffect(float val) 
         => IEnumeratorCallBacks.Instance.PulseFOVEffectCallback(val);
+
+    // define um novo volume de som
+    public void SetNewVolume(float newVolume)
+    {
+        // atualiza o volume para o valor passado
+        MasterVolume = newVolume;
+        SetListenerVolume();
+    }
+    // Funçao que altera o volume dos listenners
+    public void SetListenerVolume() {
+        // define o volume
+        AudioListener.volume = MasterVolume;
+    }
 
     #endregion
 

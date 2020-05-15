@@ -75,7 +75,7 @@ public class CharacterSystem : MonoBehaviour
     private void Update()
     {
         // caso esteja vivo
-        if (is_alive_)
+        if (is_alive_ && Time.timeScale == 1)
             CharacterUpdate();  // corre o update do character 
 
         // actualiza o render Manager
