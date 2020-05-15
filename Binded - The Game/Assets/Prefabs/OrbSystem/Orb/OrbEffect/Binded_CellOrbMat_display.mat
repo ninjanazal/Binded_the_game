@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Binded_CellOrbMat
+  m_Name: Binded_CellOrbMat_display
   m_Shader: {fileID: 4800000, guid: 0ce18b702c9fd784591aeffc2d5528be, type: 3}
   m_ShaderKeywords: SHADOWED_RIM
   m_LightmapFlags: 4
@@ -71,15 +71,15 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightCutoff: 0.5
+    - _LightCutoff: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineClipDistance: 1
-    - _OutlineWidth: 0.00437
+    - _OutlineWidth: 0.00469
     - _Parallax: 0.02
-    - _RimSize: 0.176
-    - _ShadowBands: 1
+    - _RimSize: 0.568
+    - _ShadowBands: 4
     - _ShadowedRim: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -87,9 +87,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.7176471, g: 0.3647059, b: 0.4117647, a: 1}
-    - _Emission: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+    - _RimColor: {r: 0.5849056, g: 0.2896938, b: 0.2896938, a: 1}
     - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
