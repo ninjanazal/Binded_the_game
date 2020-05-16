@@ -145,7 +145,7 @@ public class IEnumeratorCallBacks : MonoBehaviour
     private IEnumerator LoadSceneCorroutine(int sceneIndex)
     {
         // abranda o jogador
-        game_settings.SetTimeMultiplier(0.1f);
+        Time.timeScale = 0.0f;
         // inicia o load async da cena
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
 
@@ -159,14 +159,10 @@ public class IEnumeratorCallBacks : MonoBehaviour
             yield return null;
         }
 
+        // restaura a razao do time
+        Time.timeScale = 1.0f;
         // activa a cena
         loadOperation.allowSceneActivation = true;
-        yield return new WaitForSeconds(1);
-        Debug.Log("FinishedLoad");
-
-        // restaura a razao do time
-        game_settings.SetTimeMultiplier(1f);
-
     }
 
     #endregion
