@@ -40,7 +40,7 @@
 
         // stencil compara todos os pixel com o valor de referencia
         // como no buffer de stencil de entrada os valores sao sempre 0
-        // substitui todos os valores dos pixeis renderizados para 1
+        // substitui todos os valores dos pixeis renderizados para 200
         Stencil
         {
             Ref 200

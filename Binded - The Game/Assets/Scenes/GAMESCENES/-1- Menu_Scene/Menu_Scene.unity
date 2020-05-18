@@ -330,7 +330,7 @@ PlayableDirector:
   m_PlayableAsset: {fileID: 11400000, guid: 0a3c3ad03f2e74e42a5771813accc38e, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
-  m_DirectorUpdateMode: 1
+  m_DirectorUpdateMode: 2
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 6253123990640205605, guid: 0a3c3ad03f2e74e42a5771813accc38e, type: 2}
@@ -2951,6 +2951,11 @@ PrefabInstance:
       propertyPath: director_
       value: 
       objectReference: {fileID: 136144581}
+    - target: {fileID: 2605001085757628917, guid: 7ea66bb6e5dc6dc4ba830d998ec703b0,
+        type: 3}
+      propertyPath: play_to
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3789632532973018538, guid: 7ea66bb6e5dc6dc4ba830d998ec703b0,
         type: 3}
       propertyPath: m_LocalPosition.x

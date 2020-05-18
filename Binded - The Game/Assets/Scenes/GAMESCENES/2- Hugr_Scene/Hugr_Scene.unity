@@ -515,7 +515,7 @@ PrefabInstance:
     - target: {fileID: 550502849260733563, guid: 76250945e20975b48ac98018a61414b0,
         type: 3}
       propertyPath: teleportTo
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1570737104943622592, guid: 76250945e20975b48ac98018a61414b0,
         type: 3}
