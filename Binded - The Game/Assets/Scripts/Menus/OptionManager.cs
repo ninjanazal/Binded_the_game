@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 // class de controlo do menu
@@ -12,6 +13,7 @@ public class OptionManager : MonoBehaviour
     public Dropdown resolution_dropDown; // dropdown a ser preenchida com as resoluçoes disponiveis
     public Slider volume_slider;         // slider para controlo do volume
     public GameSettings _settings;      // definiçoes de jogo
+    public PlayableDirector director_;  // director da cutscene
 
     [Header("Sound")]
     public AudioSource audio_source_interactions; // source do audio
@@ -65,7 +67,14 @@ public class OptionManager : MonoBehaviour
 
 
     #region CallbacksHandler
-    public void NewGamePressed() { enum_callbacks.LoadNewScene((int)play_to); }
+    public void NewGamePressed()
+    {
+        // escode e bloqueia o rato
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        // inicia a animaçao
+        director_.Play();
+    }
 
     // funçao  quando o rato passa sobre botao
     public void MouseHoverCallback() { audio_source_interactions.PlayOneShot(button_hovered_); }
@@ -77,4 +86,6 @@ public class OptionManager : MonoBehaviour
     public void OnExitPress() { Application.Quit(); }
     #endregion
 
+    // handler do signal do fim da cutscene
+    public void SignalLoadGameHandler() { enum_callbacks.LoadNewScene((int)play_to); }
 }
