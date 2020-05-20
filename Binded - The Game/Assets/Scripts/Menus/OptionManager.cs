@@ -67,7 +67,14 @@ public class OptionManager : MonoBehaviour
 
 
     #region CallbacksHandler
-    public void NewGamePressed() { director_.Play(); }
+    public void NewGamePressed()
+    {
+        // escode e bloqueia o rato
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        // inicia a animaçao
+        director_.Play();
+    }
 
     // funçao  quando o rato passa sobre botao
     public void MouseHoverCallback() { audio_source_interactions.PlayOneShot(button_hovered_); }

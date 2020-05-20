@@ -30,7 +30,8 @@ Shader "Binded/CustomGrassShader"
         Pass
         {   
             ZWrite on 
-             Blend SrcAlpha OneMinusSrcAlpha 
+            Blend SrcAlpha OneMinusSrcAlpha 
+            Cull Off
 
             //Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
@@ -125,7 +126,7 @@ Shader "Binded/CustomGrassShader"
                 float x = axis.x;
                 float y = axis.y;
                 float z = axis.z;
-
+                
                 return float3x3(
                     t * x * x + c,      t * x * y - s * z,  t * x * z + s * y,
                     t * x * y + s * z,  t * y * y + c,      t * y * z - s * x,

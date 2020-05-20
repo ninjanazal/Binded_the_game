@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GAMESCENES/-- 1 - Intro_Scene/Intro_Scene.unity
+    path: Assets/Scenes/GAMESCENES/-- Intro_Scene/Intro_Scene.unity
     guid: dfdcbfe31128ac34b81144f58577e27d
   - enabled: 1
-    path: Assets/Scenes/GAMESCENES/-1- Menu_Scene/Menu_Scene.unity
+    path: Assets/Scenes/GAMESCENES/- Menu_Scene/Menu_Scene.unity
     guid: c709f11decdd40142987f1265b0815c7
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/IntroCut_Scene/IntroCutScene.unity
+    guid: a14d25df956f15e4983180475551a138
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/0- Gaol_Map/Gaol_Scene.unity
     guid: fafa5098a3ac15646b2ba803cbd8931c
