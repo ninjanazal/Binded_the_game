@@ -29,7 +29,7 @@ public class GameSettings : ScriptableObject
     // fov da camera
     [Header("Efeito de pulsar o FOV")]
     [Range(10f, 60f)] public float FOV_Pulse_Speed = 2f;
-    public float base_camera_fov = 60; 
+    public float base_camera_fov = 60;
 
     // private Vars -------------------------------------------------------
     // Multiplicador de tempo
@@ -40,6 +40,9 @@ public class GameSettings : ScriptableObject
 
     // funcs
     #region Funcs
+    // para utilizar o scriptableObj como container, o unity nao pode descarregar o obj de memoria quando nao estiver
+    // a ser utilizado
+    private void OnEnable() { hideFlags = HideFlags.DontUnloadUnusedAsset; }
     // tempo
     // define um novo multiplicador
     public void SetTimeMultiplier(float value)
@@ -53,7 +56,7 @@ public class GameSettings : ScriptableObject
         // retorna o tempo basal ajustado á multiplicaçao
         return Time.deltaTime * _timeMultiplier;
     }
-    
+
     // get/Set para o fov da camea
     public float CameraFOV { get => camera_fov_; set => camera_fov_ = value; }
 
@@ -62,7 +65,7 @@ public class GameSettings : ScriptableObject
         => IEnumeratorCallBacks.Instance.SetNewCameraDistance(targetDistance, speed);
 
     // funçao chamada para definir a FOV da camera
-    public void StartCameraPulseFOVEffect(float val) 
+    public void StartCameraPulseFOVEffect(float val)
         => IEnumeratorCallBacks.Instance.PulseFOVEffectCallback(val);
 
     // define um novo volume de som
@@ -73,7 +76,8 @@ public class GameSettings : ScriptableObject
         SetListenerVolume();
     }
     // Funçao que altera o volume dos listenners
-    public void SetListenerVolume() {
+    public void SetListenerVolume()
+    {
         // define o volume
         AudioListener.volume = MasterVolume;
     }

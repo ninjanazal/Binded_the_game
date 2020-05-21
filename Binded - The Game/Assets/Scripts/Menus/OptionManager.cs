@@ -23,7 +23,8 @@ public class OptionManager : MonoBehaviour
     // variaveis privadas
     private Resolution[] resolutions_;   // array das resoluçoes disponiveis
     private IEnumeratorCallBacks enum_callbacks;    // calbbacks
-    private void OnEnable()
+    
+    private void Awake()
     {
         // atribui um delegate para callback aquando aletraçao do valor 
         // callback para alteraçao da qualidade grafica
@@ -41,6 +42,10 @@ public class OptionManager : MonoBehaviour
 
         // guarda referencia ao  ienum callbacks
         enum_callbacks = GetComponent<IEnumeratorCallBacks>();
+
+        // mostra e desbloqueia o rato
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // handler para alteraçao da resoluçao

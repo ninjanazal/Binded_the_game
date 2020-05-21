@@ -54,6 +54,9 @@ public class CutSceneController : MonoBehaviour
     // handler para esperar input
     public void StartWaitingForInput() { waiting_input = true; }
 
+    // carrega e mostra a cena apos cutScne
+    public void LoadandShowScene() => IEnumeratorCallBacks.Instance.LoadNewScene((int)load_to);
+
     // carrega async a cena definida
     private IEnumerator LoadAsyncAndWaitScene()
     {

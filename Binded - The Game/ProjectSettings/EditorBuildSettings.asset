@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/4.1- HamingjaBeacon_Scene/HamingjaBeacon_Scene.unity
     guid: b6e7378a2d4e27945b1fab74d2f4d4be
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/!CutScenes --------------------/ExitCutScene/ExitCutScene.unity
+    guid: ba67f0425c0aa11439091b5d41fbc6f5
   m_configObjects: {}

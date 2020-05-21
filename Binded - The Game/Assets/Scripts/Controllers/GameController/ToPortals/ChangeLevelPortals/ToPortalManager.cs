@@ -42,6 +42,8 @@ public class ToPortalManager : MonoBehaviour
 
         // indica ao controlador do jogo que o nivel foi completo
         game_state_.CompletedLevel();
+        //IEnumeratorCallBacks.Instance.LevelCompletedCallBack(game_state_);
+
         // inicia a call para mudar de cena
         IEnumeratorCallBacks.Instance.LoadNewScene((int)teleportTo);
     }
