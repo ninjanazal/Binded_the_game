@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 // enumerdo dos niveis existentes
 public enum KLevelName
-{Intro, MainMenu, FirstCutScene ,Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon,
-    HamrGame}
+{
+    Intro, MainMenu, FirstCutScene, Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon,
+    HamrGame, HarmBeaconGame, HugrGame, HugrBeaconGame, FylgjaGame, FylgjaBeaconGame, HamingjaGame, HamingjaBeaconGame }
 
 // enumerado para nome dos portais existentes
 public enum kPortals
@@ -24,7 +25,7 @@ public class GameState : ScriptableObject
     // getter publico para obter o nivel actual
     public KLevelName GetCurrentLevel { get { return current_level_; } }
     // getter para obter o portal actual
-    public kPortals GetCurrentPortal {  get { DefinePortal(); return current_portal_; } }
+    public kPortals GetCurrentPortal { get { DefinePortal(); return current_portal_; } }
 
     public void DefinePortal()
     {
