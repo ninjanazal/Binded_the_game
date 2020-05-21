@@ -6,17 +6,41 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GAMESCENES/-- Intro_Scene/Intro_Scene.unity
+    path: Assets/Scenes/GAMESCENES/!CutScenes --------------------/-- Intro_Scene/Intro_Scene.unity
     guid: dfdcbfe31128ac34b81144f58577e27d
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/- Menu_Scene/Menu_Scene.unity
     guid: c709f11decdd40142987f1265b0815c7
   - enabled: 1
-    path: Assets/Scenes/GAMESCENES/IntroCut_Scene/IntroCutScene.unity
+    path: Assets/Scenes/GAMESCENES/!CutScenes --------------------/IntroCut_Scene/IntroCutScene.unity
     guid: a14d25df956f15e4983180475551a138
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/0- Gaol_Map/Gaol_Scene.unity
     guid: fafa5098a3ac15646b2ba803cbd8931c
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/1- Hamr_Scene/LoadToScene/ToHamr_Scene.unity
+    guid: aacfde4b887ac5d48972a69e081278cb
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/1.1- HamrBeacon_Scene/LoadToScene/ToHamrBeacon_Scene.unity
+    guid: 388d0c7c7cce3404b8e77fb9076f5e43
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/2- Hugr_Scene/LoadToScene/ToHugr_Scene.unity
+    guid: 8efddb4838c3b4b418b65362f45e0fb9
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/2.2- HugrBeacon_Scene/LoadToScene/ToHugrBeacon_Scene.unity
+    guid: a006472fa7dee9646b6b8bdf27f913fb
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/3- Fylgja_Scene/LoadToScene/ToFylgja_Scene.unity
+    guid: 464b851ee9779d24c852dd7dcee2d7ab
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/3.1- FylgjaBeacon_Scene/LoadToScene/ToFylgjaBeacon_Scene.unity
+    guid: 589a1965f9b047644b6928665abafbbc
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/4- Hamingja_Scene/LoadToScene/ToHamingja_Scene.unity
+    guid: 17f1592243a51e647af3edbd6132bcc5
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/4.1- HamingjaBeacon_Scene/LoadToScene/ToHamingjaBeacon_Scene.unity
+    guid: ed2dbdcf849096d41a789f5fa74b2af8
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/1- Hamr_Scene/Hamr_Scene.unity
     guid: 476592124ee706349afa584d1cfa3a55
@@ -41,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GAMESCENES/4.1- HamingjaBeacon_Scene/HamingjaBeacon_Scene.unity
     guid: b6e7378a2d4e27945b1fab74d2f4d4be
+  - enabled: 1
+    path: Assets/Scenes/GAMESCENES/!CutScenes --------------------/ExitCutScene/ExitCutScene.unity
+    guid: ba67f0425c0aa11439091b5d41fbc6f5
   m_configObjects: {}
