@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 // enumerdo dos niveis existentes
 public enum KLevelName
-{Intro, MainMenu, FirstCutScene ,Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon }
+{Intro, MainMenu, FirstCutScene ,Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon,
+    HamrGame}
 
 // enumerado para nome dos portais existentes
 public enum kPortals

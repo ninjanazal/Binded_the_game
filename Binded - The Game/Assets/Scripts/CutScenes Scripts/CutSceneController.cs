@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(IEnumeratorCallBacks))]
+[RequireComponent(typeof(PlayableDirector), typeof(IEnumeratorCallBacks))]
 public class CutSceneController : MonoBehaviour
 {
     // private vars
@@ -22,8 +23,10 @@ public class CutSceneController : MonoBehaviour
         if (!need_input) return;
 
         // se estiver á espera de input e o entrer for pressionado
-        if (waiting_input && Input.GetAxis("Start") != 0)
+        if (waiting_input && Input.GetAxisRaw("Start") != 0)
         {
+            Debug.Log("Showing scene");
+
             // Mostra a cena
             ShowLoadedScene();
         }
@@ -56,11 +59,11 @@ public class CutSceneController : MonoBehaviour
     {
         // iniciar o load async
         load_operation = SceneManager.LoadSceneAsync((int)load_to);
-
         // impede que active imediatamente a cena
         load_operation.allowSceneActivation = false;
+
         // enquanto estiver a dar load
-        while (load_operation.progress < 0.9f) { yield return null; }
+        while (load_operation.progress >= .9f) { yield return null; }
 
         //assim que terminar de carregar indica que está pronta
         is_scene_ready = true;
