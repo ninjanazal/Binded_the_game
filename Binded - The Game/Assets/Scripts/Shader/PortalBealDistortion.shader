@@ -51,7 +51,7 @@ Shader "Binded/VoronoiShader"
                 // um metodo generalista para determinar um valor aleatorio dado 3 componentes
                 float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
                 UV = frac(sin(mul(UV, m)) * 46839.32);
-                return float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
+                return float2(sin(UV.y*offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
             }
             
             // Voronoi 
@@ -107,7 +107,7 @@ Shader "Binded/VoronoiShader"
                 // pega no valor da cor de frag na textura de grab, influenciado pelo voronoi e a intensidade
                 fixed4 grabColor = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uv + (voronoiDisplace.x * _Amount)));
                 
-                return (col % grabColor.x) * grabColor.z;   // divisao de resto sobre a cor de parametro e a cor de grabPass
+                return (col % grabColor.x);   // divisao de resto sobre a cor de parametro e a cor de grabPass
                 //return col % voronoiDisplace.y;
                 //return voronoiDisplace.x;
             }

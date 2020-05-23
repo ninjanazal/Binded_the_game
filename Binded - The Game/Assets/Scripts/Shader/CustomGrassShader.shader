@@ -105,7 +105,8 @@ Shader "Binded/CustomGrassShader"
                 
                 // valor da displace do vento com base na Textura   
                 o.windDir = (float2)(tex2Dlod(_WindTexture, v.uv));
-                o.windDir = float2(sin(_Time.x * (o.windDir.x -_WindForce *10)) , cos(_Time.x *( o.windDir.y -_WindForce *10))) * (_WindForce * 0.2);
+                o.windDir = float2(sin(_Time.x * (o.windDir.x -_WindForce *10)) ,
+                    cos(_Time.x *( o.windDir.y -_WindForce *10))) * (_WindForce * 0.2);
                 // mantem funcionalidade da fog
                 UNITY_TRANSFER_FOG(o,UnityObjectToClipPos(v.vertex));
                 return o;

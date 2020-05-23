@@ -16,7 +16,7 @@
         [Header(Rim)]
         _RimSize("Rim size", Range(0,1)) = 0                    // linha de rim, largura
         [HDR]_RimColor("Rim color", Color) = (0,0,0,1)          // cor de rim
-        [Toggle(SHADOWED_RIM)]
+        [Toggle(SHADOWED)]
         _ShadowedRim("Rim affected by shadow", float) = 0       // toogle se a rim deve ser afectada pelas sombras
         
         [Header(Emission)]
@@ -52,7 +52,7 @@
         // definiçao do surface, iluminaçao personalizada, full shadows
         #pragma surface surf CelShaded fullforwardshadows 
         // feature
-        #pragma shader_feature SHADOWED_RIM
+        #pragma shader_feature SHADOWED
         #pragma target 5.0
 
         // lib da iluminaçao global
@@ -110,7 +110,7 @@
             // cor de saida
             half4 c;
             // caso esteja activado a opçao de atribuir á cor de rim o valor da sombra
-            #ifdef SHADOWED_RIM
+            #ifdef SHADOWED
                 // cor de saida é determinada pela soma da cor determinada anteriormente com o valor de Rim 
                 // multiplicado pelo valor de diff, ou seja a atenuaçao da cor com base na projecçao da sombra
                 c.rgb = (col + rim) * diff;
