@@ -53,7 +53,6 @@
         #pragma surface surf CelShaded fullforwardshadows 
         // feature
         #pragma shader_feature SHADOWED_RIM
-        #pragma shader_feature ENABLE_OUTLINE
         #pragma target 5.0
 
         // lib da iluminaçao global
@@ -82,8 +81,6 @@
             float2 uv_MainTex;  // uvs para a textura de albedo
             float2 uv_Normal;   // uvs para a textura de normais
             float2 uv_SpecularMap;  // uvs para a textura especular
-
-            float4 screenPos;
         };
         
         
@@ -169,7 +166,7 @@
             // utilizando o stencil
             Stencil 
             {
-                // apenas passa pixeis que tenham o valor de ref maior que a ref 1
+                // passa pixeis que tenham em buffer stencil menor ou igual
                 Ref 200
                 Comp GEqual
             }

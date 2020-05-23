@@ -1,4 +1,6 @@
-﻿Shader "Binded/VoronoiShader"
+﻿/// Binded Voronoi, transcrito a partir de 
+/// https://www.shadertoy.com/view/MslGD8
+Shader "Binded/VoronoiShader"
 {
     Properties
     {
@@ -9,10 +11,10 @@
     }
     SubShader
     {
-        Tags { "Queue"="Transparent+10" }       // tag de transparencia acrescida, garante que ocorre apos maioria dos renderes transparentes
+        // tag de transparencia acrescida, garante que ocorre apos maioria dos renderes transparentes
+        Tags { "Queue"="Transparent" }      
         LOD 100
         GrabPass{}  // grabpass para a textura da camara atual
-        ZWrite On   // escreve no buffer de profundidade
         Cull Off    // cull off
         Pass
         {
@@ -105,7 +107,8 @@
                 // pega no valor da cor de frag na textura de grab, influenciado pelo voronoi e a intensidade
                 fixed4 grabColor = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uv + (voronoiDisplace.x * _Amount)));
                 
-                return col % grabColor.x;   // divisao de resto sobre a cor de parametro e a cor de grabPass
+                return (col % grabColor.x) * grabColor.z;   // divisao de resto sobre a cor de parametro e a cor de grabPass
+                //return col % voronoiDisplace.y;
                 //return voronoiDisplace.x;
             }
             ENDCG
