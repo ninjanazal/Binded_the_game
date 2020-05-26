@@ -56,6 +56,9 @@ public class PlayBeaconController : MonoBehaviour
         // inica a camera, guardando referencia para o controlador da mesma
         cam_controller_ = GameObject.Instantiate(camera_obj_, spawn_position_.position, Quaternion.identity).
             GetComponent<CameraController>();
+
+        // define o volume dos listener
+        char_system_.game_settings_.SetListenerVolume();
     }
 
     // metodo privado que define o respawn do jogador

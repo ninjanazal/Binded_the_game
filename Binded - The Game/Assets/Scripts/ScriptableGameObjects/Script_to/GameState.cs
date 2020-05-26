@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // enumerdo dos niveis existentes
+// este enumerado indica o nivel actual do jogo assim como qual cena deve ser carregada
 public enum KLevelName
-{ Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon }
+{
+    Intro, MainMenu, FirstCutScene, Gaol, Hamr, HamrBeacon, Hugr, HugrBeacon, Fylgja, FylgjaBeacon, Hamingja, HamingjaBeacon,
+    HamrGame, HarmBeaconGame, HugrGame, HugrBeaconGame, FylgjaGame, FylgjaBeaconGame, HamingjaGame, HamingjaBeaconGame, ExitCutScene
+}
+
 // enumerado para nome dos portais existentes
 public enum kPortals
 { Hamr, Hugr, Fylgja, Hamingja, Exit }
@@ -13,16 +18,21 @@ public enum kPortals
 [CreateAssetMenu(fileName = "GameState", menuName = "Binded/GameState")]
 public class GameState : ScriptableObject
 {
+    public void OnEnable() { hideFlags = HideFlags.DontUnloadUnusedAsset; }
+
     // variaveis de nivel
     // indicaçao em que nivel o jogador esta
-    [SerializeField] private KLevelName current_level_ = KLevelName.Hamr;
+    public KLevelName current_level_ = KLevelName.Hamr;
     // indica qual o proximo nivel 
     private kPortals current_portal_;
 
     // getter publico para obter o nivel actual
     public KLevelName GetCurrentLevel { get { return current_level_; } }
+    // setter public para o nivel actual
+    public KLevelName SetCurrentLevel { set { current_level_ = value; } }
+
     // getter para obter o portal actual
-    public kPortals GetCurrentPortal {  get { DefinePortal(); return current_portal_; } }
+    public kPortals GetCurrentPortal { get { DefinePortal(); return current_portal_; } }
 
     public void DefinePortal()
     {
@@ -79,6 +89,7 @@ public class GameState : ScriptableObject
                 current_level_ = KLevelName.Gaol;
                 break;
         }
+
         // determina qual o portal
         DefinePortal();
     }

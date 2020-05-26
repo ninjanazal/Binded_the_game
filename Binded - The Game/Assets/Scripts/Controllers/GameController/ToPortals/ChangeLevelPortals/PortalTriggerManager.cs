@@ -7,6 +7,7 @@ public class PortalTriggerManager : MonoBehaviour
     // referencia privada para receber o evento
     private ToPortalManager portal_manager_;    // referencia para o script mae
     private ParticleSystem.EmissionModule emission_module_; // referencia ao modulo de emissao do sistema
+    private AudioSource beacon_audio_souce; // referencia para o source de som 
 
     private void Awake()
     {
@@ -14,6 +15,9 @@ public class PortalTriggerManager : MonoBehaviour
         emission_module_ = GetComponent<ParticleSystem>().emission;
         // desativa a emissao
         emission_module_.enabled = false;
+
+        // guarda referencia para o source de audio
+        beacon_audio_souce = GetComponent<AudioSource>();
     }
 
     // funçao chamada para registar o portal
@@ -23,6 +27,8 @@ public class PortalTriggerManager : MonoBehaviour
         portal_manager_ = manager;
         // ao registar activa o efeito de emissao
         emission_module_.enabled = true;
+        // activa o efeito sonoro
+        beacon_audio_souce.Play();
     }
 
     private void OnTriggerEnter(Collider other)

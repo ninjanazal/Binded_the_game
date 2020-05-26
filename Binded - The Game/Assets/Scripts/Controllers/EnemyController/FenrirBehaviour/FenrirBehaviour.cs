@@ -11,10 +11,17 @@ public class FenrirBehaviour : MonoBehaviour
     public int fenrir_arm_count_;   // numero de braços que o fenrir tem
     public float look_for_interval = 2f; // intervalo entre looks do Fenrir
     public LayerMask layer_mask;    // variavel que determina em que layer deve o ray detectar
+    
+    [Header("Audio Controll")]
+    [Range(0f, 1f)] public float target_volume_;    // volume alvo
+    public float volume_change_speed;   // velocidade de alteraçao do som
 
     // variaveis privadas
     private Transform player_transform_; // referencia para o transform do jogador
     private Transform fenrir_transform_;    // referencia para o transform do fenrir 
+    private bool player_was_visible = false;    // indica se o jogador esteve visivel
+    private AudioSource fenrir_source_;     // fonte de audio do fenrir
+
 
     // variaveis de comportamento
     private Vector3 player_seen_position;   // referencia para a posiçao do jogador em vista
@@ -30,8 +37,37 @@ public class FenrirBehaviour : MonoBehaviour
 
         // guarda a referencia para o transform local, maior commudidade
         fenrir_transform_ = this.transform;
+        //guarda referencia para o source do fenrir
+        fenrir_source_ = this.GetComponent<AudioSource>();
+        fenrir_source_.Play();
+
         // inicia o processo de actividade do Fenrir
         StartCoroutine(FenrirActivity());
+    }
+
+    private void Update()
+    {
+        // verifica se o jogador foi visto
+        if (player_was_visible)
+        {
+            // se sim e o volume for menor que o alvo
+            if (fenrir_source_.volume < target_volume_)
+                // ajusta o valor de acordo com a velocidade
+                fenrir_source_.volume += volume_change_speed * Time.deltaTime;
+            else
+                // caso contrário, iguala o volume ao alvo
+                fenrir_source_.volume = target_volume_;
+        }
+        else
+        {
+            // caso o jogador nao tenha sido visto e o volume ainda for superior a 0
+            if (fenrir_source_.volume > 0f)
+                // ajusta o volume de acordo com a velocidade de alteraçao
+                fenrir_source_.volume -= volume_change_speed * Time.deltaTime;
+            else
+                // caso contrario iguala a 0
+                fenrir_source_.volume = 0f;
+        }
     }
 
     #region Metodos privados
@@ -60,12 +96,17 @@ public class FenrirBehaviour : MonoBehaviour
             // chama a funçao que avalia se o jogador está em vista
             if (InVisionCheck())
             {
+                // define se o jogador foi visto
+                player_was_visible = true;
                 // guarda a posiçao de hit
                 player_seen_position = player_transform_.position;
                 // deve ser instanciado o numero de braços definidos
                 // inicia a corroutina e aguarda a conclusao da mesma
                 yield return StartCoroutine(FenrirArmSpawner());
             }
+            else
+                // o jogador saio de vista
+                player_was_visible = false;
 
             // aguarda o proximo frame
             yield return new WaitForSeconds(look_for_interval);

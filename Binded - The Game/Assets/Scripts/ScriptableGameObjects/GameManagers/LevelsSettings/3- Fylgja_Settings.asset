@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bab66e90cf8f04fa7b555c0a7e202c, type: 3}
   m_Name: 3- Fylgja_Settings
   m_EditorClassIdentifier: 
-  LevelName: 5
-  EnergyRequired: 15
+  LevelName: 8
+  EnergyRequired: 10
+  DeliveredEnergy: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OrbTriggerManager : MonoBehaviour
 {
-
     private ToPortalManager portal_manager_;    // referencia ao manager de portal
 
     // regista o portal

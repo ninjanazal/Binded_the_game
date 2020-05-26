@@ -16,7 +16,7 @@
         [Header(Rim)]
         _RimSize("Rim size", Range(0,1)) = 0                    // linha de rim, largura
         [HDR]_RimColor("Rim color", Color) = (0,0,0,1)          // cor de rim
-        [Toggle(SHADOWED_RIM)]
+        [Toggle(SHADOWED)]
         _ShadowedRim("Rim affected by shadow", float) = 0       // toogle se a rim deve ser afectada pelas sombras
         
         [Header(Emission)]
@@ -40,7 +40,7 @@
 
         // stencil compara todos os pixel com o valor de referencia
         // como no buffer de stencil de entrada os valores sao sempre 0
-        // substitui todos os valores dos pixeis renderizados para 1
+        // substitui todos os valores dos pixeis renderizados para 200
         Stencil
         {
             Ref 200
@@ -52,8 +52,7 @@
         // definiçao do surface, iluminaçao personalizada, full shadows
         #pragma surface surf CelShaded fullforwardshadows 
         // feature
-        #pragma shader_feature SHADOWED_RIM
-        #pragma shader_feature ENABLE_OUTLINE
+        #pragma shader_feature SHADOWED
         #pragma target 5.0
 
         // lib da iluminaçao global
@@ -82,8 +81,6 @@
             float2 uv_MainTex;  // uvs para a textura de albedo
             float2 uv_Normal;   // uvs para a textura de normais
             float2 uv_SpecularMap;  // uvs para a textura especular
-
-            float4 screenPos;
         };
         
         
@@ -113,7 +110,7 @@
             // cor de saida
             half4 c;
             // caso esteja activado a opçao de atribuir á cor de rim o valor da sombra
-            #ifdef SHADOWED_RIM
+            #ifdef SHADOWED
                 // cor de saida é determinada pela soma da cor determinada anteriormente com o valor de Rim 
                 // multiplicado pelo valor de diff, ou seja a atenuaçao da cor com base na projecçao da sombra
                 c.rgb = (col + rim) * diff;
@@ -136,7 +133,7 @@
             LightingStandard_GI(s,data, gi);
         }       
         
-        // permite que o objecto seja instanciado na GPU
+        // permite instanciaçao de parametros na gpu
         UNITY_INSTANCING_BUFFER_START(Props)
         UNITY_INSTANCING_BUFFER_END(Props)
 
@@ -169,7 +166,7 @@
             // utilizando o stencil
             Stencil 
             {
-                // apenas passa pixeis que tenham o valor de ref maior que a ref 1
+                // passa pixeis que tenham em buffer stencil menor ou igual
                 Ref 200
                 Comp GEqual
             }

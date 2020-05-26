@@ -71,6 +71,46 @@ public class IEnumeratorCallBacks : MonoBehaviour
             StartCoroutine(LoadSceneCorroutine(sceneIndex)); // chama a corroutina        
     }
 
+    public void LevelCompletedCallBack(GameState game_state)
+    {
+        // avalia o nivel actual e coloca no seguinte
+        switch (game_state.GetCurrentLevel)
+        {
+            case KLevelName.Hamr:
+                // se o jogador completar o nivel Hamr, muda o nivel actual para o beacon
+                game_state.SetCurrentLevel = KLevelName.HamrBeacon;  // altera o nivel actual para hamrBeacon
+                break;
+            case KLevelName.HamrBeacon:
+                // se o jogador completar o beacon de Hamr, muda o nivel actual para Hugr, e altera tambem
+                // o portal
+                game_state.SetCurrentLevel = KLevelName.Hugr;    // altera o nivel atual para Hugr
+                break;
+            case KLevelName.Hugr:
+                // se o jogador completar o nivel hugr, muda o nivel actual para hugrBeacon
+                game_state.SetCurrentLevel = KLevelName.HugrBeacon; // altera o nivel actual para HugrBeacon
+                break;
+            case KLevelName.HugrBeacon:
+                // se o jogador completar o beacon de Hugr beacon, muda o nivel e o portal para Fylgja
+                game_state.SetCurrentLevel = KLevelName.Fylgja;     // altera o nivel actual para fylgja
+                break;
+            case KLevelName.Fylgja:
+                // se o jogador completar o beacon de fylgja, muda o nivel para o beacon de fylgja
+                game_state.SetCurrentLevel = KLevelName.FylgjaBeacon;   // altera o nivel para o beacon de fylgja
+                break;
+            case KLevelName.FylgjaBeacon:
+                // caso o jogador tenho completo o beacon de filgja, muda o nivel e o actual para haminja
+                game_state.SetCurrentLevel = KLevelName.Hamingja;   // altera o nivel actual para filgja
+                break;
+            case KLevelName.Hamingja:
+                // caso o jogador tenha completo o hamingja, o beacon fica disponivel
+                game_state.SetCurrentLevel = KLevelName.HamingjaBeacon;
+                break;
+            case KLevelName.HamingjaBeacon:
+                // caso o jogador tenha completo o beacon de hamingja, o jogo terminou, marca o nivel como o principal
+                game_state.SetCurrentLevel = KLevelName.Gaol;
+                break;
+        }
+    }
 
     // metodos enumerados
     #region IEnumerators
@@ -144,10 +184,12 @@ public class IEnumeratorCallBacks : MonoBehaviour
     // coroutina para o carregamento de scenas 
     private IEnumerator LoadSceneCorroutine(int sceneIndex)
     {
+        // aguarda o proximo frame para iniciar a transiçao
+        yield return null;
         // abranda o jogador
-        game_settings.SetTimeMultiplier(0.1f);
+        Time.timeScale = 0.0f;
         // inicia o load async da cena
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex);
 
         // impede que assim que a cena esteja pronto carregue imediatamente
         loadOperation.allowSceneActivation = false;
@@ -159,14 +201,10 @@ public class IEnumeratorCallBacks : MonoBehaviour
             yield return null;
         }
 
+        // restaura a razao do time
+        Time.timeScale = 1.0f;
         // activa a cena
         loadOperation.allowSceneActivation = true;
-        yield return new WaitForSeconds(1);
-        Debug.Log("FinishedLoad");
-
-        // restaura a razao do time
-        game_settings.SetTimeMultiplier(1f);
-
     }
 
     #endregion

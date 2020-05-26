@@ -29,11 +29,9 @@ Shader "Binded/CustomGrassShader"
        
         Pass
         {   
-
-            ZWrite On // don't write to depth buffer 
-            // in order not to occlude other objects
-             Blend SrcAlpha OneMinusSrcAlpha 
-            // blend based on the fragment's alpha value 
+            ZWrite on 
+            Blend SrcAlpha OneMinusSrcAlpha 
+            Cull Off
 
             //Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
@@ -107,7 +105,8 @@ Shader "Binded/CustomGrassShader"
                 
                 // valor da displace do vento com base na Textura   
                 o.windDir = (float2)(tex2Dlod(_WindTexture, v.uv));
-                o.windDir = float2(sin(_Time.x * (o.windDir.x -_WindForce *10)) , cos(_Time.x *( o.windDir.y -_WindForce *10))) * (_WindForce * 0.2);
+                o.windDir = float2(sin(_Time.x * (o.windDir.x -_WindForce *10)) ,
+                    cos(_Time.x *( o.windDir.y -_WindForce *10))) * (_WindForce * 0.2);
                 // mantem funcionalidade da fog
                 UNITY_TRANSFER_FOG(o,UnityObjectToClipPos(v.vertex));
                 return o;
@@ -128,7 +127,7 @@ Shader "Binded/CustomGrassShader"
                 float x = axis.x;
                 float y = axis.y;
                 float z = axis.z;
-
+                
                 return float3x3(
                     t * x * x + c,      t * x * y - s * z,  t * x * z + s * y,
                     t * x * y + s * z,  t * y * y + c,      t * y * z - s * x,

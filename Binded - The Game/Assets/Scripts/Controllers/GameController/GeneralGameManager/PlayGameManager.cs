@@ -76,6 +76,9 @@ public class PlayGameManager : MonoBehaviour
         cam_controller_ = GameObject.Instantiate(CameraControllerObject, StartSpawn.position, StartSpawn.rotation).
             GetComponent<CameraController>();
 
+        // define o volume do listenner
+        char_system_.game_settings_.SetListenerVolume();
+
         // apos o jogador estar iniciado, indica ao Fenrir a existencia deste
         fenrir_behaviour.ActivateFenrir(char_transform_);
     }
