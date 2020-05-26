@@ -212,4 +212,4 @@ MonoBehaviour:
   turning_speed_: 0.6
   arm_max_life_time: 6
   arm_velocity_: 1
-  arm_radius_: 0.5
+  arm_radius_: 0.3

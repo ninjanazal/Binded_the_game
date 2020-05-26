@@ -27,8 +27,19 @@ public class BeaconToPortal : MonoBehaviour
             // caso o jogador tenha entrado no portal
             // define que o nivel foi concluido
             game_state_.CompletedLevel();
+            //IEnumeratorCallBacks.Instance.LevelCompletedCallBack(game_state_);
+
             // inicia o callBack para alterar a cena
-            IEnumeratorCallBacks.Instance.LoadNewScene((int)(KLevelName.Gaol));
+            // avalia se o portal actual não é o portal de saida
+            if (game_state_.GetCurrentPortal != kPortals.Exit)
+                IEnumeratorCallBacks.Instance.LoadNewScene((int)(KLevelName.Gaol));
+            else
+            {
+                // define o nivel inicial 
+                game_state_.SetCurrentLevel = KLevelName.Hamr;
+                // transita para a cutScen de saida
+                IEnumeratorCallBacks.Instance.LoadNewScene((int)(KLevelName.ExitCutScene));                
+            }
         }
     }
 }

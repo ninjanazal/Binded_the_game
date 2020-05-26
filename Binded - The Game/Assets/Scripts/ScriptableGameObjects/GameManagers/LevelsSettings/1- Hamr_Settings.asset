@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bab66e90cf8f04fa7b555c0a7e202c, type: 3}
   m_Name: 1- Hamr_Settings
   m_EditorClassIdentifier: 
-  LevelName: 1
+  LevelName: 4
   EnergyRequired: 5
-  DeliveredEnergy: 0
+  DeliveredEnergy: 5

@@ -56,7 +56,7 @@
                 fixed4 col2 = ((col.r + col.g + col.b) / 3) * _DimmAmount + col *(1 - _DimmAmount);
                 
                 //col = 1- step(col.r, col2.r);
-                col = 1- step(col.r, 0.4);
+                col = 1- step(col2.r, 0.4);
 
                 return (2*col / col2) % _DimmAmount;
                 //return col2;

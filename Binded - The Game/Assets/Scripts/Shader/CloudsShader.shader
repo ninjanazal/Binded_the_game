@@ -87,7 +87,7 @@
                 float remapSin = RemapVal(_SinTime.w,-1,1,0 ,0.1);
                 col.w = smoothstep(1,(noiseTexVal.x > _NoiseThreshold + remapSin) ? 0.001 : 1 , .1);
                 if(col.w != 0){col.w = _BaseColor.w;}
-                
+                else{clip(-1);}
                 UNITY_APPLY_FOG(i.fogCoord,col);
                 return col;
             }
