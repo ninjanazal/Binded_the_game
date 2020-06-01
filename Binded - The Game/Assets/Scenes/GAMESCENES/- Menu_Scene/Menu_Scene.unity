@@ -2910,38 +2910,73 @@ PrefabInstance:
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.size
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 40ab0e4d7fd7c1441a31461903f0ffd5, type: 3}
+      objectReference: {fileID: 8300000, guid: 9e52e69280ad3d843a056b4f4916961a, type: 3}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: e378bcce7d5cb624db3176bf79dbe27e, type: 3}
+      objectReference: {fileID: 8300000, guid: dd3dd3f2c72cc544bac49765164e432d, type: 3}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: f86671ad28296d649894553b0951fcd6, type: 3}
+      objectReference: {fileID: 8300000, guid: 6158e9183854fbd46b5a7c6bef2767bd, type: 3}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 4fe3e705a44bd7c42a83bab95a40927c, type: 3}
+      objectReference: {fileID: 8300000, guid: aa8d4ef5bb2d8a746a5d59883c162821, type: 3}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[4]
       value: 
-      objectReference: {fileID: 8300000, guid: c2456c5e07d65c6478b365aa8e3148ba, type: 3}
+      objectReference: {fileID: 8300000, guid: 7240ccc10ca1c734bbce8eefabd6f1bc, type: 3}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.data[5]
       value: 
-      objectReference: {fileID: 8300000, guid: 89c395d9424c34846be05b7d431644fc, type: 3}
+      objectReference: {fileID: 8300000, guid: 2fa88a79460cc2a48b5a2a3225849619, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f7f6677a2875bc4d986efa7cf96eccb, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e52e69280ad3d843a056b4f4916961a, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd3dd3f2c72cc544bac49765164e432d, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: aa8d4ef5bb2d8a746a5d59883c162821, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7240ccc10ca1c734bbce8eefabd6f1bc, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2fa88a79460cc2a48b5a2a3225849619, type: 3}
+    - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
+        type: 3}
+      propertyPath: music_.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f7f6677a2875bc4d986efa7cf96eccb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 732c09623246f4b4bb08d4b157cd65fa, type: 3}
 --- !u!1001 &3410760360704180395
