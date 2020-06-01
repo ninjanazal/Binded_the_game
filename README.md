@@ -1,5 +1,7 @@
 # Binded - The Game
 
+Trailer: https://youtu.be/PPh7uTIbSNo
+
 ## Final ScreenShots
 (ScreenShots)
 
