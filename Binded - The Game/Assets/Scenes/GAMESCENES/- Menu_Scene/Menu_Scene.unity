@@ -2910,7 +2910,7 @@ PrefabInstance:
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
       propertyPath: music_.Array.size
-      value: 13
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 123240604295105909, guid: 732c09623246f4b4bb08d4b157cd65fa,
         type: 3}
