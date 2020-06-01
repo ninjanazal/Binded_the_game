@@ -1,5 +1,5 @@
 # Binded - The Game
-
+![Binded](https://i.imgur.com/4wtR32z.png)
 Trailer: https://youtu.be/PPh7uTIbSNo
 
 ## Final ScreenShots
